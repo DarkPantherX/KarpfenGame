@@ -99,7 +99,7 @@ public class KarpfenGame extends JPanel implements Runnable{
     */
 
 	private void update() {
-		oldTime=System.currentTimeMillis();
+		
 		lvl.update(inHandler);
 		long timeElapsed=System.currentTimeMillis()-oldTime;
 		//System.out.println(timeElapsed);
@@ -112,7 +112,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 			    e.printStackTrace();
 		    }
 		}	
-			
+		oldTime=System.currentTimeMillis();	
 			
 		/* walls dont need to change on their own anymore
 		for (int w = 0; w < walls.size(); w++) {
