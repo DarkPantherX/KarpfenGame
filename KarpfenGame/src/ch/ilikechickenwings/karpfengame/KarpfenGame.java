@@ -29,7 +29,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 	private InputHandler inHandler;
 	private ComponentHandler compHandler;
 	private Menu menu;
-	private long oldTime=0;
+	private long oldTime=System.currentTimeMillis();
 	//public static Player player; // moved to Level.java - SC
 	private Level lvl;
 	private boolean a[] = new boolean[8];
@@ -57,7 +57,6 @@ public class KarpfenGame extends JPanel implements Runnable{
 
 		@Override
 	public void run() {
-		
 		
 			while(!paused){
 			update();
@@ -100,9 +99,21 @@ public class KarpfenGame extends JPanel implements Runnable{
     */
 
 	private void update() {
-		long currTime= System.currentTimeMillis();
-		
-		if(currTime>oldTime+40){
+		oldTime=System.currentTimeMillis();
+		lvl.update(inHandler);
+		long timeElapsed=System.currentTimeMillis()-oldTime;
+		//System.out.println(timeElapsed);
+		if(timeElapsed<40)
+		{
+			try {
+			    Thread.sleep((long) 40-timeElapsed); // ~25fps
+		    } catch (InterruptedException e) {
+			    System.out.println("Couldn't start sleeping:" + e);
+			    e.printStackTrace();
+		    }
+		}	
+			
+			
 		/* walls dont need to change on their own anymore
 		for (int w = 0; w < walls.size(); w++) {
 			Wall wall = (Wall) walls.get(w);
@@ -116,12 +127,9 @@ public class KarpfenGame extends JPanel implements Runnable{
 		 }
 		 */
 		//getA();
-		lvl.update(inHandler);
-		// player.update(inHandler); // moved to Level.java - SC
-		oldTime=currTime;
-		}
 		
-			
+		// player.update(inHandler); // moved to Level.java - SC
+		
 		}
 
 	public void paintComponent(Graphics g) {

@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
-import ch.ilikechickenwings.karpfengame.KarpfenGame;
-import ch.ilikechickenwings.karpfengame.Wall;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 public class Player extends Entity{
@@ -14,7 +12,6 @@ public class Player extends Entity{
 	private boolean jumping=false;
 	private int gravity=10;
 	private int jumped=0;
-	private int x=0;
 	
 	public Player(int x, int y, int lifes, int width, int height) {
 		super(x, y, lifes, width, height);
