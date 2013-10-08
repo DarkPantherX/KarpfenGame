@@ -47,7 +47,6 @@ public class Player extends Entity{
 			jump();
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]) {
-				System.out.println("here");
 				setX_Point(getX_Point()-4);
 				
 			}
@@ -56,8 +55,8 @@ public class Player extends Entity{
 
 			}
 
-		
-		for (int w = 0; w < KarpfenGame.walls.size(); w++) {
+		/* moved to Level.java - SC
+		for (int w = 0; w < KarpfenGame.walls.size(); w++) { // TODO: This collision is checked in Level.java
 			Wall wall = (Wall) KarpfenGame.walls.get(w);
 		if(getX_Point()<wall.getX_Point()+wall.getWidth()&&getX_Point()+30>wall.getX_Point()){
 			if(wall.getY_Point()<getY_Point()+getHeight() && !(wall.getY_Point()+10<getY_Point()+70)){
@@ -76,10 +75,12 @@ public class Player extends Entity{
 			falling=true;
 		}
 		x=0;
-		
+		*/ 
+			
 		if(falling){
 			setY_Point(getY_Point()+gravity);
 		}
+		
 		
 	}
 
@@ -95,9 +96,9 @@ public class Player extends Entity{
 		}
 	}
 	
-	public void draw(Graphics2D g2){
+	public void draw(Graphics2D g2,int xOffset){
 		g2.setColor(Color.green);
-		g2.fillRect(getX_Point(), getY_Point(), getWidth(), getHeight());
+		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
 		
 	}
 

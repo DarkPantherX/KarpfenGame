@@ -1,12 +1,15 @@
 package ch.ilikechickenwings.karpfengame;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+
 public class Wall {
 	
 	private int x_Point;
 	private int y_Point;
 	private int width;
-	private int height;
-	private int pf=0;
+	private int height=20;
+	private int pf=0; // what the heck is that?
 	
 	public Wall(int x, int y, int width, int height){
 		this.setX_Point(x);
@@ -84,6 +87,12 @@ public class Wall {
 	 */
 	public void setPf(int pf) {
 		this.pf = pf;
+	}
+	
+	public void draw(Graphics2D g2,int xOffset){
+		g2.setColor(Color.red);
+		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(),
+				getHeight());
 	}
 
 }
