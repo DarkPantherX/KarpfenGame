@@ -12,7 +12,6 @@ public class Player extends Entity{
 
 	private boolean falling=true;
 	private boolean jumping=false;
-	private boolean jumpready=false;
 	private int gravity=10;
 	private int jumped=0;
 	private int x=0;
@@ -38,25 +37,14 @@ public class Player extends Entity{
 		this.jumping = jumping;
 	}
 
-	public boolean isJumpready() {
-		return jumpready;
-	}
-
-	public void setJumpready(boolean jumpready) {
-		this.jumpready = jumpready;
-	}
-
 	public void update(InputHandler inHandler) {
 		
-			jump();
-
-			if (inHandler.getKeys()[KeyEvent.VK_W]&&jumpready) {
+			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
 				jumping=true;
 				falling=false;
-				jumpready=false;
-				jump();
-
 			}
+			
+			jump();
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]) {
 				System.out.println("here");
@@ -68,13 +56,6 @@ public class Player extends Entity{
 
 			}
 
-			
-			if (inHandler.getKeys()[KeyEvent.VK_SPACE]&&jumpready) {
-				jumping=true;
-				falling=false;
-				jumpready=false;
-				jump();
-		}
 		
 		for (int w = 0; w < KarpfenGame.walls.size(); w++) {
 			Wall wall = (Wall) KarpfenGame.walls.get(w);
@@ -90,11 +71,9 @@ public class Player extends Entity{
 		if(x==1){
 			falling=false;
 			jumping=false;
-			jumpready=true;
 			x=0;
 		}else if (!jumping){
 			falling=true;
-			jumpready=false;
 		}
 		x=0;
 		
