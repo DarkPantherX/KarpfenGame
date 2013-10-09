@@ -19,7 +19,7 @@ public class Level {
 	public static int xOffset=0;
 	public static int playerTrigger=50; // as soon as the player reached this position in the window, the screen will follow the player.
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
-	public static ArrayList<WalkZombie> WZombies = new ArrayList<WalkZombie>();
+	public static ArrayList<WalkZombie> wZombies = new ArrayList<WalkZombie>();
 	public static Player player;
 	
 	// These parameters may vary from level to level and should be stored in a .txt file:
@@ -71,8 +71,7 @@ public class Level {
 		Wall wi = (Wall) walls.get(in);
 		Random r= new Random();
 		while(wi.getX_Point()+wi.getWidth()<xMax){ // as long as there is space
-			System.out.println("random"+wi.getX_Point()+" "+wi.getY_Point());
-			
+					
 			int dyOffset=r.nextInt(2*dyVar)-dyVar;
 			if(wi.getY_Point()+dyOffset+height>KarpfenGame.HEIGHT||wi.getY_Point()+dyOffset<0){ // makes walls outside of the window impossible
 				dyOffset*=-1;
@@ -82,8 +81,7 @@ public class Level {
 			wi=wall;
 			if(spawnWalkZombie>=r.nextInt(100)){
 				WalkZombie wz=new WalkZombie(wi.getX_Point(),wi.getY_Point());
-				WZombies.add(wz);
-				System.out.println("jup");
+				wZombies.add(wz);
 			}
 			walls.add(wall);
 		}
@@ -92,7 +90,9 @@ public class Level {
 	
 	public void update(InputHandler inHandler) {
 		
-		if(player.getX_Point()>xOffset+playerTrigger){ // follow the player with camera
+	
+		// follow the player with camera
+		if(player.getX_Point()>xOffset+playerTrigger){ 
 			xOffset=player.getX_Point()-playerTrigger;
 		}
 		
@@ -116,6 +116,26 @@ public class Level {
 	
 		player.update(inHandler);
 		
+		// Monsters update:
+		for (int wz = 0; wz < wZombies.size(); wz++) { 
+		    WalkZombie wZombie = (WalkZombie) wZombies.get(wz);
+		    //check if they are still on the platform
+		    for (int w = 0; w < walls.size(); w++) { 
+				Wall wall = (Wall) walls.get(w);
+				if(wZombie.isDir() && wZombie.getX_Point()+wZombie.getWidth()>wall.getX_Point()+wall.getWidth() && wZombie.getX_Point()<wall.getX_Point()+wall.getWidth()){
+					wZombie.setDir(false); // change direction
+					w=walls.size();
+				}else if(!wZombie.isDir() && wZombie.getX_Point()<wall.getX_Point()&& wZombie.getX_Point()+wZombie.getWidth()>wall.getX_Point()) {
+					
+					wZombie.setDir(true); // change direction
+					w=walls.size();
+				}
+				
+				
+		    }
+		    
+		    wZombie.update(inHandler);
+		}
 	}
 	
 	public void draw(Graphics2D g2){
@@ -125,8 +145,8 @@ public class Level {
 			Wall wall = (Wall) walls.get(w);
 			wall.draw(g2,xOffset);
 		}
-		for(int wz=0;wz<WZombies.size();wz++){
-			WalkZombie wZombie= (WalkZombie) WZombies.get(wz);
+		for(int wz=0;wz<wZombies.size();wz++){
+			WalkZombie wZombie= (WalkZombie) wZombies.get(wz);
 			wZombie.draw(g2,xOffset);
 		}
 	}

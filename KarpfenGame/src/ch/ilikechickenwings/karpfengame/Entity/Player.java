@@ -21,7 +21,6 @@ public class Player extends Entity{
 		setWidth(30);
 		setHeight(70);
 		setVelocity(vel);
-		System.out.println(vel);
 		//super(x, y, lifes);
 		// TODO Auto-generated constructor stub
 	}
