@@ -7,6 +7,7 @@ public class Entity {
 	private int lifes;
 	private int width;
 	private int height;
+	private int velocity;
 	
 	/*
 	public Entity(int x, int y, int lifes, int width, int height){
@@ -17,6 +18,14 @@ public class Entity {
 		this.setHeight(height);
 		
 	}*/
+
+	public int getVelocity() {
+		return velocity;
+	}
+
+	public void setVelocity(int velocity) {
+		this.velocity = velocity;
+	}
 
 	public int getX_Point() {
 		return x_Point;

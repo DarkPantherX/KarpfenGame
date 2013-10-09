@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import ch.ilikechickenwings.karpfengame.Entity.Player;
+import ch.ilikechickenwings.karpfengame.Entity.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 /*
@@ -18,6 +19,7 @@ public class Level {
 	public static int xOffset=0;
 	public static int playerTrigger=50; // as soon as the player reached this position in the window, the screen will follow the player.
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
+	public static ArrayList<WalkZombie> WZombies = new ArrayList<WalkZombie>();
 	public static Player player;
 	
 	// These parameters may vary from level to level and should be stored in a .txt file:
@@ -30,12 +32,15 @@ public class Level {
 	public static int dxVar; // maximal variance of dxMu (+ or -) (-> e.g. walls are closer together than normal)
 	public static int height;
 	public static int dyVar; // maximal y-offset (+ or -) (-> e.g. wall is higher than the one before)
-	// TODO: Coffee / Monsters / Player etc..
+	// Monsters:
+	public static int spawnWalkZombie; // in %
+	// Player:
+	public static int maxLife;
+	public static int velPlayer; // velocity
+	// TODO: Coffee  etc..
 	
 	
 	public Level(int lvl){
-		
-		player = new Player(0,0,10);
 		
 		// data should now be loaded depending on lvl
 		xMax=KarpfenGame.WIDTH*2;
@@ -45,13 +50,22 @@ public class Level {
 		widthVar=35;
 		dxVar=35; 
 		height=20;
-		dyVar=60; // I took half of the previous value..
+		dyVar=60; // Here I took half of the previous value..
+		
+		spawnWalkZombie=30;
+
+		maxLife=100;
+		velPlayer=4;
+		
+		
+		player = new Player(0,0,maxLife,velPlayer);
 		createWalls();
 	}
 	
 	private void createWalls(){
 		Wall wall = new Wall(0,KarpfenGame.HEIGHT/2,widthMu,height); // first wall
 		walls.add(wall);
+		// on the first wall there should be no zombie
 		
 		int in = walls.size()-1;
 		Wall wi = (Wall) walls.get(in);
@@ -66,6 +80,11 @@ public class Level {
 			
 			wall = new Wall(wi.getX_Point()+wi.getWidth()+dxMu+r.nextInt(2*dxVar)-dxVar,wi.getY_Point()+dyOffset,widthMu+r.nextInt(2*widthVar)-widthVar,height);
 			wi=wall;
+			if(spawnWalkZombie>=r.nextInt(100)){
+				WalkZombie wz=new WalkZombie(wi.getX_Point(),wi.getY_Point());
+				WZombies.add(wz);
+				System.out.println("jup");
+			}
 			walls.add(wall);
 		}
 		
@@ -105,6 +124,10 @@ public class Level {
 		for (int w = 0; w < walls.size(); w++) {
 			Wall wall = (Wall) walls.get(w);
 			wall.draw(g2,xOffset);
+		}
+		for(int wz=0;wz<WZombies.size();wz++){
+			WalkZombie wZombie= (WalkZombie) WZombies.get(wz);
+			wZombie.draw(g2,xOffset);
 		}
 	}
 	
