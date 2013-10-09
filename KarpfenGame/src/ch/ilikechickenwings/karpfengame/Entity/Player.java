@@ -122,7 +122,8 @@ public class Player extends Entity{
 		g2.setColor(Color.green);
 		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
 		g2.setColor(Color.yellow);
-		g2.fillRect(getX_Point()-xOffset, getY_Point()-coffeeHeigth*2,(int)(getWidth()*coffee/100),coffeeHeigth);
+		//coffe shouldn't be above the player
+		g2.fillRect(5, 5,(int)(getWidth()*coffee/100),coffeeHeigth);
 	}
 
 }
