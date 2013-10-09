@@ -118,8 +118,9 @@ public class Level {
 		
 		player.update(inHandler);
 		//neeeded for falling - otherwise you could keep on walking if you don't jump
+		if(!player.isJumping()){
 		player.setFalling(true);
-		
+		}
 		// Monsters update:
 		for (int wz = 0; wz < wZombies.size(); wz++) { 
 		    WalkZombie wZombie = (WalkZombie) wZombies.get(wz);
