@@ -9,10 +9,6 @@ import ch.ilikechickenwings.karpfengame.Entity.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 /*
- *  TODO: The parameters of a level should be stored in a .txt file - 
- *  TODO: Why? -DPX 9.10.2013
- *  
- *  
  *  TODO: Please add support for eternal wall-creating, now it is limited and resource heavy, the platforms have to be removed out of the array-> to reduce resouces needed -DPX 9.10.2013
  *  
  */
@@ -28,8 +24,7 @@ public class Level {
 	public static ArrayList<WalkZombie> wZombies = new ArrayList<WalkZombie>();
 	public static Player player;
 
-	// These parameters may vary from level to level and should be stored in a
-	// .txt file:
+	// These parameters may vary from level to level 
 	// General:
 	public static int xMax; // length of the level
 	// Walls:
@@ -138,16 +133,19 @@ public class Level {
 			}
 		}
 	
-		
-		
 		player.update(inHandler);
 		//neeeded for falling - otherwise you could keep on walking if you don't jump
+		/*
 		if(!player.isJumping()){
 		player.setFalling(true);
+		}
+		*/ // this code is already included in line 135. -SC 09.10.2013
 		
+		
+		// die
 		if(player.getY_Point()>KarpfenGame.HEIGHT){
 			karpfenGame.setLvl(new Level(1, karpfenGame));
-		}
+		
 		}
 		// Monsters update:
 		for (int wz = 0; wz < wZombies.size(); wz++) { 
