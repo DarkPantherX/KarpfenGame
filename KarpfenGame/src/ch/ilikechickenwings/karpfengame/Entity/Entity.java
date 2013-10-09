@@ -8,6 +8,7 @@ public class Entity {
 	private int width;
 	private int height;
 	
+	/*
 	public Entity(int x, int y, int lifes, int width, int height){
 		this.setX_Point(x);
 		this.setY_Point(y);
@@ -15,7 +16,7 @@ public class Entity {
 		this.setWidth(width);
 		this.setHeight(height);
 		
-	}
+	}*/
 
 	public int getX_Point() {
 		return x_Point;

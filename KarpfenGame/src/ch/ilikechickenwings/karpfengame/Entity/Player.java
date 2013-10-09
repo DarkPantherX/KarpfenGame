@@ -13,8 +13,12 @@ public class Player extends Entity{
 	private int gravity=10;
 	private int jumped=0;
 	
-	public Player(int x, int y, int lifes, int width, int height) {
-		super(x, y, lifes, width, height);
+	public Player(int x, int y, int lifes) {
+		
+		setX_Point(x);
+		setY_Point(y);
+		setLifes(lifes);
+		//super(x, y, lifes);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -43,11 +47,11 @@ public class Player extends Entity{
 			
 			jump();
 
-			if (inHandler.getKeys()[KeyEvent.VK_A]) {
+			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
 				setX_Point(getX_Point()-4);
 				
 			}
-			if (inHandler.getKeys()[KeyEvent.VK_D]) {
+			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
 				setX_Point(getX_Point()+4);
 
 			}
