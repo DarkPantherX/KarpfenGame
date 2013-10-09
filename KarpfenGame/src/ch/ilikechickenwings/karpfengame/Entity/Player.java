@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import ch.ilikechickenwings.karpfengame.KarpfenGame;
 import ch.ilikechickenwings.karpfengame.Wall;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Entity.Entity;
 
 public class Player extends Entity{
 
