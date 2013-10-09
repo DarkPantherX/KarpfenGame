@@ -21,13 +21,12 @@ public class KarpfenGame extends JPanel implements Runnable{
 	 *  08.10.2013 - Strichcoder joined the project
 	 *  09.10.2013 - Space joined the project
 	 *  09.10.2013 - great another idiot...
-	 *  PENIS
+
 
 	 *  09.10.2013 - I should concentrate on my studies...
 
 	 */
 	
-	private static final long asdfss=0;
 	private static final long serialVersionUID = 1L;
 	public static int WIDTH=640;
 	public static int HEIGHT=480;
