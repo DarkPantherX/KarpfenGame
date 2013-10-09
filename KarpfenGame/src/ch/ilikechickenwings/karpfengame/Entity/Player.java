@@ -14,6 +14,12 @@ public class Player extends Entity{
 	private int gravity=10;
 	private int jumped=0;
 	
+	// coffee:
+	private double coffee;
+	private int coffeeHeigth=10; // height of the coffee-bar.
+	private double cReduceWalk=0.2; // the amount of coffee that is lost per jump
+	private double cReduceJump=2.0; // the amount of coffee that is lost per update whilst one is walking.
+	
 	public Player(int x, int y, int lifes, int vel) {
 		
 		setX_Point(x);
@@ -22,8 +28,17 @@ public class Player extends Entity{
 		setWidth(30);
 		setHeight(70);
 		setVelocity(vel);
+		setCoffee(100);
 		//super(x, y, lifes);
 		// TODO Auto-generated constructor stub
+	}
+
+	public int getCoffee() {
+		return (int)coffee;
+	}
+
+	public void setCoffee(int coffee) {
+		this.coffee = (double)coffee;
 	}
 
 	public boolean isFalling() {
@@ -47,17 +62,18 @@ public class Player extends Entity{
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
 				jumping=true;
 				falling=false;
+				coffee-=cReduceJump;
 			}
 			
 			jump();
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
 				setX_Point(getX_Point()-getVelocity());
-				
+				coffee-=cReduceWalk;
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
 				setX_Point(getX_Point()+getVelocity());
-
+				coffee-=cReduceWalk;
 			}
 
 		/* moved to Level.java - SC
@@ -104,7 +120,8 @@ public class Player extends Entity{
 	public void draw(Graphics2D g2,int xOffset){
 		g2.setColor(Color.green);
 		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
-		
+		g2.setColor(Color.yellow);
+		g2.fillRect(getX_Point()-xOffset, getY_Point()-coffeeHeigth*2,(int)(getWidth()*coffee/100),coffeeHeigth);
 	}
 
 }
