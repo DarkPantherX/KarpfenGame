@@ -65,6 +65,11 @@ public class Level {
 	private void createWalls(){
 		Wall wall = new Wall(0,KarpfenGame.HEIGHT/2,widthMu,height); // first wall
 		walls.add(wall);
+		
+		//debug for 2 walls above each other
+//		Wall wall1 = new Wall(0,(KarpfenGame.HEIGHT/2)-50,widthMu-20,height); // first wall
+//		walls.add(wall1);
+		
 		// on the first wall there should be no zombie
 		
 		int in = walls.size()-1;
