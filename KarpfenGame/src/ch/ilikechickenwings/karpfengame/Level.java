@@ -22,7 +22,7 @@ public class Level {
 	
     public static int widht; // TODO: Variable width?
 	public static int xOffset=0;
-	public static int playerTrigger=50; // as soon as the player reached this position in the window, the screen will follow the player.
+	public static int playerTrigger=250; // as soon as the player reached this position in the window, the screen will follow the player.
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	public static ArrayList<WalkZombie> wZombies = new ArrayList<WalkZombie>();
 	public static Player player;
@@ -50,11 +50,11 @@ public class Level {
 		// data should now be loaded depending on lvl
 		xMax=KarpfenGame.WIDTH*2;
 		
-		widthMu=65; 
+		widthMu=100; 
 		dxMu=65; 
 		widthVar=35;
-		dxVar=35; 
-		height=20;
+		dxVar=30; 
+		height=15;
 		dyVar=60; // Here I took half of the previous value..
 		
 		spawnWalkZombie=30;
@@ -110,7 +110,8 @@ public class Level {
    
 			    if(wall.getY_Point()<player.getY_Point()+player.getHeight() && 
 			    		wall.getY_Point()+wall.getHeight()>player.getY_Point()+player.getHeight()){ // player's y is on a wall
-				    player.setFalling(false);
+			    	player.setY_Point(wall.getY_Point()+1-player.getHeight());
+			    	player.setFalling(false);
 				    player.setJumping(false);
 			    }else if(!player.isJumping()){
 				    player.setFalling(true);
