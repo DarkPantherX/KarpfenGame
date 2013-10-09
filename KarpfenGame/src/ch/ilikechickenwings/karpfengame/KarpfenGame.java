@@ -18,7 +18,7 @@ import ch.ilikechickenwings.karpfengame.Menu.Menu;
 public class KarpfenGame extends JPanel implements Runnable{
 
 	/**
-	 * 
+	 *  Strichcoder joined the project
 	 */
 	private static final long serialVersionUID = 1L;
 	public static int WIDTH=500;
