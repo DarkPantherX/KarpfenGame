@@ -42,11 +42,18 @@ public class Level {
 	// Player:
 	public static int maxLife;
 	public static int velPlayer; // velocity
+
+	private KarpfenGame karpfenGame;
+	
 	// TODO: Coffee  etc..
 
 	
-	public Level(int lvl){
+	public Level(int lvl, KarpfenGame karpfenGame){
 		
+		this.setKarpfenGame(karpfenGame);
+		walls.clear();
+		wZombies.clear();
+		xOffset=0;
 		// data should now be loaded depending on lvl
 		xMax=KarpfenGame.WIDTH*2;
 		
@@ -126,6 +133,10 @@ public class Level {
 		//neeeded for falling - otherwise you could keep on walking if you don't jump
 		if(!player.isJumping()){
 		player.setFalling(true);
+		
+		if(player.getY_Point()>KarpfenGame.HEIGHT){
+			karpfenGame.setLvl(new Level(1, karpfenGame));
+		}
 		}
 		// Monsters update:
 		for (int wz = 0; wz < wZombies.size(); wz++) { 
@@ -160,6 +171,20 @@ public class Level {
 			WalkZombie wZombie= (WalkZombie) wZombies.get(wz);
 			wZombie.draw(g2,xOffset);
 		}
+	}
+
+	/**
+	 * @return the karpfenGame
+	 */
+	public KarpfenGame getKarpfenGame() {
+		return karpfenGame;
+	}
+
+	/**
+	 * @param karpfenGame the karpfenGame to set
+	 */
+	public void setKarpfenGame(KarpfenGame karpfenGame) {
+		this.karpfenGame = karpfenGame;
 	}
 	
 }

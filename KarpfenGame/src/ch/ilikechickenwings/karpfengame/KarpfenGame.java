@@ -50,7 +50,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 
 				// Player player = new Player(0,0,10,30,70);
 				// this.player = player; // moved to Level.java - SC
-				this.lvl = new Level(1);
+				this.lvl = new Level(1,this);
 				// start the game thread (run-method)
 				new Thread(this).start();
 	}
@@ -186,6 +186,18 @@ public class KarpfenGame extends JPanel implements Runnable{
 		this.menu=menu;
 		
 	}
+
+
+
+			public Level getLvl() {
+				return lvl;
+			}
+
+
+
+			public void setLvl(Level lvl) {
+				this.lvl = lvl;
+			}
 
 		/**	public boolean[] getA() {
 
