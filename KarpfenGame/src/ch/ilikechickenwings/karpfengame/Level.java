@@ -9,7 +9,12 @@ import ch.ilikechickenwings.karpfengame.Entity.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 /*
- *  TODO: The parameters of a level should be stored in a .txt file
+ *  TODO: The parameters of a level should be stored in a .txt file - 
+ *  TODO: Why? -DPX 9.10.2013
+ *  
+ *  
+ *  TODO: Please add support for eternal wall-creating, now it is limited and resource heavy, the platforms have to be removed out of the array-> to reduce resouces needed -DPX 9.10.2013
+ *  
  */
 
 
@@ -65,11 +70,6 @@ public class Level {
 	private void createWalls(){
 		Wall wall = new Wall(0,KarpfenGame.HEIGHT/2,widthMu,height); // first wall
 		walls.add(wall);
-		
-		//debug for 2 walls above each other
-//		Wall wall1 = new Wall(0,(KarpfenGame.HEIGHT/2)-50,widthMu-20,height); // first wall
-//		walls.add(wall1);
-		
 		// on the first wall there should be no zombie
 		
 		int in = walls.size()-1;
