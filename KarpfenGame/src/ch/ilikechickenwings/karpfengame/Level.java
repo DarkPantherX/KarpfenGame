@@ -17,26 +17,35 @@ import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
  *  
  */
 
+public class Level {
 
-public class Level { 
-	
-    public static int widht; // TODO: Variable width?
-	public static int xOffset=0;
-	public static int playerTrigger=250; // as soon as the player reached this position in the window, the screen will follow the player.
+	public static int widht; // TODO: Variable width?
+	public static int xOffset = 0;
+	public static int playerTrigger = 250; // as soon as the player reached this
+											// position in the window, the
+											// screen will follow the player.
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	public static ArrayList<WalkZombie> wZombies = new ArrayList<WalkZombie>();
 	public static Player player;
-	
-	// These parameters may vary from level to level and should be stored in a .txt file:
+
+	// These parameters may vary from level to level and should be stored in a
+	// .txt file:
 	// General:
 	public static int xMax; // length of the level
 	// Walls:
-	public static int widthMu; // average length of wall (has to be modified at some stage, as the graphics should fit the wall's length
-	public static int dxMu; // average difference between to walls (Mu comes from the Greek letter mu and stands for the arithmetic mean in statistics)
-	public static int widthVar; // maximal variance of xMu (+ or -) (-> e.g. the wall is smaller than usual)
-	public static int dxVar; // maximal variance of dxMu (+ or -) (-> e.g. walls are closer together than normal)
+	public static int widthMu; // average length of wall (has to be modified at
+								// some stage, as the graphics should fit the
+								// wall's length
+	public static int dxMu; // average difference between to walls (Mu comes
+							// from the Greek letter mu and stands for the
+							// arithmetic mean in statistics)
+	public static int widthVar; // maximal variance of xMu (+ or -) (-> e.g. the
+								// wall is smaller than usual)
+	public static int dxVar; // maximal variance of dxMu (+ or -) (-> e.g. walls
+								// are closer together than normal)
 	public static int height;
-	public static int dyVar; // maximal y-offset (+ or -) (-> e.g. wall is higher than the one before)
+	public static int dyVar; // maximal y-offset (+ or -) (-> e.g. wall is
+								// higher than the one before)
 	// Monsters:
 	public static int spawnWalkZombie; // in %
 	// Player:
@@ -44,36 +53,38 @@ public class Level {
 	public static int velPlayer; // velocity
 
 	private KarpfenGame karpfenGame;
-	
-	// TODO: Coffee  etc..
+	private int lvl;
 
-	
-	public Level(int lvl, KarpfenGame karpfenGame){
-		
+	// TODO: Coffee etc..
+
+	public Level(int lvl, KarpfenGame karpfenGame) {
+
+		this.setLvl(lvl);
 		this.setKarpfenGame(karpfenGame);
 		walls.clear();
 		wZombies.clear();
-		xOffset=0;
-		// data should now be loaded depending on lvl
-		xMax=KarpfenGame.WIDTH*2;
-		
-		widthMu=100; 
-		dxMu=65; 
-		widthVar=35;
-		dxVar=30; 
-		height=15;
-		dyVar=60; // Here I took half of the previous value..
-		
-		spawnWalkZombie=30;
+		xOffset = 0;
+		if (this.lvl == 1) {
+			// data should now be loaded depending on lvl
+			xMax = KarpfenGame.WIDTH * 2;
 
-		maxLife=100;
-		velPlayer=4;
-		
-		
-		player = new Player(0,0,maxLife,velPlayer);
-		createWalls();
+			widthMu = 100;
+			dxMu = 65;
+			widthVar = 35;
+			dxVar = 30;
+			height = 15;
+			dyVar = 60; // Here I took half of the previous value..
+
+			spawnWalkZombie = 30;
+
+			maxLife = 100;
+			velPlayer = 4;
+
+			player = new Player(0, 0, maxLife, velPlayer);
+			createWalls();
+		}
 	}
-	
+
 	private void createWalls(){
 		Wall wall = new Wall(0,KarpfenGame.HEIGHT/2,widthMu,height); // first wall
 		walls.add(wall);
@@ -185,6 +196,20 @@ public class Level {
 	 */
 	public void setKarpfenGame(KarpfenGame karpfenGame) {
 		this.karpfenGame = karpfenGame;
+	}
+
+	/**
+	 * @return the lvl
+	 */
+	public int getLvl() {
+		return lvl;
+	}
+
+	/**
+	 * @param lvl the lvl to set
+	 */
+	public void setLvl(int lvl) {
+		this.lvl = lvl;
 	}
 	
 }
