@@ -59,6 +59,7 @@ public class Player extends Entity{
 
 	public void update(InputHandler inHandler) {
 		
+		
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
 				jumping=true;
 				falling=false;

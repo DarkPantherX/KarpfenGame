@@ -10,16 +10,18 @@ import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 /*
  *  TODO: Please add support for eternal wall-creating, now it is limited and resource heavy, the platforms have to be removed out of the array-> to reduce resouces needed -DPX 9.10.2013
- *  
+ *  - I think this is now done. Walls are being created (int)preCalcWalls after xOffset. They are removed as soon as they can no more be seen. - SC 09.10.2013
  */
 
 public class Level {
 
 	public static int widht; // TODO: Variable width?
-	public static int xOffset = 0;
+	public static int xOffset;
 	public static int playerTrigger = 250; // as soon as the player reached this
 											// position in the window, the
 											// screen will follow the player.
+	public static int preCalcWalls=KarpfenGame.WIDTH*2; // the walls will pregenerate
+			
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	public static ArrayList<WalkZombie> wZombies = new ArrayList<WalkZombie>();
 	public static Player player;
@@ -61,7 +63,7 @@ public class Level {
 		xOffset = 0;
 		if (this.lvl == 1) {
 			// data should now be loaded depending on lvl
-			xMax = KarpfenGame.WIDTH * 2;
+			xMax = KarpfenGame.WIDTH * 4;
 
 			widthMu = 100;
 			dxMu = 65;
@@ -85,11 +87,16 @@ public class Level {
 		walls.add(wall);
 		// on the first wall there should be no zombie
 		
+		addWalls();
+	}
+	
+	private void addWalls(){
 		int in = walls.size()-1;
 		Wall wi = (Wall) walls.get(in);
+		Wall wall;
 		Random r= new Random();
-		while(wi.getX_Point()+wi.getWidth()<xMax){ // as long as there is space
-					
+		while(wi.getX_Point()+wi.getWidth()<xMax && wi.getX_Point()+wi.getWidth()<xOffset+preCalcWalls){ // as long as there is space
+			
 			int dyOffset=r.nextInt(2*dyVar)-dyVar;
 			if(wi.getY_Point()+dyOffset+height>KarpfenGame.HEIGHT||wi.getY_Point()+dyOffset<0){ // makes walls outside of the window impossible
 				dyOffset*=-1;
@@ -104,6 +111,11 @@ public class Level {
 			walls.add(wall);
 		}
 		
+		// remove walls that are no longer nessecary.
+		wall=(Wall) walls.get(0);
+		if(wall.getX_Point()+wall.getY_Point()<xOffset){
+			walls.remove(0);
+		}
 	}
 	
 	public void update(InputHandler inHandler) {
@@ -114,13 +126,17 @@ public class Level {
 			xOffset=player.getX_Point()-playerTrigger;
 		}
 		
+		addWalls();
+		
+		if(!player.isJumping()){
+		    player.setFalling(true);
+		}
 		// checks collision of player with walls
 		// TODO: This check does probably not work if there's more than one wall above each other.. (witch is not possible yet)
 		for (int w = 0; w < walls.size(); w++) { 
 			Wall wall = (Wall) walls.get(w);
 		    if(player.getX_Point()<wall.getX_Point()+wall.getWidth() && 
 		    		player.getX_Point()+player.getWidth()>wall.getX_Point()){// player's x is not on a wall
-   
 			    if(wall.getY_Point()<player.getY_Point()+player.getHeight() && 
 			    		wall.getY_Point()+wall.getHeight()>player.getY_Point()+player.getHeight()){ // player's y is on a wall
 			    	player.setY_Point(wall.getY_Point()+1-player.getHeight());
@@ -132,24 +148,21 @@ public class Level {
 				
 			}
 		}
-	
+		
 		player.update(inHandler);
-		//neeeded for falling - otherwise you could keep on walking if you don't jump
-		/*
-		if(!player.isJumping()){
-		player.setFalling(true);
-		}
-		*/ // this code is already included in line 135. -SC 09.10.2013
-		
-		
+			
 		// die
 		if(player.getY_Point()>KarpfenGame.HEIGHT){
 			karpfenGame.setLvl(new Level(1, karpfenGame));
 		
 		}
 		// Monsters update:
+		WalkZombie wZombie = (WalkZombie) wZombies.get(0);
+		if(wZombie.getX_Point()+wZombie.getWidth()*10<xOffset){ // unnice
+			wZombies.remove(0);
+		}
 		for (int wz = 0; wz < wZombies.size(); wz++) { 
-		    WalkZombie wZombie = (WalkZombie) wZombies.get(wz);
+		    wZombie = (WalkZombie) wZombies.get(wz);
 		    //check if they are still on the platform
 		    for (int w = 0; w < walls.size(); w++) { 
 				Wall wall = (Wall) walls.get(w);
