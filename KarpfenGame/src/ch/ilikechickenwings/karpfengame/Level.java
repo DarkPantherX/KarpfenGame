@@ -38,7 +38,7 @@ public class Level {
 	public static int maxLife;
 	public static int velPlayer; // velocity
 	// TODO: Coffee  etc..
-	
+
 	
 	public Level(int lvl){
 		
@@ -114,7 +114,11 @@ public class Level {
 			}
 		}
 	
+		
+		
 		player.update(inHandler);
+		//neeeded for falling - otherwise you could keep on walking if you don't jump
+		player.setFalling(true);
 		
 		// Monsters update:
 		for (int wz = 0; wz < wZombies.size(); wz++) { 
