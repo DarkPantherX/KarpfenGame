@@ -157,9 +157,11 @@ public class Level {
 		
 		}
 		// Monsters update:
+		if(!(wZombies.size()==0)){
 		WalkZombie wZombie = (WalkZombie) wZombies.get(0);
 		if(wZombie.getX_Point()+wZombie.getWidth()*10<xOffset){ // unnice
 			wZombies.remove(0);
+		
 		}
 		for (int wz = 0; wz < wZombies.size(); wz++) { 
 		    wZombie = (WalkZombie) wZombies.get(wz);
@@ -179,6 +181,7 @@ public class Level {
 		    }
 		    
 		    wZombie.update(inHandler);
+			}
 		}
 	}
 	
