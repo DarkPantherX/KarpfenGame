@@ -5,11 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-
-import ch.ilikechickenwings.karpfengame.KarpfenGame;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 
@@ -22,7 +18,6 @@ public class Player extends Entity{
 	
 	// coffee:
 	private double coffee;
-	private int coffeeHeigth=10; // height of the coffee-bar.
 	private double cReduceWalk=0.2; // the amount of coffee that is lost per jump
 	private double cReduceJump=2.0; // the amount of coffee that is lost per update whilst one is walking.
 	
@@ -69,18 +64,20 @@ public class Player extends Entity{
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
 				jumping=true;
 				falling=false;
-				coffee-=cReduceJump;
+				
+				if(!(coffee<=0)){
+					coffee-=cReduceJump;
+				}
 			}
 			
 			jump();
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
-				setX_Point(getX_Point()-getVelocity());
-				coffee-=cReduceWalk;
+				walk(-getVelocity());
+
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
-				setX_Point(getX_Point()+getVelocity());
-				coffee-=cReduceWalk;
+				walk(getVelocity());
 			}
 
 		/* moved to Level.java - SC
@@ -112,6 +109,16 @@ public class Player extends Entity{
 		
 	}
 
+	private void walk(int i){
+		setX_Point(getX_Point() + i);
+		
+		if(!(coffee<=0)){
+			coffee-=cReduceWalk;
+		}
+		
+	}
+	
+	
 	private void jump() {
 		if(jumping==true){
 		jumped++;
