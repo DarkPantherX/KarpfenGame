@@ -2,8 +2,14 @@ package ch.ilikechickenwings.karpfengame.Entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import ch.ilikechickenwings.karpfengame.KarpfenGame;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 
@@ -121,9 +127,17 @@ public class Player extends Entity{
 	public void draw(Graphics2D g2,int xOffset){
 		g2.setColor(Color.green);
 		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
-		g2.setColor(Color.yellow);
+		g2.setColor(Color.black);
 		//coffe shouldn't be above the player
-		g2.fillRect(5, 5,(int)(getWidth()*coffee/100),coffeeHeigth);
+		
+		
+		Image imge1 = null;
+			imge1 = Toolkit.getDefaultToolkit().getImage(
+					getClass().getResource("/res/loadingbar.png"));
+
+		g2.drawImage(imge1,5, 5, 150, 30,null);
+		g2.fillRect(5+(int)(150*coffee/100), 5,150,30);
+		
 	}
 
 }
