@@ -152,37 +152,42 @@ public class Level {
 		player.update(inHandler);
 			
 		// die
-		if(player.getY_Point()>KarpfenGame.HEIGHT){
-			karpfenGame.setLvl(new Level(1, karpfenGame));
-		
+		if(player.getY_Point()>KarpfenGame.HEIGHT || player.getLifes()<=0){
+			die();
 		}
 		// Monsters update:
 		if(!(wZombies.size()==0)){
-		WalkZombie wZombie = (WalkZombie) wZombies.get(0);
-		if(wZombie.getX_Point()+wZombie.getWidth()*10<xOffset){ // unnice
-			wZombies.remove(0);
-		
-		}
-		for (int wz = 0; wz < wZombies.size(); wz++) { 
-		    wZombie = (WalkZombie) wZombies.get(wz);
-		    //check if they are still on the platform
-		    for (int w = 0; w < walls.size(); w++) { 
-				Wall wall = (Wall) walls.get(w);
-				if(wZombie.isDir() && wZombie.getX_Point()+wZombie.getWidth()>wall.getX_Point()+wall.getWidth() && wZombie.getX_Point()<wall.getX_Point()+wall.getWidth()){
-					wZombie.setDir(false); // change direction
-					w=walls.size();
-				}else if(!wZombie.isDir() && wZombie.getX_Point()<wall.getX_Point()&& wZombie.getX_Point()+wZombie.getWidth()>wall.getX_Point()) {
+		    WalkZombie wZombie = (WalkZombie) wZombies.get(0);
+		    if(wZombie.getX_Point()+wZombie.getWidth()*10<xOffset){ // unnice
+			    wZombies.remove(0);
+		    }
+		    for (int wz = 0; wz < wZombies.size(); wz++) { 
+		        wZombie = (WalkZombie) wZombies.get(wz);
+		        //check if they are still on the platform
+		        for (int w = 0; w < walls.size(); w++) { 
+				    Wall wall = (Wall) walls.get(w);
+				    if(wZombie.isDir() && wZombie.getX_Point()+wZombie.getWidth()>wall.getX_Point()+wall.getWidth() && wZombie.getX_Point()<wall.getX_Point()+wall.getWidth()){
+				    	wZombie.setDir(false); // change direction
+				    	w=walls.size();
+				    }else if(!wZombie.isDir() && wZombie.getX_Point()<wall.getX_Point()&& wZombie.getX_Point()+wZombie.getWidth()>wall.getX_Point()) {
 					
-					wZombie.setDir(true); // change direction
-					w=walls.size();
-				}
-				
-				
+				    	wZombie.setDir(true); // change direction
+				    	w=walls.size();
+			    	}
+		        }
+		        wZombie.update(inHandler);
+		        // Monster - Player
+		        if(player.getX_Point()+player.getWidth()>wZombie.getX_Point() && 
+		        		player.getX_Point()<wZombie.getX_Point()+wZombie.getWidth() && 
+		        		player.getY_Point()+player.getHeight()>wZombie.getY_Point() && 
+		        		player.getY_Point()<wZombie.getY_Point()+wZombie.getHeight() ){
+		        	player.setLifes(player.getLifes()-wZombie.getDamage());
+		        }
 		    }
 		    
-		    wZombie.update(inHandler);
-			}
+		    
 		}
+		
 	}
 	
 	public void draw(Graphics2D g2){
@@ -198,6 +203,9 @@ public class Level {
 		}
 	}
 
+	public void die(){
+		karpfenGame.setLvl(new Level(1, karpfenGame));
+	}
 	/**
 	 * @return the karpfenGame
 	 */

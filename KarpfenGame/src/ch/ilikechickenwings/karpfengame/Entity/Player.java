@@ -60,7 +60,6 @@ public class Player extends Entity{
 
 	public void update(InputHandler inHandler) {
 		
-		
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
 				jumping=true;
 				falling=false;
@@ -141,9 +140,14 @@ public class Player extends Entity{
 		Image imge1 = null;
 			imge1 = Toolkit.getDefaultToolkit().getImage(
 					getClass().getResource("/res/loadingbar.png"));
-
+		// coffee
 		g2.drawImage(imge1,5, 5, 150, 30,null);
 		g2.fillRect(5+(int)(150*coffee/100), 5,150,30);
+		// lifes
+		// TODO: Load life-image
+		g2.drawImage(imge1,160, 5, 150, 30,null);
+		g2.fillRect(160+(int)(150*getLifes()/100), 5,150,30);
+		
 		
 	}
 

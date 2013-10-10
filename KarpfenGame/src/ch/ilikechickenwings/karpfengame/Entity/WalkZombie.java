@@ -10,6 +10,7 @@ public class WalkZombie extends Entity{
 	
 
 	private boolean dir=true; // true = they walk to right, false = they walk to left
+	private int damage=5;
 	
 	public WalkZombie(int x,int y) {
 		setWidth(30);
@@ -19,6 +20,14 @@ public class WalkZombie extends Entity{
 		setLifes(100);
 		setVelocity(4);
 		
+	}
+
+	public int getDamage() {
+		return damage;
+	}
+
+	public void setDamage(int damage) {
+		this.damage = damage;
 	}
 
 	public void update(InputHandler inHandler) {
