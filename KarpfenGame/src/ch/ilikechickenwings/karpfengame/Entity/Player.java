@@ -131,11 +131,8 @@ public class Player extends Entity{
 	}
 	
 	public void draw(Graphics2D g2,int xOffset){
-		g2.setColor(Color.green);
-		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
 		g2.setColor(Color.black);
 		//coffe shouldn't be above the player
-		
 		
 		Image imge1 = null;
 			imge1 = Toolkit.getDefaultToolkit().getImage(
@@ -148,7 +145,9 @@ public class Player extends Entity{
 		g2.drawImage(imge1,160, 5, 150, 30,null);
 		g2.fillRect(160+(int)(150*getLifes()/100), 5,150,30);
 		
-		
+		// player
+		g2.setColor(Color.green);
+		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
 	}
 
 }
