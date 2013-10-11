@@ -19,6 +19,7 @@ public class Player extends Entity{
 	private int invincibleCount=0;
 	private long currTime=0;
 	private long oldTime=0;
+	private int dir=0;
 	
 	// coffee:
 	private double coffee;
@@ -73,12 +74,26 @@ public class Player extends Entity{
 		this.jumping = jumping;
 	}
 
+	/**
+	 * @return the dir
+	 */
+	public int getDir() {
+		return dir;
+	}
+
+	/**
+	 * @param dir the dir to set
+	 */
+	public void setDir(int dir) {
+		this.dir = dir;
+	}
+
 	public void update(InputHandler inHandler) {
 		
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
 				jumping=true;
 				falling=false;
-				
+				setDir(3);
 				if(!(coffee<=0)){
 					coffee-=cReduceJump;
 				}
@@ -88,10 +103,13 @@ public class Player extends Entity{
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
 				walk(-getVelocity());
+				setDir(2);
+				
 
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
 				walk(getVelocity());
+				setDir(1);
 			}
 			
 			
