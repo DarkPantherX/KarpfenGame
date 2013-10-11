@@ -15,6 +15,10 @@ public class Player extends Entity{
 	private boolean jumping=false;
 	private int gravity=10;
 	private int jumped=0;
+	private boolean invincible=false;
+	private int invincibleCount=0;
+	private long currTime=0;
+	private long oldTime=0;
 	
 	// coffee:
 	private double coffee;
@@ -30,9 +34,20 @@ public class Player extends Entity{
 		setHeight(70);
 		setVelocity(vel);
 		setCoffee(100);
+		setInvincible(false);
 		//super(x, y, lifes);
 		// TODO Auto-generated constructor stub
 	}
+
+	public boolean isInvincible(){
+		return invincible;
+	}
+	
+	public void setInvincible(boolean b) {
+		this.invincible=b;
+		
+	}
+	
 
 	public int getCoffee() {
 		return (int)coffee;
@@ -78,6 +93,21 @@ public class Player extends Entity{
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
 				walk(getVelocity());
 			}
+			
+			
+			//Added Cooldown for damage
+			if(invincible){
+			currTime=System.currentTimeMillis();
+				if(invincibleCount==0){
+				invincibleCount++;
+				oldTime=currTime;
+				System.out.println("here");
+			}else if(currTime>oldTime+1000){
+				invincibleCount=0;
+				setInvincible(false);
+			}
+				
+			}
 
 		/* moved to Level.java - SC
 		for (int w = 0; w < KarpfenGame.walls.size(); w++) { // TODO: This collision is checked in Level.java
@@ -118,8 +148,10 @@ public class Player extends Entity{
 	}
 	
 	public void getDamaged(Entity ent){
+		if(!invincible){
 		setLifes(getLifes()-ent.getDamage());
-		
+		setInvincible(true);
+		}
 	}
 	
 	
@@ -153,6 +185,11 @@ public class Player extends Entity{
 		// player
 		g2.setColor(Color.green);
 		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		if(invincible){
+		g2.setColor(Color.blue);
+		g2.drawRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		System.out.println(invincibleCount);
+		}
 	}
 
 }
