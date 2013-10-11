@@ -17,8 +17,14 @@ New Way of sturctoring class:
 10. getters and setters functions
 (11.main function)
 
+
+See the Level-class, I already applied the changes there
+
+
 With this was we can get a clean sturctor.
 The next point is the real clean up:
 
 In the future, before commiting we both have rewatch our code and see what could be made more efficient
 And if we pull, we have to rewatch the code the other person wrote to see if we can improof the code
+
+If you also have some point just write it in here... this should be our guide!
