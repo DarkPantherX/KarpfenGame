@@ -1,0 +1,24 @@
+We have managed to get some really nice code up and running.
+Now the next problem is the clean up which we have to do, so the code doesn't get out of hand.
+To contribut to this I invented a new system to bring some structure to out classes:
+
+New Way of sturctoring class:
+
+
+1. imports
+2. class
+3. public static variables
+4. private static variables
+5. public non-static variables
+6. priavte non-static variables
+7. Constuctor
+8. update & paint-methodes
+9. Functions which are typicall for this class (except main function)
+10. getters and setters functions
+(11.main function)
+
+With this was we can get a clean sturctor.
+The next point is the real clean up:
+
+In the future, before commiting we both have rewatch our code and see what could be made more efficient
+And if we pull, we have to rewatch the code the other person wrote to see if we can improof the code
