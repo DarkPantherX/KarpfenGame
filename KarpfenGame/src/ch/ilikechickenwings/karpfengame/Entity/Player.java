@@ -117,6 +117,11 @@ public class Player extends Entity{
 		
 	}
 	
+	public void getDamaged(Entity ent){
+		setLifes(getLifes()-ent.getDamage());
+		
+	}
+	
 	
 	private void jump() {
 		if(jumping==true){

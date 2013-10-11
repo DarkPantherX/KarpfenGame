@@ -177,11 +177,12 @@ public class Level {
 		        }
 		        wZombie.update(inHandler);
 		        // Monster - Player
+		        //we have to talk about this after we made the graphics...
 		        if(player.getX_Point()+player.getWidth()>wZombie.getX_Point() && 
 		        		player.getX_Point()<wZombie.getX_Point()+wZombie.getWidth() && 
 		        		player.getY_Point()+player.getHeight()>wZombie.getY_Point() && 
 		        		player.getY_Point()<wZombie.getY_Point()+wZombie.getHeight() ){
-		        	player.setLifes(player.getLifes()-wZombie.getDamage());
+		        		player.getDamaged(wZombie);
 		        }
 		    }
 		    
