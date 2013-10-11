@@ -19,7 +19,7 @@ public class WalkZombie extends Entity{
 		setY_Point(y-getHeight());
 		setLifes(100);
 		setVelocity(4);
-		setDamage(5);
+		setDamage(10);
 		
 	}
 
