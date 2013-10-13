@@ -40,6 +40,108 @@ public class Player extends Entity{
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public void update(InputHandler inHandler) {
+		
+			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
+				jumping=true;
+				falling=false;
+				setDir(3);
+				if(!(coffee<=0)){
+					coffee-=cReduceJump;
+				}
+			}
+			
+			jump();
+
+			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
+				walk(-getVelocity());
+				setDir(2);
+				
+
+			}
+			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
+				walk(getVelocity());
+				setDir(1);
+			}
+			
+			
+			//Added Cooldown for damage
+			if(invincible){
+			currTime=System.currentTimeMillis();
+				if(invincibleCount==0){
+				invincibleCount++;
+				oldTime=currTime;
+			}else if(currTime>oldTime+1000){
+				invincibleCount=0;
+				setInvincible(false);
+			}
+				
+			}
+
+
+		if(falling){
+			setY_Point(getY_Point()+gravity);
+		}
+		
+		
+	}
+
+	
+	public void draw(Graphics2D g2,int xOffset){
+		g2.setColor(Color.black);
+		//coffe shouldn't be above the player
+		
+		Image imge1 = null;
+			imge1 = Toolkit.getDefaultToolkit().getImage(
+					getClass().getResource("/res/loadingbar.png"));
+		// coffee
+		g2.drawImage(imge1,5, 5, 150, 30,null);
+		g2.fillRect(5+(int)(150*coffee/100), 5,150,30);
+		// lifes
+		// TODO: Load life-image
+		g2.drawImage(imge1,160, 5, 150, 30,null);
+		g2.fillRect(160+(int)(150*getLifes()/100), 5,150,30);
+		
+		// player
+		g2.setColor(Color.green);
+		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		if(invincible){
+		g2.setColor(Color.blue);
+		g2.drawRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		}
+	}
+	
+	private void walk(int i){
+		setX_Point(getX_Point() + i);
+		
+		if(!(coffee<=0)){
+			coffee-=cReduceWalk;
+		}
+		
+	}
+	
+	public void getDamaged(Entity ent){
+		if(!invincible){
+		setLifes(getLifes()-ent.getDamage());
+		setInvincible(true);
+		}
+	}
+	
+	
+	private void jump() {
+		if(jumping==true){
+		jumped++;
+		if(jumped>9){
+			falling=true;
+			jumping=false;
+			jumped=0;
+		}
+		setY_Point(getY_Point()-10);
+		}
+	}
+	
+
 	public boolean isInvincible(){
 		return invincible;
 	}
@@ -87,127 +189,4 @@ public class Player extends Entity{
 	public void setDir(int dir) {
 		this.dir = dir;
 	}
-
-	public void update(InputHandler inHandler) {
-		
-			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
-				jumping=true;
-				falling=false;
-				setDir(3);
-				if(!(coffee<=0)){
-					coffee-=cReduceJump;
-				}
-			}
-			
-			jump();
-
-			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
-				walk(-getVelocity());
-				setDir(2);
-				
-
-			}
-			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
-				walk(getVelocity());
-				setDir(1);
-			}
-			
-			
-			//Added Cooldown for damage
-			if(invincible){
-			currTime=System.currentTimeMillis();
-				if(invincibleCount==0){
-				invincibleCount++;
-				oldTime=currTime;
-				System.out.println("here");
-			}else if(currTime>oldTime+1000){
-				invincibleCount=0;
-				setInvincible(false);
-			}
-				
-			}
-
-		/* moved to Level.java - SC
-		for (int w = 0; w < KarpfenGame.walls.size(); w++) { // TODO: This collision is checked in Level.java
-			Wall wall = (Wall) KarpfenGame.walls.get(w);
-		if(getX_Point()<wall.getX_Point()+wall.getWidth()&&getX_Point()+30>wall.getX_Point()){
-			if(wall.getY_Point()<getY_Point()+getHeight() && !(wall.getY_Point()+10<getY_Point()+70)){
-				x=1;
-			}else{
-				x=0;}
-				
-			}
-		}
-		
-		if(x==1){
-			falling=false;
-			jumping=false;
-			x=0;
-		}else if (!jumping){
-			falling=true;
-		}
-		x=0;
-		*/ 
-			
-		if(falling){
-			setY_Point(getY_Point()+gravity);
-		}
-		
-		
-	}
-
-	private void walk(int i){
-		setX_Point(getX_Point() + i);
-		
-		if(!(coffee<=0)){
-			coffee-=cReduceWalk;
-		}
-		
-	}
-	
-	public void getDamaged(Entity ent){
-		if(!invincible){
-		setLifes(getLifes()-ent.getDamage());
-		setInvincible(true);
-		}
-	}
-	
-	
-	private void jump() {
-		if(jumping==true){
-		jumped++;
-		if(jumped>9){
-			falling=true;
-			jumping=false;
-			jumped=0;
-		}
-		setY_Point(getY_Point()-10);
-		}
-	}
-	
-	public void draw(Graphics2D g2,int xOffset){
-		g2.setColor(Color.black);
-		//coffe shouldn't be above the player
-		
-		Image imge1 = null;
-			imge1 = Toolkit.getDefaultToolkit().getImage(
-					getClass().getResource("/res/loadingbar.png"));
-		// coffee
-		g2.drawImage(imge1,5, 5, 150, 30,null);
-		g2.fillRect(5+(int)(150*coffee/100), 5,150,30);
-		// lifes
-		// TODO: Load life-image
-		g2.drawImage(imge1,160, 5, 150, 30,null);
-		g2.fillRect(160+(int)(150*getLifes()/100), 5,150,30);
-		
-		// player
-		g2.setColor(Color.green);
-		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
-		if(invincible){
-		g2.setColor(Color.blue);
-		g2.drawRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
-		System.out.println(invincibleCount);
-		}
-	}
-
 }
