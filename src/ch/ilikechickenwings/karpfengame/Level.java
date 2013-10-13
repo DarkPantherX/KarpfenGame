@@ -7,6 +7,7 @@ import java.util.Random;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.WalkZombie;
+import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 /*
@@ -176,6 +177,11 @@ public class Level {
 					if(ent instanceof WalkZombie){
 					
 					player.getDamaged(ent);
+					}else if(ent instanceof HealthPack){
+						if(player.getLifes()<=maxLife){
+						player.getHealed(ent);
+						entities.remove(ent);
+						}
 					}
 				}
 			}
@@ -192,9 +198,11 @@ public class Level {
 			wall.draw(g2, xOffset);
 		}
 		for (int wz = 0; wz < entities.size(); wz++) {
-			if(entities.get(wz) instanceof WalkZombie){
-			WalkZombie wZombie = (WalkZombie) entities.get(wz);
-			wZombie.draw(g2, xOffset);
+			Entity en= entities.get(wz);
+			if(en instanceof WalkZombie){
+			((WalkZombie) en).draw(g2, xOffset);
+			}else if(en instanceof HealthPack){
+			((HealthPack) en).draw(g2, xOffset);
 			}
 		}
 	}
@@ -237,6 +245,13 @@ public class Level {
 				WalkZombie wz = new WalkZombie(wi.getX_Point(), wi.getY_Point());
 				entities.add(wz);
 			}
+			
+			if (spawnWalkZombie >= r.nextInt(120)) {
+				HealthPack co = new HealthPack(wi.getX_Point()+(wi.getWidth()/2), wi.getY_Point());
+				entities.add(co);
+			}
+			
+			
 			walls.add(wall);
 		}
 

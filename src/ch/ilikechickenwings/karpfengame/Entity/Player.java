@@ -128,6 +128,11 @@ public class Player extends Entity{
 		}
 	}
 	
+	public void getHealed(Entity ent) {
+		setLifes(getLifes()+ent.getDamage());
+		
+	}
+	
 	
 	private void jump() {
 		if(jumping==true){
@@ -189,4 +194,5 @@ public class Player extends Entity{
 	public void setDir(int dir) {
 		this.dir = dir;
 	}
+
 }
