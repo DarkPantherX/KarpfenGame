@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
+import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
@@ -24,7 +25,7 @@ public class Level {
 															// pregenerate
 
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
-	public static ArrayList<WalkZombie> wZombies = new ArrayList<WalkZombie>();
+	public static ArrayList<Entity> entities = new ArrayList<Entity>();
 	public static Player player;
 
 	// These parameters may vary from level to level
@@ -60,7 +61,7 @@ public class Level {
 		this.setLvl(lvl);
 		this.setKarpfenGame(karpfenGame);
 		walls.clear();
-		wZombies.clear();
+		entities.clear();
 		xOffset = 0;
 		if (this.lvl == 1) {
 			// data should now be loaded depending on lvl
@@ -128,13 +129,18 @@ public class Level {
 			die();
 		}
 		// Monsters update:
-		if (!(wZombies.size() == 0)) {
-			WalkZombie wZombie = (WalkZombie) wZombies.get(0);
-			if (wZombie.getX_Point() + wZombie.getWidth() * 10 < xOffset) { // unnice
-				wZombies.remove(0);
+		if (!(entities.size() == 0)) {
+			Entity ent = entities.get(0);
+			
+			if (ent.getX_Point() + ent.getWidth() * 10 < xOffset) { // unnice
+				entities.remove(0);
+			
 			}
-			for (int wz = 0; wz < wZombies.size(); wz++) {
-				wZombie = (WalkZombie) wZombies.get(wz);
+			for (int wz = 0; wz < entities.size(); wz++) {
+				ent = (Entity) entities.get(wz);
+				if(entities.get(wz) instanceof WalkZombie){
+				
+				WalkZombie wZombie= (WalkZombie) entities.get(wz);
 				// check if they are still on the platform
 				for (int w = 0; w < walls.size(); w++) {
 					Wall wall = (Wall) walls.get(w);
@@ -155,23 +161,28 @@ public class Level {
 					}
 				}
 				wZombie.update(inHandler);
+				}
+				
 				// Monster - Player
 				// we have to talk about this after we made the graphics...
-				if (player.getX_Point() + player.getWidth() > wZombie
+				if (player.getX_Point() + player.getWidth() > ent
 						.getX_Point()
-						&& player.getX_Point() < wZombie.getX_Point()
-								+ wZombie.getWidth()
-						&& player.getY_Point() + player.getHeight() > wZombie
+						&& player.getX_Point() < ent.getX_Point()
+								+ ent.getWidth()
+						&& player.getY_Point() + player.getHeight() > ent
 								.getY_Point()
-						&& player.getY_Point() < wZombie.getY_Point()
-								+ wZombie.getHeight()) {
-					player.getDamaged(wZombie);
+						&& player.getY_Point() < ent.getY_Point()
+								+ ent.getHeight()) {
+					if(ent instanceof WalkZombie){
+					
+					player.getDamaged(ent);
+					}
 				}
 			}
-
+			}
 		}
 
-	}
+	
 
 	public void draw(Graphics2D g2) {
 		player.draw(g2, xOffset);
@@ -180,9 +191,11 @@ public class Level {
 			Wall wall = (Wall) walls.get(w);
 			wall.draw(g2, xOffset);
 		}
-		for (int wz = 0; wz < wZombies.size(); wz++) {
-			WalkZombie wZombie = (WalkZombie) wZombies.get(wz);
+		for (int wz = 0; wz < entities.size(); wz++) {
+			if(entities.get(wz) instanceof WalkZombie){
+			WalkZombie wZombie = (WalkZombie) entities.get(wz);
 			wZombie.draw(g2, xOffset);
+			}
 		}
 	}
 
@@ -222,7 +235,7 @@ public class Level {
 			wi = wall;
 			if (spawnWalkZombie >= r.nextInt(100)) {
 				WalkZombie wz = new WalkZombie(wi.getX_Point(), wi.getY_Point());
-				wZombies.add(wz);
+				entities.add(wz);
 			}
 			walls.add(wall);
 		}
