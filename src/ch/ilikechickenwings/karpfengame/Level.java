@@ -48,6 +48,7 @@ public class Level {
 								// higher than the one before)
 	// Monsters:
 	public static int spawnWalkZombie; // in %
+	public static int spawnHealthPack; // in %
 	// Player:
 	public static int maxLife;
 	public static int velPlayer; // velocity
@@ -76,6 +77,7 @@ public class Level {
 			dyVar = 60; // Here I took half of the previous value..
 
 			spawnWalkZombie = 30;
+			spawnHealthPack = 20;
 
 			maxLife = 100;
 			velPlayer = 4;
@@ -246,7 +248,7 @@ public class Level {
 				entities.add(wz);
 			}
 			
-			if (spawnWalkZombie >= r.nextInt(120)) {
+			if (spawnHealthPack >= r.nextInt(100)) {
 				HealthPack co = new HealthPack(wi.getX_Point()+(wi.getWidth()/2), wi.getY_Point());
 				entities.add(co);
 			}
