@@ -14,8 +14,8 @@ New Way of sturctoring class:
 7. Constuctor
 8. update & paint-methodes
 9. Functions which are typicall for this class (except main function)
-10. getters and setters functions
-(11.main function)
+(10.main function)
+11. getters and setters functions
 
 
 See the Level-class, I already applied the changes there
