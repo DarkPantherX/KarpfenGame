@@ -5,25 +5,32 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.beans.PropertyChangeListener;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 
-import ch.ilikechickenwings.karpfengame.Handler.ButtonHandler;
 import ch.ilikechickenwings.karpfengame.Handler.ComponentHandler;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Menu.Menu;
 
-public class KarpfenGame extends JPanel implements Runnable {
+public class KarpfenGame extends JPanel implements Runnable{
 
 	/**
 	 * 08.10.2013 - Strichcoder joined the project 09.10.2013 - Space joined the
@@ -49,7 +56,6 @@ public class KarpfenGame extends JPanel implements Runnable {
 	private Level lvl;
 	private long oldTime = System.currentTimeMillis();
 	private boolean opened=false;
-	private String str="";
 
 	
 	private ByteArrayOutputStream baos;
@@ -127,19 +133,36 @@ public class KarpfenGame extends JPanel implements Runnable {
 					 but.setPreferredSize(new Dimension(50,30));
 					 frame.add(but,BorderLayout.EAST);
 					 frame.setVisible(true);
-					 ButtonHandler al = new ButtonHandler();
-					 but.addActionListener(al);
-					 System.out.println("Hier");
+					 WinListener win = new WinListener();
+					 but.addActionListener(win);
+					 frame.addWindowListener(win);
+					  Action keyAction = new AbstractAction() {
+					        /**
+							 * 
+							 */
+							private static final long serialVersionUID = 1L;
+
+							@Override
+					        public void actionPerformed(ActionEvent ae) {
+					            System.out.println(textArea2.getText());
+					            textArea2.setText("");
+					        }
+					    };
+
+					 textArea2.getInputMap().put(KeyStroke.getKeyStroke("ENTER"), "ENTER key");
+				       textArea2.getActionMap().put("ENTER key", keyAction);
+					 System.out.println("Started Dev Console");
+					  
+					   
 					 
 					 
 				}	
 			}
 			if(baos!=null){
-				if(!baos.toString().equals(str)&&!baos.toString().equals("")){
+				if(!baos.toString().equals("")){
 				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 				Date date = new Date();
 				textArea1.append("<"+dateFormat.format(date)+">"+baos.toString());
-				str =baos.toString();
 				baos.reset();
 				}
 			}
@@ -148,7 +171,10 @@ public class KarpfenGame extends JPanel implements Runnable {
 
 	}
 
-	public void addNotify() {
+	
+	
+
+    public void addNotify() {
 		super.addNotify();
 		requestFocus();
 	}
@@ -187,4 +213,71 @@ public class KarpfenGame extends JPanel implements Runnable {
 		this.lvl = lvl;
 	}
 
+
+	class WinListener implements WindowListener, ActionListener, Action{
+
+
+		@Override
+		public void windowClosing(WindowEvent e) {
+			System.setOut(old);
+			System.out.println("Dev Console closed!");
+			
+		}
+		
+	
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			print(KarpfenGame.textArea2.getText());
+			KarpfenGame.textArea2.setText("");
+			
+		}
+		
+		public void print(String str){
+			System.out.println(str);
+			
+		}
+		
+		
+		@Override
+		public void windowDeactivated(WindowEvent e) {}
+
+		@Override
+		public void windowDeiconified(WindowEvent e) {}
+
+		@Override
+		public void windowIconified(WindowEvent e) {}
+
+		@Override
+		public void windowOpened(WindowEvent e) {}
+		
+		@Override
+		public void windowClosed(WindowEvent e) {}
+
+		@Override
+		public void windowActivated(WindowEvent e) {}
+		
+		@Override
+		public void addPropertyChangeListener(PropertyChangeListener arg0) {}
+
+		@Override
+		public Object getValue(String arg0) {return null;}
+
+		@Override
+		public boolean isEnabled() {return false;}
+
+		@Override
+		public void putValue(String arg0, Object arg1) {}
+
+		@Override
+		public void removePropertyChangeListener(PropertyChangeListener arg0) {}
+
+		@Override
+		public void setEnabled(boolean arg0) {}
+
+
+
+		
+	}
+	
 }
