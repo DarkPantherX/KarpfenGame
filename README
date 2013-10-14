@@ -30,6 +30,36 @@ And if we pull, we have to rewatch the code the other person wrote to see if we 
 If you also have some point just write it in here... this should be our guide!
 
 So here are some of my thoughts: - SC 14.10.2013
+
+[Still open questions]
+3) Should there be a Invincibility for Projectiles? should this be the same as for the Mobs?
+DPX:Since when does Mobs have Invincibility?
+SC: I meantj the invincibility of the player, when it touched a monster. 
+Should it have a short time of invincibility after touching Projectiles as well?
+e.g. You could plan on getting hit by WalkZombie in order to get rid of a deadly Projectile.
+Shall this be allowed? 
+
+4) Player can get Health and Coffee overflow.. (not infinitely though) Do we want this?
+DPX:No, the macHealth should stay the maxHealth. When it comes to HealthPack, I already have implemented, 
+that you just can pick it up, if you have lower life
+SC: That is true, but when you have say 99 instead of 100 lifes 
+then you are able to pick up the health package and get for example 149 lifes.
+After that you can't pick up any more
+The same applies to coffee at the moment.
+Do we want this?
+The food system in Minecraft kind of works this way.
+
+7) Should Health-Packs and Coffees (and Mobs) be able to spawn on the same platforms as they do right now?
+DPX: What ever you want... That was just a try to see if the healthpacks work, maybe we make the zombies drop them afterwards?
+SC: Ok, actually the problem is, that healthpack and coffee are overlapping... ideas?
+
+10) Should all items be the same Height/Width? So move those functions to Item.java.
+DPX: No not every item has the same Height/Width... This should change with every item... 
+or do you think a coffee is the same length as a fish? ;)
+SC: Well there will not be a fish-item i think.. 
+By item i only mean coffee and healthpack and i would find it nice, if they would be similar
+
+[Decided, welcome to implement[I will do these next.. but if DPX wishes to do some first.. no problem]]
 1) Should the velocity of the player be part of each level (as it is right now)
 or have more like a constant caracter and thus being definied in the Player.java class?
 DPX: The players velocity should be in the player class but should be changable by getter and setter
@@ -38,35 +68,13 @@ DPX: The players velocity should be in the player class but should be changable 
 as things can move diagonally.. (we just didn't juse diagonal direction yet)
 DPX:Okay, that's your thing ;)
 
-
-3) Should there be a Invincibility for Projectiles? should this be the same as for the Mobs?
-DPX:Since when does Mobs have Invincibility?
-
-4) Player can get Health and Coffee overflow.. (not infinitely though) Do we want this?
-DPX:No, the macHealth should stay the maxHealth. When it comes to HealthPack, I already have implemented, 
-that you just can pick it up, if you have lower life
-
 5) double coffee in Player.java is double not int. 
 I had to do this because else the wakling would have taken too much coffee.
 But it clearly is not nice. shall we get rid of coffee-consuming-walking (and/or) jumping?
 DPX: Get rid of it! At least I think so... The Coffee should be for his abilities
 
-6) Should Mobs be able to heal themselves when they step on a health pack?
-DPX: Don't think so, they would eat up every fucking health pack
-
-7) Should Health-Packs and Coffees (and Mobs) be able to spawn on the same platforms as they do right now?
-DPX: What ever you want... That was just a try to see if the healthpacks work, maybe we make the zombies drop them afterwards?
-
-8) One of the parameters of Entity is lifes. Coffee and HealthPack do extend Entity but don't use lifes.
-Therefore I think lifes should be moved to Mob.java and Player.java
-DPX: I would stick the lifes now, because we can use it the same as mc uses the damage-value to change the blockcolors...
-(Just an idea)
-
-9) the same applies to velocity.
+9) Velocity is a part of Entity.java, though not all Entities have velocities.
 yeah, velocity can be removed and reimplemented in the other classes
 
-10) Should all items be the same Height/Width? So move those functions to Item.java.
-DPX: No not every item has the same Height/Width... This should change with every item... 
-or do you think a coffee is the same length as a fish? ;)
 
 Write what you think.
