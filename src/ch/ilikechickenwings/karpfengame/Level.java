@@ -8,6 +8,8 @@ import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
@@ -61,7 +63,7 @@ public class Level {
 	// Coffee:
 	public static int maxCoffee;
 	// Skills: 
-	public static boolean[] enableSkill; // [0] = CarpSkill
+	public static boolean[] enableSkill= new boolean[5]; // [0] = CarpSkill
 	// Stuff:
     private KarpfenGame karpfenGame; 
 	private int lvl;
@@ -96,7 +98,7 @@ public class Level {
 			
 			enableSkill[0]=true;
 			
-			player = new Player(0, 0, maxLife, velPlayer, maxCoffee);
+			player = new Player(0, 0, maxLife, velPlayer, maxCoffee, enableSkill);
 			 
 		}
 		
@@ -114,9 +116,11 @@ public class Level {
 		if (player.getX_Point() > xOffset + playerTrigger) {
 			xOffset = player.getX_Point() - playerTrigger;
 		}
-
+		
+		// update Walls:
 		addWalls();
-
+		
+		// update Player
 		if (!player.isJumping()) {
 			player.setFalling(true);
 		}
@@ -145,46 +149,47 @@ public class Level {
 
 			}
 		}
-
 		player.update(inHandler);
-
 		// die
 		if (player.getY_Point() > KarpfenGame.HEIGHT || player.getLifes() <= 0) {
 			die();
 		}
-		// Monsters update:
+		
+		// Entities update:
 		if (!(entities.size() == 0)) {
 			Entity ent = entities.get(0);
 			
 			if (ent.getX_Point() + ent.getWidth() * 10 < xOffset) { // unnice
 				entities.remove(0);
-			
 			}
 			for (int wz = 0; wz < entities.size(); wz++) {
 				ent = (Entity) entities.get(wz);
-				if(entities.get(wz) instanceof WalkZombie){
+				if(ent instanceof WalkZombie){
 				
-				WalkZombie wZombie= (WalkZombie) entities.get(wz);
-				// check if they are still on the platform
-				for (int w = 0; w < walls.size(); w++) {
-					Wall wall = (Wall) walls.get(w);
-					if (wZombie.isDir()
-							&& wZombie.getX_Point() + wZombie.getWidth() > wall
-									.getX_Point() + wall.getWidth()
-							&& wZombie.getX_Point() < wall.getX_Point()
-									+ wall.getWidth()) {
-						wZombie.setDir(false); // change direction
-						w = walls.size();
-					} else if (!wZombie.isDir()
-							&& wZombie.getX_Point() < wall.getX_Point()
-							&& wZombie.getX_Point() + wZombie.getWidth() > wall
-									.getX_Point()) {
+					WalkZombie wZombie= (WalkZombie) entities.get(wz);
+					// check if they are still on the platform
+					for (int w = 0; w < walls.size(); w++) {
+						Wall wall = (Wall) walls.get(w);
+						if (wZombie.isDir()
+								&& wZombie.getX_Point() + wZombie.getWidth() > wall
+								.getX_Point() + wall.getWidth()
+								&& wZombie.getX_Point() < wall.getX_Point()
+								+ wall.getWidth()) {
+							wZombie.setDir(false); // change direction
+							w = walls.size();
+						} else if (!wZombie.isDir()
+								&& wZombie.getX_Point() < wall.getX_Point()
+								&& wZombie.getX_Point() + wZombie.getWidth() > wall
+								.getX_Point()) {
 
-						wZombie.setDir(true); // change direction
-						w = walls.size();
+							wZombie.setDir(true); // change direction
+							w = walls.size();
+						}
 					}
-				}
-				wZombie.update(inHandler);
+					wZombie.update(inHandler);
+				}else if(ent instanceof Projectile){
+					Projectile pr=(Projectile) entities.get(wz);
+					pr.update(inHandler);
 				}
 				
 				// Entity - Player
@@ -198,7 +203,6 @@ public class Level {
 						&& player.getY_Point() < ent.getY_Point()
 								+ ent.getHeight()) {
 					if(ent instanceof WalkZombie){
-					
 					    player.getDamaged((Mob) ent);
 					}else if(ent instanceof HealthPack){
 						if(player.getLifes()<=maxLife){
@@ -209,13 +213,38 @@ public class Level {
 						if(player.getCoffee()<=maxCoffee){
 							player.getCaffeined((Coffee) ent);
 							entities.remove(ent);
-							
+						}
+					}else if(ent instanceof Projectile){
+						player.getDamaged((Projectile) ent);
+					}
+				}
+				
+				// Entity - Monster
+				if(ent instanceof Mob){
+					for (int pr = 0; pr < entities.size(); pr++) { // pr for projetiles
+						Entity entity=entities.get(pr);
+						if(entity instanceof Projectile && 
+								ent.getX_Point() + ent.getWidth() > entity
+								.getX_Point()
+								&& ent.getX_Point() < entity.getX_Point()
+										+ entity.getWidth()
+								&& ent.getY_Point() + ent.getHeight() > entity
+										.getY_Point()
+								&& ent.getY_Point() < entity.getY_Point()
+										+ entity.getHeight()){
+							Mob mob=(Mob) ent;
+							mob.getDamaged((Projectile) entity);
+							entities.remove(entity);
+							if(mob.getLifes()<=0){
+								entities.remove(mob);
+							}
 						}
 					}
 				}
-			}
+				
 			}
 		}
+	}
 
 	
 
@@ -234,6 +263,8 @@ public class Level {
 			    ((HealthPack) en).draw(g2, xOffset);
 			}else if(en instanceof Coffee){
 				((Coffee) en).draw(g2, xOffset);
+			}else if(en instanceof Carp){
+				((Carp) en).draw(g2, xOffset);
 			}
 		}
 	}
@@ -290,6 +321,20 @@ public class Level {
 
 	public void die() {
 		karpfenGame.setLvl(new Level(1, karpfenGame));
+	}
+
+	
+	
+	
+	
+	
+	
+	public static ArrayList<Entity> getEntities() {
+		return entities;
+	}
+
+	public static void setEntities(ArrayList<Entity> entities) {
+		Level.entities = entities;
 	}
 
 	/**

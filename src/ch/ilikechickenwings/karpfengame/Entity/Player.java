@@ -6,11 +6,14 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
+import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 
 public class Player extends Entity{
 
@@ -23,13 +26,14 @@ public class Player extends Entity{
 	private long currTime=0;
 	private long oldTime=0;
 	private int dir=0;
+	private boolean[] enableSkill;
 	
 	// coffee:
 	private double coffee;
 	private double cReduceWalk=0.2; // the amount of coffee that is lost per jump
 	private double cReduceJump=2.0; // the amount of coffee that is lost per update whilst one is walking.
 	
-	public Player(int x, int y, int lifes, int vel,int coffee) {
+	public Player(int x, int y, int lifes, int vel,int coffee, boolean[] enableSkill) {
 		
 		setX_Point(x);
 		setY_Point(y);
@@ -39,6 +43,7 @@ public class Player extends Entity{
 		setVelocity(vel);
 		setCoffee(coffee);
 		setInvincible(false);
+		setEnableSkill(enableSkill);
 		//super(x, y, lifes);
 		// TODO Auto-generated constructor stub
 	}
@@ -46,6 +51,7 @@ public class Player extends Entity{
 
 	public void update(InputHandler inHandler) {
 		
+			// movement
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
 				jumping=true;
 				falling=false;
@@ -60,32 +66,33 @@ public class Player extends Entity{
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
 				walk(-getVelocity());
 				setDir(2);
-				
-
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
 				walk(getVelocity());
 				setDir(1);
 			}
-			
+			  if(falling){
+			     setY_Point(getY_Point()+gravity);
+		    }
 			
 			//Added Cooldown for damage
 			if(invincible){
-			currTime=System.currentTimeMillis();
+			    currTime=System.currentTimeMillis();
 				if(invincibleCount==0){
-				invincibleCount++;
-				oldTime=currTime;
-			}else if(currTime>oldTime+1000){
-				invincibleCount=0;
-				setInvincible(false);
-			}
-				
+				    invincibleCount++;
+				    oldTime=currTime;
+			    }else if(currTime>oldTime+1000){
+				    invincibleCount=0;
+				    setInvincible(false);
+			    }	
 			}
 
-
-		if(falling){
-			setY_Point(getY_Point()+gravity);
-		}
+			// Skills:
+			if(inHandler.getKeys()[KeyEvent.VK_1]&&enableSkill[0]){
+				Carp carp=new Carp(getX_Point()+getWidth(),getY_Point()+getHeight()/2);
+				Level.getEntities().add(carp);
+			}
+		  
 		
 		
 	}
@@ -130,6 +137,12 @@ public class Player extends Entity{
 		setInvincible(true);
 		}
 	}
+	public void getDamaged(Projectile pro){
+		if(!invincible){
+		setLifes(getLifes()-pro.getDamage());
+		setInvincible(true);
+		}
+	}
 	
 	public void getHealed(HealthPack hp) {
 		setLifes(getLifes()+hp.getHealth());
@@ -152,6 +165,18 @@ public class Player extends Entity{
 		}
 	}
 	
+
+	
+	
+	public boolean[] getEnableSkill() {
+		return enableSkill;
+	}
+
+
+	public void setEnableSkill(boolean[] enableSkill) {
+		this.enableSkill = enableSkill;
+	}
+
 
 	public boolean isInvincible(){
 		return invincible;
