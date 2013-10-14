@@ -194,9 +194,9 @@ public class Level {
 						}
 					}
 					wZombie.update(inHandler);
-				}else if(ent instanceof Projectile){
-					Projectile pr=(Projectile) entities.get(wz);
-					pr.update(inHandler);
+				}else if(ent instanceof Carp){
+					Carp carp=(Carp) ent;
+					carp.update(inHandler);
 				}
 				
 				// Entity - Player
@@ -241,6 +241,7 @@ public class Level {
 										+ entity.getHeight()){
 							Mob mob=(Mob) ent;
 							mob.getDamaged((Projectile) entity);
+							Projectile prr = (Projectile) entity;
 							entities.remove(entity);
 							if(mob.getLifes()<=0){
 								entities.remove(mob);

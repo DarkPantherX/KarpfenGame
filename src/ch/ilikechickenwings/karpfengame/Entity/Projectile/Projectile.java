@@ -10,11 +10,6 @@ public class Projectile extends Entity {
 	public Projectile(){
 		
 	}
-	
-	public void update(InputHandler inHandler){
-		
-			setX_Point(getX_Point()+getVelocity());
-	}
 
 	public int getDamage() {
 		return damage;

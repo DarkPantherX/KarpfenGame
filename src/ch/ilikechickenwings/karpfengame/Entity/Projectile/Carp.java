@@ -5,9 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+
 public class Carp extends Projectile{
 	
-	
+	int damageLoss; // damageloss per gametick
 	
 	public Carp(int x, int y){
 		setX_Point(x);
@@ -16,7 +18,16 @@ public class Carp extends Projectile{
 		setHeight(20);
 		setVelocity(10);
 		setDamage(50);
-		
+		setDamageLoss(1);
+	}
+	
+	public void update(InputHandler inHandler){
+		setX_Point(getX_Point()+getVelocity());
+		if(getDamage()>0){
+			setDamage(getDamage()-getDamageLoss());
+		}else if(getDamage()<0){
+			setDamage(0);
+		}
 	}
 
 	public void draw(Graphics2D g2,int xOffset){
@@ -24,5 +35,15 @@ public class Carp extends Projectile{
 		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
 		
 	}
+
+	public int getDamageLoss() {
+		return damageLoss;
+	}
+
+	public void setDamageLoss(int damageLoss) {
+		this.damageLoss = damageLoss;
+	}
+	
+	
 	
 }
