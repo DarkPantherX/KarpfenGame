@@ -1,12 +1,24 @@
 package ch.ilikechickenwings.karpfengame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
+import ch.ilikechickenwings.karpfengame.Handler.ButtonHandler;
 import ch.ilikechickenwings.karpfengame.Handler.ComponentHandler;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Menu.Menu;
@@ -25,6 +37,9 @@ public class KarpfenGame extends JPanel implements Runnable {
 	public static int WIDTH = 640;
 	public static int HEIGHT = 480;
 	public static boolean paused = false;
+	public static PrintStream old;
+	public static JTextArea textArea2;
+	public static JTextArea textArea1;
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -33,9 +48,11 @@ public class KarpfenGame extends JPanel implements Runnable {
 	private Menu menu;
 	private Level lvl;
 	private long oldTime = System.currentTimeMillis();
+	private boolean opened=false;
+	private String str="";
+
 	
-	
-	
+	private ByteArrayOutputStream baos;
 
 	public KarpfenGame() {
 
@@ -85,6 +102,48 @@ public class KarpfenGame extends JPanel implements Runnable {
 		while (!paused) {
 			update();
 			repaint();
+			
+			if (inHandler.getKeys()[KeyEvent.VK_F3]) {
+				if(!opened){
+					opened=true;
+					// opens new frame
+					JFrame frame = new JFrame();
+					frame.setSize(500, 210);
+					frame.setLayout(new BorderLayout());
+					
+					 baos = new ByteArrayOutputStream();
+					 PrintStream ps = new PrintStream(baos);
+					 old = System.out;
+					 System.setOut(ps);
+					 textArea1 = new JTextArea();
+					 textArea1.setEditable(false);
+					 JScrollPane scrollPane = new JScrollPane(textArea1);
+					 scrollPane.setPreferredSize(new Dimension(490,170));
+					 frame.add(scrollPane, BorderLayout.NORTH);
+					 textArea2 = new JTextArea();
+					 textArea2.setPreferredSize(new Dimension(440,30));
+					 frame.add(textArea2, BorderLayout.CENTER);
+					 JButton but = new JButton("Enter");
+					 but.setPreferredSize(new Dimension(50,30));
+					 frame.add(but,BorderLayout.EAST);
+					 frame.setVisible(true);
+					 ButtonHandler al = new ButtonHandler();
+					 but.addActionListener(al);
+					 System.out.println("Hier");
+					 
+					 
+				}	
+			}
+			if(baos!=null){
+				if(!baos.toString().equals(str)&&!baos.toString().equals("")){
+				DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+				Date date = new Date();
+				textArea1.append("<"+dateFormat.format(date)+">"+baos.toString());
+				str =baos.toString();
+				baos.reset();
+				}
+			}
+			
 		}
 
 	}
