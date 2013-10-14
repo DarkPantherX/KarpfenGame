@@ -1,0 +1,14 @@
+xMax=2000
+widthMu=100
+dxMu=65
+widthVar=35
+dxVar=30
+height=15
+dyVar=60
+spawnWalkZombie=30
+spawnHealthPack=20
+spawnCoffee=40
+maxLife=100
+velPlayer=4
+maxCoffee=100
+enableSkill=true
