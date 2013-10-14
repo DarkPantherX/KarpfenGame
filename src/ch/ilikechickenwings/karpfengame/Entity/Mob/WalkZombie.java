@@ -3,8 +3,6 @@ package ch.ilikechickenwings.karpfengame.Entity.Mob;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-
-import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 public class WalkZombie extends Mob{
