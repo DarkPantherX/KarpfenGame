@@ -65,6 +65,7 @@ public class Level {
 	public static int maxCoffee;
 	// Skills: 
 	public static boolean[] enableSkill= new boolean[Skill.nr]; // [0] = CarpSkill
+	// this has multiple uses. in the beginning its used as a initial boolean, whether to play with this specific skill or not.. AND as a timing variable in Player.java
 	// Stuff:
     private KarpfenGame karpfenGame; 
 	private int lvl;

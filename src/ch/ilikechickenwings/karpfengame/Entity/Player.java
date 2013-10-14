@@ -23,9 +23,10 @@ public class Player extends Entity{
 	private int gravity=10;
 	private int jumped=0;
 	private boolean invincible=false;
-	private int invincibleCount=0;
-	private long currTime=0;
-	private long oldTime=0;
+	private long currTimeInvincible;
+	private long oldTimeInvincible;
+	private long[] currTimeSkill= new long[Skill.nr];
+	private long[] oldTimeSkill= new long[Skill.nr];
 	private int dir=0;
 	private boolean[] enableSkill;
 	
@@ -78,27 +79,30 @@ public class Player extends Entity{
 			
 			//Added Cooldown for damage
 			if(invincible){
-			    currTime=System.currentTimeMillis();
-				if(invincibleCount==0){
-				    invincibleCount++;
-				    oldTime=currTime;
-			    }else if(currTime>oldTime+1000){
-				    invincibleCount=0;
+			    currTimeInvincible=System.currentTimeMillis();
+				if(currTimeInvincible>oldTimeInvincible+1000){ // 1 sec
+				    oldTimeInvincible=System.currentTimeMillis();
 				    setInvincible(false);
 			    }	
 			}
 
 			// Skills:
+			if(currTimeSkill[0]>=oldTimeSkill[0]+500){
+				enableSkill[0]=true;
+			}else{
+				currTimeSkill[0]=System.currentTimeMillis();
+			}
 			if(inHandler.getKeys()[KeyEvent.VK_1]&&enableSkill[0]){ // Carp
 				Skill skill=(Skill) Level.getSkills()[0];
 				if(getCoffee()>=skill.getCoffee()){
 					setCoffee(getCoffee()-skill.getCoffee());
+					enableSkill[0]=false;
+					oldTimeSkill[0]=System.currentTimeMillis();
 					Carp carp=new Carp(getX_Point()+getWidth(),getY_Point()+getHeight()/2);
 				    Level.getEntities().add(carp);
 				}
 				
 			}
-		  
 		
 		
 	}
