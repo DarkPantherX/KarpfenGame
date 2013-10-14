@@ -39,6 +39,8 @@ Should it have a short time of invincibility after touching Projectiles as well?
 e.g. You could plan on getting hit by WalkZombie in order to get rid of a deadly Projectile.
 Shall this be allowed? 
 
+DPX:Invincibility is invincibility doesnt matte against what... and your idea would give some more options to survive :D
+
 4) Player can get Health and Coffee overflow.. (not infinitely though) Do we want this?
 DPX:No, the macHealth should stay the maxHealth. When it comes to HealthPack, I already have implemented, 
 that you just can pick it up, if you have lower life
@@ -49,9 +51,13 @@ The same applies to coffee at the moment.
 Do we want this?
 The food system in Minecraft kind of works this way.
 
+DPX:No we (I think so) dont want to have more lifes than max!
+
 7) Should Health-Packs and Coffees (and Mobs) be able to spawn on the same platforms as they do right now?
 DPX: What ever you want... That was just a try to see if the healthpacks work, maybe we make the zombies drop them afterwards?
 SC: Ok, actually the problem is, that healthpack and coffee are overlapping... ideas?
+
+DPX: Maybe just a Coffee or a health packat once? Or we have them to be set next to eacht other.
 
 10) Should all items be the same Height/Width? So move those functions to Item.java.
 DPX: No not every item has the same Height/Width... This should change with every item... 
@@ -59,22 +65,53 @@ or do you think a coffee is the same length as a fish? ;)
 SC: Well there will not be a fish-item i think.. 
 By item i only mean coffee and healthpack and i would find it nice, if they would be similar
 
-[Decided, welcome to implement[I will do these next.. but if DPX wishes to do some first.. no problem]]
-1) Should the velocity of the player be part of each level (as it is right now)
-or have more like a constant caracter and thus being definied in the Player.java class?
-DPX: The players velocity should be in the player class but should be changable by getter and setter
-
-2) We should change velocity (in Entity.java) to x_velocity and y_velocity, 
-as things can move diagonally.. (we just didn't juse diagonal direction yet)
-DPX:Okay, that's your thing ;)
-
-5) double coffee in Player.java is double not int. 
-I had to do this because else the wakling would have taken too much coffee.
-But it clearly is not nice. shall we get rid of coffee-consuming-walking (and/or) jumping?
-DPX: Get rid of it! At least I think so... The Coffee should be for his abilities
-
-9) Velocity is a part of Entity.java, though not all Entities have velocities.
-yeah, velocity can be removed and reimplemented in the other classes
+DPX:we will have other items, too! Think about the ammo for the next fishes
 
 
-Write what you think.
+
+A new thing to do: if we have written something and you think you dont need those lines anymore,
+just make a '#' in front of the line. So e.g. if i take a look at the Readme again I'll look through the things 
+you dont need any more and if i also think, that this is done, than we delete it.
+
+Just to try: those lines beneath arnt used any more so i suggested to delete them with the '#'
+If think the same about those lines you can delete them, else remove the '#'!
+
+
+
+
+
+# [Decided, welcome to implement[I will do these next.. but if DPX wishes to do some first.. no problem]]
+# [No more Comment here, I let you do your thing ;)]
+# 
+# 1) Should the velocity of the player be part of each level (as it is right now)
+# or have more like a constant caracter and thus being definied in the Player.java class?
+# DPX: The players velocity should be in the player class but should be changable by getter and setter
+# 
+# 
+# 2) We should change velocity (in Entity.java) to x_velocity and y_velocity, 
+# as things can move diagonally.. (we just didn't juse diagonal direction yet)
+# DPX:Okay, that's your thing ;)
+# 
+# 5) double coffee in Player.java is double not int. 
+# I had to do this because else the wakling would have taken too much coffee.
+# But it clearly is not nice. shall we get rid of coffee-consuming-walking (and/or) jumping?
+# DPX: Get rid of it! At least I think so... The Coffee should be for his abilities
+# 
+# 9) Velocity is a part of Entity.java, though not all Entities have velocities.
+# yeah, velocity can be removed and reimplemented in the other classes
+
+
+
+
+TODO SC:
+ -velocity in the player + mob class
+ -implement x_Velocity + y_Velocity
+ -remove coffee-loss while walking/jumping
+ -implement own ideas
+ 
+TODO DPX:
+ -Reformat all classes to fit the new made rules above
+ -Add Karp throwing
+ -Add Menu (if this is okay?)
+ -Add Dev-console for debugging
+ -Add more support for more than one lvl
