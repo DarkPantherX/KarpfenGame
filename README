@@ -32,18 +32,41 @@ If you also have some point just write it in here... this should be our guide!
 So here are some of my thoughts: - SC 14.10.2013
 1) Should the velocity of the player be part of each level (as it is right now)
 or have more like a constant caracter and thus being definied in the Player.java class?
+DPX: The players velocity should be in the player class but should be changable by getter and setter
+
 2) We should change velocity (in Entity.java) to x_velocity and y_velocity, 
 as things can move diagonally.. (we just didn't juse diagonal direction yet)
+DPX:Okay, that's your thing ;)
+
+
 3) Should there be a Invincibility for Projectiles? should this be the same as for the Mobs?
+DPX:Since when does Mobs have Invincibility?
+
 4) Player can get Health and Coffee overflow.. (not infinitely though) Do we want this?
+DPX:No, the macHealth should stay the maxHealth. When it comes to HealthPack, I already have implemented, 
+that you just can pick it up, if you have lower life
+
 5) double coffee in Player.java is double not int. 
 I had to do this because else the wakling would have taken too much coffee.
 But it clearly is not nice. shall we get rid of coffee-consuming-walking (and/or) jumping?
+DPX: Get rid of it! At least I think so... The Coffee should be for his abilities
+
 6) Should Mobs be able to heal themselves when they step on a health pack?
+DPX: Don't think so, they would eat up every fucking health pack
+
 7) Should Health-Packs and Coffees (and Mobs) be able to spawn on the same platforms as they do right now?
+DPX: What ever you want... That was just a try to see if the healthpacks work, maybe we make the zombies drop them afterwards?
+
 8) One of the parameters of Entity is lifes. Coffee and HealthPack do extend Entity but don't use lifes.
 Therefore I think lifes should be moved to Mob.java and Player.java
+DPX: I would stick the lifes now, because we can use it the same as mc uses the damage-value to change the blockcolors...
+(Just an idea)
+
 9) the same applies to velocity.
+yeah, velocity can be removed and reimplemented in the other classes
+
 10) Should all items be the same Height/Width? So move those functions to Item.java.
+DPX: No not every item has the same Height/Width... This should change with every item... 
+or do you think a coffee is the same length as a fish? ;)
 
 Write what you think.
