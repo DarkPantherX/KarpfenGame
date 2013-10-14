@@ -28,3 +28,22 @@ In the future, before commiting we both have rewatch our code and see what could
 And if we pull, we have to rewatch the code the other person wrote to see if we can improof the code
 
 If you also have some point just write it in here... this should be our guide!
+
+So here are some of my thoughts: - SC 14.10.2013
+1) Should the velocity of the player be part of each level (as it is right now)
+or have more like a constant caracter and thus being definied in the Player.java class?
+2) We should change velocity (in Entity.java) to x_velocity and y_velocity, 
+as things can move diagonally.. (we just didn't juse diagonal direction yet)
+3) Should there be a Invincibility for Projectiles? should this be the same as for the Mobs?
+4) Player can get Health and Coffee overflow.. (not infinitely though) Do we want this?
+5) double coffee in Player.java is double not int. 
+I had to do this because else the wakling would have taken too much coffee.
+But it clearly is not nice. shall we get rid of coffee-consuming-walking (and/or) jumping?
+6) Should Mobs be able to heal themselves when they step on a health pack?
+7) Should Health-Packs and Coffees (and Mobs) be able to spawn on the same platforms as they do right now?
+8) One of the parameters of Entity is lifes. Coffee and HealthPack do extend Entity but don't use lifes.
+Therefore I think lifes should be moved to Mob.java and Player.java
+9) the same applies to velocity.
+10) Should all items be the same Height/Width? So move those functions to Item.java.
+
+Write what you think.
