@@ -11,6 +11,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Skill.Skill;
 
 /*
  *  TODO: Please add support for eternal wall-creating, now it is limited and resource heavy, the platforms have to be removed out of the array-> to reduce resouces needed -DPX 9.10.2013
@@ -25,12 +26,14 @@ public class Level {
 											// position in the window, the
 											// screen will follow the player.
 	public static int preCalcWalls = KarpfenGame.WIDTH * 2; // the walls will
-															// pregenerate
+															// pre-generate
 
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
+	public static ArrayList<Skill> skills = new ArrayList<Skill>(); // not sure wheter an arraylist makes sense here - SC 14.10.2013
 	public static Player player;
 
+	// TODO: decide whether all those things have to be public/private, static/non-static.. - SC 14.10.2013
 	// These parameters may vary from level to level
 	// General:
 	public static int xMax; // length of the level
@@ -57,8 +60,10 @@ public class Level {
 	public static int velPlayer; // velocity
 	// Coffee:
 	public static int maxCoffee;
+	// Skills: 
+	public static boolean[] enableSkill; // [0] = CarpSkill
 	// Stuff:
-    private KarpfenGame karpfenGame;
+    private KarpfenGame karpfenGame; 
 	private int lvl;
 	
 	
@@ -88,6 +93,8 @@ public class Level {
 			velPlayer = 4;
 
 			maxCoffee=100;
+			
+			enableSkill[0]=true;
 			
 			player = new Player(0, 0, maxLife, velPlayer, maxCoffee);
 			 
