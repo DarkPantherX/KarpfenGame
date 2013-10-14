@@ -31,10 +31,8 @@ public class Player extends Entity{
 	private boolean[] enableSkill;
 	
 	// coffee:
-	private double coffee;
-	private double cReduceWalk=0.2; // the amount of coffee that is lost per jump
-	private double cReduceJump=2.0; // the amount of coffee that is lost per update whilst one is walking.
-	
+	private int coffee;
+
 	public Player(int x, int y, int lifes, int vel,int coffee, boolean[] enableSkill) {
 		
 		setX_Point(x);
@@ -58,9 +56,6 @@ public class Player extends Entity{
 				jumping=true;
 				falling=false;
 				setDir(3);
-				if(!(coffee<=0)){
-					coffee-=cReduceJump;
-				}
 			}
 			
 			jump();
@@ -68,6 +63,7 @@ public class Player extends Entity{
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
 				walk(-getVelocity());
 				setDir(2);
+				System.out.println("is jumping");
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
 				walk(getVelocity());
@@ -134,11 +130,6 @@ public class Player extends Entity{
 	
 	private void walk(int i){
 		setX_Point(getX_Point() + i);
-		
-		if(!(coffee<=0)){
-			coffee-=cReduceWalk;
-		}
-		
 	}
 	
 	public void getDamaged(Mob mob){
@@ -160,10 +151,12 @@ public class Player extends Entity{
 	}
 	public void getCaffeined(Coffee co){
 		setCoffee(getCoffee()+co.getCaffeine());
+		//if(getCoffee()>)
 	}
 	
 	
 	private void jump() {
+		
 		if(jumping==true){
 		jumped++;
 		if(jumped>9){
@@ -194,16 +187,14 @@ public class Player extends Entity{
 	
 	public void setInvincible(boolean b) {
 		this.invincible=b;
-		
 	}
-	
 
 	public int getCoffee() {
-		return (int)coffee;
+		return coffee;
 	}
 
 	public void setCoffee(int coffee) {
-		this.coffee = (double)coffee;
+		this.coffee = coffee;
 	}
 
 	public boolean isFalling() {
