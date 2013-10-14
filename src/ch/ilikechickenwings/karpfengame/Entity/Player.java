@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
+import ch.ilikechickenwings.karpfengame.KarpfenGame;
 import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Skill.Skill;
@@ -147,11 +148,16 @@ public class Player extends Entity{
 	
 	public void getHealed(HealthPack hp) {
 		setLifes(getLifes()+hp.getHealth());
+		if(getLifes()>Level.getMaxLife()){
+			setLifes(Level.getMaxLife());// this is totally static and should totally not be static
+		}
 		
 	}
 	public void getCaffeined(Coffee co){
 		setCoffee(getCoffee()+co.getCaffeine());
-		//if(getCoffee()>)
+		if(getCoffee()>Level.getMaxCoffee()){
+			setCoffee(Level.getMaxCoffee()); // this is totally static and should totally not be static
+		}
 	}
 	
 	

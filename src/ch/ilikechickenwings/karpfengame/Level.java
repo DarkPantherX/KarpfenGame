@@ -354,6 +354,26 @@ public class Level {
 		Level.entities = entities;
 	}
 
+	
+	
+	
+	
+	public static int getMaxLife() {
+		return maxLife;
+	}
+
+	public static void setMaxLife(int maxLife) {
+		Level.maxLife = maxLife;
+	}
+
+	public static int getMaxCoffee() {
+		return maxCoffee;
+	}
+
+	public static void setMaxCoffee(int maxCoffee) {
+		Level.maxCoffee = maxCoffee;
+	}
+
 	/**
 	 * @return the karpfenGame
 	 */
