@@ -9,6 +9,7 @@ import java.awt.event.KeyEvent;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
+import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
 
 public class Player extends Entity{
@@ -28,7 +29,7 @@ public class Player extends Entity{
 	private double cReduceWalk=0.2; // the amount of coffee that is lost per jump
 	private double cReduceJump=2.0; // the amount of coffee that is lost per update whilst one is walking.
 	
-	public Player(int x, int y, int lifes, int vel) {
+	public Player(int x, int y, int lifes, int vel,int coffee) {
 		
 		setX_Point(x);
 		setY_Point(y);
@@ -36,7 +37,7 @@ public class Player extends Entity{
 		setWidth(30);
 		setHeight(70);
 		setVelocity(vel);
-		setCoffee(100);
+		setCoffee(coffee);
 		setInvincible(false);
 		//super(x, y, lifes);
 		// TODO Auto-generated constructor stub
@@ -133,6 +134,9 @@ public class Player extends Entity{
 	public void getHealed(HealthPack hp) {
 		setLifes(getLifes()+hp.getHealth());
 		
+	}
+	public void getCaffeined(Coffee co){
+		setCoffee(getCoffee()+co.getCaffeine());
 	}
 	
 	

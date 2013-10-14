@@ -7,6 +7,7 @@ import java.util.Random;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
+import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
@@ -50,15 +51,17 @@ public class Level {
 	// Monsters:
 	public static int spawnWalkZombie; // in %
 	public static int spawnHealthPack; // in %
+	public static int spawnCoffee; // in %
 	// Player:
 	public static int maxLife;
 	public static int velPlayer; // velocity
-
-	private KarpfenGame karpfenGame;
+	// Coffee:
+	public static int maxCoffee;
+	// Stuff:
+    private KarpfenGame karpfenGame;
 	private int lvl;
-
-	// TODO: Coffee etc..
-
+	
+	
 	public Level(int lvl, KarpfenGame karpfenGame) {
 
 		this.setLvl(lvl);
@@ -79,12 +82,15 @@ public class Level {
 
 			spawnWalkZombie = 30;
 			spawnHealthPack = 20;
-
+			spawnCoffee=40;
+			
 			maxLife = 100;
 			velPlayer = 4;
 
-			player = new Player(0, 0, maxLife, velPlayer);
+			maxCoffee=100;
 			
+			player = new Player(0, 0, maxLife, velPlayer, maxCoffee);
+			 
 		}
 		
 		Wall wall = new Wall(0, KarpfenGame.HEIGHT / 2, widthMu, height); // first
@@ -174,7 +180,7 @@ public class Level {
 				wZombie.update(inHandler);
 				}
 				
-				// Monster - Player
+				// Entity - Player
 				// we have to talk about this after we made the graphics...
 				if (player.getX_Point() + player.getWidth() > ent
 						.getX_Point()
@@ -186,11 +192,17 @@ public class Level {
 								+ ent.getHeight()) {
 					if(ent instanceof WalkZombie){
 					
-					player.getDamaged((Mob) ent);
+					    player.getDamaged((Mob) ent);
 					}else if(ent instanceof HealthPack){
 						if(player.getLifes()<=maxLife){
-						player.getHealed((HealthPack) ent);
-						entities.remove(ent);
+						    player.getHealed((HealthPack) ent);
+						    entities.remove(ent);
+						}
+					}else if(ent instanceof Coffee){
+						if(player.getCoffee()<=maxCoffee){
+							player.getCaffeined((Coffee) ent);
+							entities.remove(ent);
+							
 						}
 					}
 				}
@@ -210,9 +222,11 @@ public class Level {
 		for (int wz = 0; wz < entities.size(); wz++) {
 			Entity en= entities.get(wz);
 			if(en instanceof WalkZombie){
-			((WalkZombie) en).draw(g2, xOffset);
+			    ((WalkZombie) en).draw(g2, xOffset);
 			}else if(en instanceof HealthPack){
-			((HealthPack) en).draw(g2, xOffset);
+			    ((HealthPack) en).draw(g2, xOffset);
+			}else if(en instanceof Coffee){
+				((Coffee) en).draw(g2, xOffset);
 			}
 		}
 	}
@@ -242,21 +256,25 @@ public class Level {
 					+ r.nextInt(2 * dxVar) - dxVar, wi.getY_Point() + dyOffset,
 					widthMu + r.nextInt(2 * widthVar) - widthVar, height);
 			wi = wall;
+			
+			// spawn Entities:
 			if (spawnWalkZombie >= r.nextInt(100)) {
 				WalkZombie wz = new WalkZombie(wi.getX_Point(), wi.getY_Point());
 				entities.add(wz);
 			}
-			
 			if (spawnHealthPack >= r.nextInt(100)) {
 				HealthPack co = new HealthPack(wi.getX_Point()+(wi.getWidth()/2), wi.getY_Point());
 				entities.add(co);
 			}
-			
+			if (spawnCoffee >= r.nextInt(100)) {
+				Coffee co = new Coffee(wi.getX_Point()+(wi.getWidth()/2), wi.getY_Point());
+				entities.add(co);
+			}
 			
 			walls.add(wall);
 		}
 
-		// remove walls that are no longer nessecary.
+		// remove walls that are no longer necessary.
 		wall = (Wall) walls.get(0);
 		if (wall.getX_Point() + wall.getY_Point() < xOffset) {
 			walls.remove(0);
