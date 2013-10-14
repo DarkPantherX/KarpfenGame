@@ -15,7 +15,7 @@ public class Carp extends Projectile{
 		setWidth(20);
 		setHeight(20);
 		setVelocity(10);
-		setDamage(10);
+		setDamage(50);
 		
 	}
 

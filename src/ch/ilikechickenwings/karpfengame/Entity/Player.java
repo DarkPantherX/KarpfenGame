@@ -8,6 +8,7 @@ import java.awt.event.KeyEvent;
 
 import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Skill.Skill;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
@@ -88,9 +89,14 @@ public class Player extends Entity{
 			}
 
 			// Skills:
-			if(inHandler.getKeys()[KeyEvent.VK_1]&&enableSkill[0]){
-				Carp carp=new Carp(getX_Point()+getWidth(),getY_Point()+getHeight()/2);
-				Level.getEntities().add(carp);
+			if(inHandler.getKeys()[KeyEvent.VK_1]&&enableSkill[0]){ // Carp
+				Skill skill=(Skill) Level.getSkills()[0];
+				if(getCoffee()>=skill.getCoffee()){
+					setCoffee(getCoffee()-skill.getCoffee());
+					Carp carp=new Carp(getX_Point()+getWidth(),getY_Point()+getHeight()/2);
+				    Level.getEntities().add(carp);
+				}
+				
 			}
 		  
 		

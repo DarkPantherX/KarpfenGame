@@ -17,7 +17,7 @@ public class Coffee extends Item{
 		setX_Point(x-(getWidth()/2));
 		setY_Point(y-getHeight());
 		
-		setCaffeine(10); // may has to be changed
+		setCaffeine(100); // may has to be changed
 	}
 
 	public void draw(Graphics2D g2, int xOffset){

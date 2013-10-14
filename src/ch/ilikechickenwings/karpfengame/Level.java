@@ -33,7 +33,7 @@ public class Level {
 
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
-	public static ArrayList<Skill> skills = new ArrayList<Skill>(); // not sure wheter an arraylist makes sense here - SC 14.10.2013
+	public static Skill[] skills = new Skill[Skill.nr];
 	public static Player player;
 
 	// TODO: decide whether all those things have to be public/private, static/non-static.. - SC 14.10.2013
@@ -64,7 +64,7 @@ public class Level {
 	// Coffee:
 	public static int maxCoffee;
 	// Skills: 
-	public static boolean[] enableSkill= new boolean[5]; // [0] = CarpSkill
+	public static boolean[] enableSkill= new boolean[Skill.nr]; // [0] = CarpSkill
 	// Stuff:
     private KarpfenGame karpfenGame; 
 	private int lvl;
@@ -101,6 +101,12 @@ public class Level {
 			
 			player = new Player(0, 0, maxLife, velPlayer, maxCoffee, enableSkill);
 			 
+		}
+		for(int i=0;i<skills.length;i++){
+			if(enableSkill[i]){
+				Skill skill=new Skill();
+				skills[i]=skill;
+			}
 		}
 		
 		Wall wall = new Wall(0, KarpfenGame.HEIGHT / 2, widthMu, height); // first
@@ -330,6 +336,14 @@ public class Level {
 	
 	
 	
+	public static Skill[] getSkills() {
+		return skills;
+	}
+
+	public static void setSkills(Skill[] skills) {
+		Level.skills = skills;
+	}
+
 	public static ArrayList<Entity> getEntities() {
 		return entities;
 	}
