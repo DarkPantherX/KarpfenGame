@@ -29,6 +29,7 @@ public class Level {
 											// screen will follow the player.
 	public static int preCalcWalls = KarpfenGame.WIDTH * 2; // the walls will
 															// pre-generate
+															// something like "render"distance
 
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
@@ -159,7 +160,7 @@ public class Level {
 		if (!(entities.size() == 0)) {
 			Entity ent = entities.get(0);
 			
-			if (ent.getX_Point() + ent.getWidth() * 10 < xOffset) { // unnice
+			if (ent.getX_Point() + ent.getWidth() * 10 < xOffset || ent.getX_Point() > xOffset+ preCalcWalls) { // unnice
 				entities.remove(0);
 			}
 			for (int wz = 0; wz < entities.size(); wz++) {
