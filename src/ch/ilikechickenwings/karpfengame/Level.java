@@ -243,7 +243,6 @@ public class Level {
 										+ entity.getHeight()){
 							Mob mob=(Mob) ent;
 							mob.getDamaged((Projectile) entity);
-							Projectile prr = (Projectile) entity;
 							entities.remove(entity);
 							if(mob.getLifes()<=0){
 								entities.remove(mob);

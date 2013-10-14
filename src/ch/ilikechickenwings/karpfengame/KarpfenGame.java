@@ -111,6 +111,10 @@ public class KarpfenGame extends JPanel implements Runnable {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
+	public Menu getMenu() {
+		return menu;
+	}
+	
 	private void setMenu(Menu menu) {
 		this.menu = menu;
 

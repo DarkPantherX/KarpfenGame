@@ -2,8 +2,6 @@ package ch.ilikechickenwings.karpfengame.Entity.Projectile;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
 
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
