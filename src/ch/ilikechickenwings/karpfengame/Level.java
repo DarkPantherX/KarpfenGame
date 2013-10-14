@@ -13,6 +13,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Reader.LvlReader;
 import ch.ilikechickenwings.karpfengame.Skill.Skill;
 
 /*
@@ -80,25 +81,25 @@ public class Level {
 		xOffset = 0;
 		if (this.lvl == 1) {
 			// data should now be loaded depending on lvl
-			xMax = KarpfenGame.WIDTH * 4;
-
-			widthMu = 100;
-			dxMu = 65;
-			widthVar = 35;
-			dxVar = 30;
-			height = 15;
-			dyVar = 60; // Here I took half of the previous value..
-
-			spawnWalkZombie = 30;
-			spawnHealthPack = 20;
-			spawnCoffee=40;
-			
-			maxLife = 100;
-			velPlayer = 4;
-
-			maxCoffee=100;
-			
-			enableSkill[0]=true;
+			//xMax = KarpfenGame.WIDTH * 4;
+			new LvlReader("lvl1.pros");
+//			widthMu = 100;
+//			dxMu = 65;
+//			widthVar = 35;
+//			dxVar = 30;
+//			height = 15;
+//			dyVar = 60; // Here I took half of the previous value..
+//
+//			spawnWalkZombie = 30;
+//			spawnHealthPack = 20;
+//			spawnCoffee=40;
+//			
+//			maxLife = 100;
+//			velPlayer = 4;
+//
+//			maxCoffee=100;
+//			
+//			enableSkill[0]=true;
 			
 			player = new Player(0, 0, maxLife, velPlayer, maxCoffee, enableSkill);
 			 
