@@ -310,13 +310,18 @@ public class Level {
 				entities.add(wz);
 			}
 			if (spawnHealthPack >= r.nextInt(100)) {
-				HealthPack co = new HealthPack(wi.getX_Point()+(wi.getWidth()/2), wi.getY_Point());
-				entities.add(co);
-			}
-			if (spawnCoffee >= r.nextInt(100)) {
-				Coffee co = new Coffee(wi.getX_Point()+(wi.getWidth()/2), wi.getY_Point());
-				entities.add(co);
-			}
+				HealthPack hp = new HealthPack(wi.getX_Point()+(wi.getWidth()/2), wi.getY_Point());
+				entities.add(hp);
+				if (spawnCoffee >= r.nextInt(100)) {
+				    Coffee co = new Coffee(wi.getX_Point()+wi.getWidth()/2, wi.getY_Point());
+				    entities.add(co);
+				    hp.setX_Point(hp.getX_Point()-hp.getWidth());
+				    co.setX_Point(co.getX_Point()+co.getWidth());
+			    }
+			}else if (spawnCoffee >= r.nextInt(100)) {
+			    Coffee co = new Coffee(wi.getX_Point()+wi.getWidth()/2, wi.getY_Point());
+			    entities.add(co);
+		    }
 			
 			walls.add(wall);
 		}
