@@ -14,13 +14,14 @@ public class Carp extends Projectile{
 		setY_Point(y);
 		setWidth(20);
 		setHeight(20);
-		setVelocity(10);
+		setxVel(10);
+		setyVel(0);
 		setDamage(50);
 		setDamageLoss(1);
 	}
 	
 	public void update(InputHandler inHandler){
-		setX_Point(getX_Point()+getVelocity());
+		setX_Point(getX_Point()+getxVel());
 		if(getDamage()>0){
 			setDamage(getDamage()-getDamageLoss());
 		}else if(getDamage()<0){

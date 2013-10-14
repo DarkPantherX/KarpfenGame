@@ -7,7 +7,7 @@ public class Item extends Entity{
 	private boolean dropable;
 	
 	public Item(){
-		setVelocity(0);
+		
 		setLifes(1);
 		
 	}

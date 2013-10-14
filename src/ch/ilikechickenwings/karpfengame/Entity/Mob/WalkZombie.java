@@ -17,7 +17,8 @@ public class WalkZombie extends Mob{
 		setX_Point(x);
 		setY_Point(y-getHeight());
 		setLifes(100);
-		setVelocity(4);
+		setxVel(4);
+		setyVel(0);
 		setDamage(10);
 		
 	}
@@ -26,9 +27,9 @@ public class WalkZombie extends Mob{
 	public void update(InputHandler inHandler) {
 		
 		if (dir) { // right
-			setX_Point(getX_Point()+getVelocity());
+			setX_Point(getX_Point()+getxVel());
 		} else {
-			setX_Point(getX_Point()-getVelocity());
+			setX_Point(getX_Point()-getxVel());
 		}
 	}
 	

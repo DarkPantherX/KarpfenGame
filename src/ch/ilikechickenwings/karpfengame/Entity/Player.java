@@ -30,6 +30,8 @@ public class Player extends Entity{
 	private long[] oldTimeSkill= new long[Skill.nr];
 	private int dir=0;
 	private boolean[] enableSkill;
+	private int xVel;
+	private int yVel;
 	
 	// coffee:
 	private int coffee;
@@ -41,7 +43,8 @@ public class Player extends Entity{
 		setLifes(lifes);
 		setWidth(30);
 		setHeight(70);
-		setVelocity(vel);
+		setxVel(vel);
+		setyVel(0);
 		setCoffee(coffee);
 		setInvincible(false);
 		setEnableSkill(enableSkill);
@@ -62,12 +65,12 @@ public class Player extends Entity{
 			jump();
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
-				walk(-getVelocity());
+				walk(-getxVel());
 				setDir(2);
 				System.out.println("is jumping");
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
-				walk(getVelocity());
+				walk(getxVel());
 				setDir(1);
 			}
 			  if(falling){
@@ -177,6 +180,26 @@ public class Player extends Entity{
 
 	
 	
+	public int getxVel() {
+		return xVel;
+	}
+
+
+	public void setxVel(int xVel) {
+		this.xVel = xVel;
+	}
+
+
+	public int getyVel() {
+		return yVel;
+	}
+
+
+	public void setyVel(int yVel) {
+		this.yVel = yVel;
+	}
+
+
 	public boolean[] getEnableSkill() {
 		return enableSkill;
 	}
