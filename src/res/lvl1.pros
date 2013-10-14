@@ -12,3 +12,4 @@ maxLife=100
 velPlayer=4
 maxCoffee=100
 enableSkill=true
+nextLevel=1
