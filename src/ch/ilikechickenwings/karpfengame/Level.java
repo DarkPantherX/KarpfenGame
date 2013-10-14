@@ -61,7 +61,6 @@ public class Level {
 	public static int spawnCoffee; // in %
 	// Player:
 	public static int maxLife;
-	public static int velPlayer; // velocity
 	// Coffee:
 	public static int maxCoffee;
 	// Skills: 
@@ -95,13 +94,12 @@ public class Level {
 //			spawnCoffee=40;
 //			
 //			maxLife = 100;
-//			velPlayer = 4;
 //
 //			maxCoffee=100;
 //			
 //			enableSkill[0]=true;
 			
-			player = new Player(0, 0, maxLife, velPlayer, maxCoffee, enableSkill);
+			player = new Player(0, 0, maxLife, maxCoffee, enableSkill);
 			 
 		}
 		for(int i=0;i<skills.length;i++){

@@ -25,7 +25,6 @@ public class LvlReader {
 			Level.spawnHealthPack =Integer.parseInt(prop.getProperty("spawnHealthPack"));
 			Level.spawnCoffee =Integer.parseInt(prop.getProperty("spawnCoffee"));
 			Level.maxLife =Integer.parseInt(prop.getProperty("maxLife"));
-			Level.velPlayer =Integer.parseInt(prop.getProperty("velPlayer"));
 			Level.maxCoffee =Integer.parseInt(prop.getProperty("maxCoffee"));
 			Level.enableSkill[0] =Boolean.valueOf(prop.getProperty("enableSkill"));
 			in.close();

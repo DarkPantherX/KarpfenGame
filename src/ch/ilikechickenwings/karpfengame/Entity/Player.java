@@ -36,14 +36,14 @@ public class Player extends Entity{
 	// coffee:
 	private int coffee;
 
-	public Player(int x, int y, int lifes, int vel,int coffee, boolean[] enableSkill) {
+	public Player(int x, int y, int lifes, int coffee, boolean[] enableSkill) {
 		
 		setX_Point(x);
 		setY_Point(y);
 		setLifes(lifes);
 		setWidth(30);
 		setHeight(70);
-		setxVel(vel);
+		setxVel(4);
 		setyVel(0);
 		setCoffee(coffee);
 		setInvincible(false);
