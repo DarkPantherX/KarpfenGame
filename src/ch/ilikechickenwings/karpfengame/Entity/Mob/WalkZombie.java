@@ -1,12 +1,13 @@
-package ch.ilikechickenwings.karpfengame.Entity;
+package ch.ilikechickenwings.karpfengame.Entity.Mob;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
 
+import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
-public class WalkZombie extends Entity{
+public class WalkZombie extends Mob{
 	
 
 	private boolean dir=true; // true = they walk to right, false = they walk to left

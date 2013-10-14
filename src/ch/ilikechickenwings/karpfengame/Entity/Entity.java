@@ -8,7 +8,6 @@ public class Entity {
 	private int width;
 	private int height;
 	private int velocity;
-	private int damage;
 	
 	/*
 	public Entity(int x, int y, int lifes, int width, int height){
@@ -66,14 +65,6 @@ public class Entity {
 
 	public void setHeight(int height) {
 		this.height = height;
-	}
-
-	public int getDamage() {
-		return damage;
-	}
-
-	public void setDamage(int damage) {
-		this.damage = damage;
 	}
 
 }

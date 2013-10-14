@@ -8,6 +8,8 @@ import java.awt.event.KeyEvent;
 
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
+import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
+import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
 
 public class Player extends Entity{
 
@@ -121,15 +123,15 @@ public class Player extends Entity{
 		
 	}
 	
-	public void getDamaged(Entity ent){
+	public void getDamaged(Mob mob){
 		if(!invincible){
-		setLifes(getLifes()-ent.getDamage());
+		setLifes(getLifes()-mob.getDamage());
 		setInvincible(true);
 		}
 	}
 	
-	public void getHealed(Entity ent) {
-		setLifes(getLifes()+ent.getDamage());
+	public void getHealed(HealthPack hp) {
+		setLifes(getLifes()+hp.getHealth());
 		
 	}
 	

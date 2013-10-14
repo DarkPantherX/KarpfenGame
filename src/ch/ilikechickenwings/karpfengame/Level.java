@@ -6,8 +6,9 @@ import java.util.Random;
 
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
-import ch.ilikechickenwings.karpfengame.Entity.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
+import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
+import ch.ilikechickenwings.karpfengame.Entity.Mob.WalkZombie;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 /*
@@ -178,10 +179,10 @@ public class Level {
 								+ ent.getHeight()) {
 					if(ent instanceof WalkZombie){
 					
-					player.getDamaged(ent);
+					player.getDamaged((Mob) ent);
 					}else if(ent instanceof HealthPack){
 						if(player.getLifes()<=maxLife){
-						player.getHealed(ent);
+						player.getHealed((HealthPack) ent);
 						entities.remove(ent);
 						}
 					}
