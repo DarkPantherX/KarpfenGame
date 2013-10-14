@@ -84,8 +84,15 @@ public class Level {
 			velPlayer = 4;
 
 			player = new Player(0, 0, maxLife, velPlayer);
-			createWalls();
+			
 		}
+		
+		Wall wall = new Wall(0, KarpfenGame.HEIGHT / 2, widthMu, height); // first
+		// wall
+        walls.add(wall);
+        // on the first wall there should be no zombie
+
+        addWalls();
 	}
 
 	public void update(InputHandler inHandler) {
@@ -208,15 +215,6 @@ public class Level {
 			((HealthPack) en).draw(g2, xOffset);
 			}
 		}
-	}
-
-	private void createWalls() {
-		Wall wall = new Wall(0, KarpfenGame.HEIGHT / 2, widthMu, height); // first
-																			// wall
-		walls.add(wall);
-		// on the first wall there should be no zombie
-
-		addWalls();
 	}
 
 	private void addWalls() {
