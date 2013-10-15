@@ -35,7 +35,8 @@ public class Level {
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
 	public static Skill[] skills = new Skill[Skill.nr];
-	public static Player player;
+	public Player player;
+	public static Level lv;
 
 	// TODO: decide whether all those things have to be public/private, static/non-static.. - SC 14.10.2013
 	// These parameters may vary from level to level
@@ -72,7 +73,8 @@ public class Level {
 	
 	
 	public Level(int lvl, KarpfenGame karpfenGame) {
-
+		
+		lv=this;
 		this.setLvl(lvl);
 		this.setKarpfenGame(karpfenGame);
 		walls.clear();
@@ -407,4 +409,9 @@ public class Level {
 		this.lvl = lvl;
 	}
 
+	public static void executeCommand(String str){
+		new CommandExecutor(str, lv);
+	}
+	
+	
 }
