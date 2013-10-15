@@ -1,3 +1,4 @@
+---------------------------------Codeing guidlines---------------------------------
 We have managed to get some really nice code up and running.
 Now the next problem is the clean up which we have to do, so the code doesn't get out of hand.
 To contribute to this, I invented a new system to bring some structure to our classes:
@@ -18,74 +19,24 @@ New Way of sturctoring class:
 11. getters and setters functions
 
 
-#See the Level-class, I already applied the changes there
-
-
-#With this was we can get a clean sturctor.
-#The next point is the real clean up:
-
 In the future, before commiting we both have rewatch our code and see what could be made more efficient
 And if we pull, we have to rewatch the code the other person wrote to see if we can improof the code
-
+-----------------------------------------Questions---------------------------------------------
 NEW QUESTIONS by SC 15.10.2013 00:51
 - how many Skills did we have?
+DPX: dunno... let's just start and add them...
 - should Projectiles "kill" Items?
-
-
-#If you also have some point just write it in here... this should be our guide!
-
-#So here are some of my thoughts: - SC 14.10.2013
-
-#[Still open questions]
-#3) Should there be a Invincibility for Projectiles? should this be the same as for the Mobs?
-#DPX:Since when does Mobs have Invincibility?
-#SC: I meantj the invincibility of the player, when it touched a monster. 
-#Should it have a short time of invincibility after touching Projectiles as well?
-#e.g. You could plan on getting hit by WalkZombie in order to get rid of a deadly Projectile.
-#Shall this be allowed? 
-
-#DPX:Invincibility is invincibility doesnt matte against what... and your idea would give some more options to survive :D
-
-#4) Player can get Health and Coffee overflow.. (not infinitely though) Do we want this?
-#DPX:No, the macHealth should stay the maxHealth. When it comes to HealthPack, I already have implemented, 
-#that you just can pick it up, if you have lower life
-#SC: That is true, but when you have say 99 instead of 100 lifes 
-#then you are able to pick up the health package and get for example 149 lifes.
-#After that you can't pick up any more
-#The same applies to coffee at the moment.
-#Do we want this?
-#The food system in Minecraft kind of works this way.
-
-#DPX:No we (I think so) dont want to have more lifes than max!
-
-#7) Should Health-Packs and Coffees (and Mobs) be able to spawn on the same platforms as they do right now?
-#DPX: What ever you want... That was just a try to see if the healthpacks work, maybe we make the zombies drop them afterwards?
-#SC: Ok, actually the problem is, that healthpack and coffee are overlapping... ideas?
-
-#DPX: Maybe just a Coffee or a health packat once? Or we have them to be set next to eacht other.
-
-#10) Should all items be the same Height/Width? So move those functions to Item.java.
-#DPX: No not every item has the same Height/Width... This should change with every item... 
-#or do you think a coffee is the same length as a fish? ;)
-#SC: Well there will not be a fish-item i think.. 
-#By item i only mean coffee and healthpack and i would find it nice, if they would be similar
-
-#DPX:we will have other items, too! Think about the ammo for the next fishes
+DPX: Well, I like this idea, how ever, I let you have the decision ;)
 
 
 
-A new thing to do: if we have written something and you think you dont need those lines anymore,
-just make a '#' in front of the line. So e.g. if i take a look at the Readme again I'll look through the things 
-you dont need any more and if i also think, that this is done, than we delete it.
-
-#ust to try: those lines beneath arnt used any more so i suggested to delete them with the '#'
-#If think the same about those lines you can delete them, else remove the '#'!
+#A new thing to do: if we have written something and you think you dont need those lines anymore,
+#just make a '#' in front of the line. So e.g. if i take a look at the Readme again I'll look through the things 
+#you dont need any more and if i also think, that this is done, than we delete it.
 
 
+----------------------------------------------------------------------------
 TODO SC:
-# -velocity in the player + mob class [SC: DONE]
-# -implement x_Velocity + y_Velocity [SC: DONE]
-# -remove coffee-loss while walking/jumping [SC: DONE]
  -implement physical jumping (with a parabolic jump courve or so XD)
  -implement seagull with it's projetile
  -correct the wall setting algorithm, as some walls are to high/low
@@ -94,7 +45,5 @@ TODO SC:
  
 TODO DPX:
  -Reformat all classes to fit the new made rules above
-# -Add Karp throwing [SC: DONE]
  -Add Menu (if this is okay?) [Yes it is]
-# -Add Dev-console for debugging [DONE by DPX, i guess]
  -Add more support for more than one lvl
