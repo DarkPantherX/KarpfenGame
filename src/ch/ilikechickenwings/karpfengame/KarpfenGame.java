@@ -147,7 +147,8 @@ public class KarpfenGame extends JPanel implements Runnable{
 					            System.out.println(textArea2.getText());
 					           if(textArea2.getText().indexOf("/")==0){
 					            String str= textArea2.getText().replace("/", "");
-					            Level.executeCommand(str);
+					            String[] str2 = str.split(" ");
+					            Level.executeCommand(str2);
 					            }
 					            textArea2.setText("");
 					            

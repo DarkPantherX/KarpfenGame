@@ -409,8 +409,8 @@ public class Level {
 		this.lvl = lvl;
 	}
 
-	public static void executeCommand(String str){
-		new CommandExecutor(str, lv);
+	public static void executeCommand(String[] str2){
+		new CommandExecutor(str2, lv);
 	}
 	
 	
