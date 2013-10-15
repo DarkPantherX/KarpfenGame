@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
-import ch.ilikechickenwings.karpfengame.KarpfenGame;
 import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Skill.Skill;
