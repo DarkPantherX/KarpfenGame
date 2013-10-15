@@ -145,7 +145,12 @@ public class KarpfenGame extends JPanel implements Runnable{
 							@Override
 					        public void actionPerformed(ActionEvent ae) {
 					            System.out.println(textArea2.getText());
+					           if(textArea2.getText().indexOf("/")==0){
+					            String str= textArea2.getText().replace("/", "");
+					            Level.executeCommand(str);
+					            }
 					            textArea2.setText("");
+					            
 					        }
 					    };
 
