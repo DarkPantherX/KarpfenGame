@@ -61,7 +61,6 @@ public class KarpfenGame extends JPanel implements Runnable{
 	private ByteArrayOutputStream baos;
 
 	public KarpfenGame() {
-
 		// makes new listener (ComponentHandler and InputHandler) and add them
 		// to the game
 		inHandler = new InputHandler();
