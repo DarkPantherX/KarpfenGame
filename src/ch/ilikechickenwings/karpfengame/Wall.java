@@ -9,7 +9,8 @@ public class Wall {
 	private int y_Point;
 	private int width;
 	private int height=20;
-	private int pf=0; // what the heck is that?
+	private int pf=0; // what the heck is that? //DAFUQ? THIS ISNT FROM ME!
+	private boolean playerStandingOn=false;
 	
 	public Wall(int x, int y, int width, int height){
 		this.setX_Point(x);
@@ -89,6 +90,21 @@ public class Wall {
 		this.pf = pf;
 	}
 	
+	/**
+	 * @return the playerStandingOn
+	 */
+	public boolean isPlayerStandingOn() {
+		return playerStandingOn;
+	}
+
+	/**
+	 * @param playerStandingOn the playerStandingOn to set
+	 */
+	public void setPlayerStandingOn(boolean playerStandingOn) {
+		this.playerStandingOn = playerStandingOn;
+	}
+
+
 	public void draw(Graphics2D g2,int xOffset){
 		g2.setColor(Color.red);
 		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(),

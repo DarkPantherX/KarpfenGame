@@ -67,43 +67,21 @@ public class Level {
 	// Skills: 
 	public static boolean[] enableSkill= new boolean[Skill.nr]; // [0] = CarpSkill
 	// this has multiple uses. in the beginning its used as a initial boolean, whether to play with this specific skill or not.. AND as a timing variable in Player.java
+	public static int nextLevel;
+	
 	// Stuff:
     private KarpfenGame karpfenGame; 
 	private int lvl;
-	
+	private Wall lastWall;
 	
 	public Level(int lvl, KarpfenGame karpfenGame) {
 		
 		lv=this;
 		this.setLvl(lvl);
 		this.setKarpfenGame(karpfenGame);
-		walls.clear();
-		entities.clear();
-		xOffset = 0;
-		if (this.lvl == 1) {
-			// data should now be loaded depending on lvl
-			//xMax = KarpfenGame.WIDTH * 4;
-			new LvlReader("lvl1.pros");
-//			widthMu = 100;
-//			dxMu = 65;
-//			widthVar = 35;
-//			dxVar = 30;
-//			height = 15;
-//			dyVar = 60; // Here I took half of the previous value..
-//
-//			spawnWalkZombie = 30;
-//			spawnHealthPack = 20;
-//			spawnCoffee=40;
-//			
-//			maxLife = 100;
-//
-//			maxCoffee=100;
-//			
-//			enableSkill[0]=true;
-			
-			player = new Player(0, 0, maxLife, maxCoffee, enableSkill);
-			 
-		}
+		new LvlReader("lvl"+Integer.toString(lvl)+".pros");		
+		player = new Player(0, 0, maxLife, maxCoffee, enableSkill);
+
 		for(int i=0;i<skills.length;i++){
 			if(enableSkill[i]){
 				Skill skill=new Skill();
@@ -152,6 +130,7 @@ public class Level {
 							- player.getHeight());
 					player.setFalling(false);
 					player.setJumping(false);
+					wall.setPlayerStandingOn(true);
 				} else if (!player.isJumping()) {
 					player.setFalling(true);
 				}
@@ -253,9 +232,13 @@ public class Level {
 				
 			}
 		}
+		
+		if(lastWall.isPlayerStandingOn()){
+			nextLevel();
+		}
+		
 	}
 
-	
 
 	public void draw(Graphics2D g2) {
 		player.draw(g2, xOffset);
@@ -331,15 +314,26 @@ public class Level {
 		if (wall.getX_Point() + wall.getY_Point() < xOffset) {
 			walls.remove(0);
 		}
+		lastWall= (Wall) walls.get(walls.size()-1);
 	}
 
 	public void die() {
+		resetLevel();
 		karpfenGame.setLvl(new Level(1, karpfenGame));
 	}
 
 	
-	
-	
+	private void nextLevel() {
+		resetLevel();
+		karpfenGame.setLvl(new Level(nextLevel, karpfenGame));
+		
+	}
+
+	private void resetLevel(){
+		walls.clear();
+		entities.clear();
+		xOffset = 0;
+	}
 	
 	
 	
