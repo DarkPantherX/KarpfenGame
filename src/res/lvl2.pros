@@ -6,6 +6,7 @@ dxVar=30
 height=15
 dyVar=60
 spawnWalkZombie=60
+spawnSeagull=60
 spawnHealthPack=20
 spawnCoffee=40
 maxLife=100

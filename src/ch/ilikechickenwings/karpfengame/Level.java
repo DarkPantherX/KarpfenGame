@@ -58,6 +58,7 @@ public class Level {
 								// higher than the one before)
 	// Monsters:
 	public static int spawnWalkZombie; // in %
+	public static int spawnSeagull;
 	public static int spawnHealthPack; // in %
 	public static int spawnCoffee; // in %
 	// Player:

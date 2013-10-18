@@ -22,6 +22,7 @@ public class LvlReader {
 			Level.height =Integer.parseInt(prop.getProperty("height"));
 			Level.dyVar =Integer.parseInt(prop.getProperty("dyVar"));
 			Level.spawnWalkZombie =Integer.parseInt(prop.getProperty("spawnWalkZombie"));
+			Level.spawnSeagull =Integer.parseInt(prop.getProperty("spawnSeagull"));
 			Level.spawnHealthPack =Integer.parseInt(prop.getProperty("spawnHealthPack"));
 			Level.spawnCoffee =Integer.parseInt(prop.getProperty("spawnCoffee"));
 			Level.maxLife =Integer.parseInt(prop.getProperty("maxLife"));
