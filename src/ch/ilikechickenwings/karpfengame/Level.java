@@ -213,6 +213,7 @@ public class Level {
 						}
 					}else if(ent instanceof Projectile){
 						player.getDamaged((Projectile) ent);
+						entities.remove(ent);
 					}
 				}
 				
