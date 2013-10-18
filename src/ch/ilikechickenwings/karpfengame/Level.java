@@ -9,6 +9,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.*;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
@@ -153,7 +154,7 @@ public class Level {
 			}
 			for (int wz = 0; wz < entities.size(); wz++) {
 				ent = (Entity) entities.get(wz);
-				if(ent instanceof WalkZombie){
+				if(ent instanceof WalkZombie){ // WalkZombie
 				
 					WalkZombie wZombie= (WalkZombie) entities.get(wz);
 					// check if they are still on the platform
@@ -176,12 +177,15 @@ public class Level {
 						}
 					}
 					wZombie.update(inHandler);
-				}else if(ent instanceof Carp){
-					Carp carp=(Carp) ent;
-					carp.update(inHandler);
 				}else if(ent instanceof Seagull){
 					Seagull seagull=(Seagull) ent;
 					seagull.update(inHandler);
+				}else if(ent instanceof Carp){
+					Carp carp=(Carp) ent;
+					carp.update(inHandler);
+				}else if(ent instanceof Drop){
+					Drop drop=(Drop) ent;
+					drop.update(inHandler);
 				}
 				
 				// Entity - Player
@@ -265,6 +269,8 @@ public class Level {
 				((Coffee) en).draw(g2, xOffset);
 			}else if(en instanceof Carp){
 				((Carp) en).draw(g2, xOffset);
+			}else if(en instanceof Drop){
+				((Drop) en).draw(g2, xOffset);
 			}
 		}
 	}
