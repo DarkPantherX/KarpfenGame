@@ -10,8 +10,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
-import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
-import ch.ilikechickenwings.karpfengame.Entity.Mob.WalkZombie;
+import ch.ilikechickenwings.karpfengame.Entity.Mob.*;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Reader.LvlReader;
 import ch.ilikechickenwings.karpfengame.Skill.Skill;
@@ -252,6 +251,8 @@ public class Level {
 			Entity en= entities.get(wz);
 			if(en instanceof WalkZombie){
 			    ((WalkZombie) en).draw(g2, xOffset);
+			}else if(en instanceof Seagull){
+			    ((Seagull) en).draw(g2, xOffset);
 			}else if(en instanceof HealthPack){
 			    ((HealthPack) en).draw(g2, xOffset);
 			}else if(en instanceof Coffee){
@@ -292,6 +293,10 @@ public class Level {
 			if (spawnWalkZombie >= r.nextInt(100)) {
 				WalkZombie wz = new WalkZombie(wi.getX_Point(), wi.getY_Point());
 				entities.add(wz);
+			}
+			if(spawnSeagull>=r.nextInt(100)){
+				Seagull sg = new Seagull(wi.getX_Point());
+				entities.add(sg);
 			}
 			if (spawnHealthPack >= r.nextInt(100)) {
 				HealthPack hp = new HealthPack(wi.getX_Point()+(wi.getWidth()/2), wi.getY_Point());
