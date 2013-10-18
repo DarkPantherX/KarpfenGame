@@ -1,10 +1,9 @@
 ---------------------------------Codeing guidlines---------------------------------
-We have managed to get some really nice code up and running.
-Now the next problem is the clean up which we have to do, so the code doesn't get out of hand.
-To contribute to this, I invented a new system to bring some structure to our classes:
+#We have managed to get some really nice code up and running.
+#Now the next problem is the clean up which we have to do, so the code doesn't get out of hand.
+#To contribute to this, I invented a new system to bring some structure to our classes:
 
 New Way of sturctoring class:
-
 
 1. imports
 2. class
@@ -18,29 +17,32 @@ New Way of sturctoring class:
 (10.main function)
 11. getters and setters functions
 
-
 In the future, before commiting we both have rewatch our code and see what could be made more efficient
-And if we pull, we have to rewatch the code the other person wrote to see if we can improof the code
+And if we pull, we have to rewatch the code the other person wrote to see if we can improve the code
+Lines marked with a # in front may be deleted - but no others. Mark them with #, if you want to get rid of them.
 -----------------------------------------Questions---------------------------------------------
-NEW QUESTIONS by SC 15.10.2013 00:51
-- how many Skills did we have?
-DPX: dunno... let's just start and add them...
-- should Projectiles "kill" Items?
-DPX: Well, I like this idea, how ever, I let you have the decision ;)
+#NEW QUESTIONS by SC 15.10.2013 00:51
+#- how many Skills did we have?
+#DPX: dunno... let's just start and add them...
+#- should Projectiles "kill" Items?
+#DPX: Well, I like this idea, how ever, I let you have the decision ;)
 
-
-
-#A new thing to do: if we have written something and you think you dont need those lines anymore,
-#just make a '#' in front of the line. So e.g. if i take a look at the Readme again I'll look through the things 
-#you dont need any more and if i also think, that this is done, than we delete it.
+NEW QUESTIONS by SC 18.10-2013 03:53
+1) How should Seagulls shoot? a) just drop their Drop, b) aim at the player, c) drop the drop at a 45° angle.
+2) How should Seagulls spawn? it doesn't make sense, to spawn them atop of walls, as they all fly out of the viewing field. 
+3) Should Drop fall through walls as they do right now.. or not?
+4) we have to introduce a new type of weapon, so that one can get rid of the seagulls.. or should they be kind of invulnerable?
+5) Should the camera also follow a certain y-changement? I think that would add a nice effect. (Like xOffset, yOffset)
 
 
 ----------------------------------------------------------------------------
 TODO SC:
  -implement physical jumping (with a parabolic jump courve or so XD)
- -implement seagull with it's projetile
+# -implement seagull with it's projetile [DONE by SC: 18.10.2013]
  -correct the wall setting algorithm, as some walls are to high/low
  -all the variables that vary from level to level are static. they shouldn't be...
+ -Seagull fly a bit more naturally
+ -Projectiles should "kill" Items
  -implement own ideas
  
 TODO DPX:
