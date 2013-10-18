@@ -66,7 +66,6 @@ public class Player extends Entity{
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
 				walk(-getxVel());
 				setDir(2);
-				System.out.println("is jumping");
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
 				walk(getxVel());
