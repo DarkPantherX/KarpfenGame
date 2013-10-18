@@ -74,6 +74,7 @@ public class Level {
 	private int lvl;
 	private Wall lastWall;
 	
+	// constructor
 	public Level(int lvl, KarpfenGame karpfenGame) {
 		
 		lv=this;
@@ -178,6 +179,9 @@ public class Level {
 				}else if(ent instanceof Carp){
 					Carp carp=(Carp) ent;
 					carp.update(inHandler);
+				}else if(ent instanceof Seagull){
+					Seagull seagull=(Seagull) ent;
+					seagull.update(inHandler);
 				}
 				
 				// Entity - Player
@@ -189,8 +193,9 @@ public class Level {
 						&& player.getY_Point() + player.getHeight() > ent
 								.getY_Point()
 						&& player.getY_Point() < ent.getY_Point()
-								+ ent.getHeight()) {
-					if(ent instanceof WalkZombie){
+								+ ent.getHeight()) // if ent and player collide
+				{
+					if(ent instanceof Mob){
 					    player.getDamaged((Mob) ent);
 					}else if(ent instanceof HealthPack){
 						if(player.getLifes()<=maxLife){
@@ -219,7 +224,8 @@ public class Level {
 								&& ent.getY_Point() + ent.getHeight() > entity
 										.getY_Point()
 								&& ent.getY_Point() < entity.getY_Point()
-										+ entity.getHeight()){
+										+ entity.getHeight()) // if Projectile entity intersects Mob ent
+						{
 							Mob mob=(Mob) ent;
 							mob.getDamaged((Projectile) entity);
 							entities.remove(entity);
