@@ -1,4 +1,4 @@
-xMax=2000
+xMax=500
 widthMu=100
 dxMu=65
 widthVar=35
@@ -6,7 +6,7 @@ dxVar=30
 height=15
 dyVar=60
 spawnWalkZombie=30
-spawnSeagull=30
+spawnSeagull=0
 spawnHealthPack=20
 spawnCoffee=40
 maxLife=100
