@@ -22,7 +22,6 @@ public class InputHandler implements KeyListener {
 		int code = e.getKeyCode();
 		if (code > 0 && code < keys.length) {
 			keys[code] = true;
-			System.out.println("asdfasdfa");
 		}
 	}
 
