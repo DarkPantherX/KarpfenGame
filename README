@@ -1,8 +1,4 @@
 ---------------------------------Codeing guidlines---------------------------------
-#We have managed to get some really nice code up and running.
-#Now the next problem is the clean up which we have to do, so the code doesn't get out of hand.
-#To contribute to this, I invented a new system to bring some structure to our classes:
-
 New Way of sturctoring class:
 
 1. imports
@@ -23,21 +19,27 @@ Lines marked with a # in front may be deleted - but no others. Mark them with #,
 -----------------------------------------Questions---------------------------------------------
 
 NEW QUESTIONS by SC 18.10-2013 03:53
-1) How should Seagulls shoot? a) just drop their Drop, b) aim at the player, c) drop the drop at a 45�� angle.
-DPX: You decide
+#1) How should Seagulls shoot? a) just drop their Drop, b) aim at the player, c) drop the drop at a 45�� angle.
+#DPX: You decide
+#SC: a)
 
-2) How should Seagulls spawn? it doesn't make sense, to spawn them atop of walls, as they all fly out of the viewing field. 
-DPX: They should spawn randomly like "Test every 10 sec or something..."
+#2) How should Seagulls spawn? it doesn't make sense, to spawn them atop of walls, as they all fly out of the viewing field. 
+#DPX: They should spawn randomly like "Test every 10 sec or something..."
 
 3) Should Drop fall through walls as they do right now.. or not?
 DPX:Maybe be platforms should get whiter and whiter? ;)
 	BUT we have to change the mec, that the zombies get damage by seagulls
+SC: So they should collide with the walls. (?) And the zombies already get damaged by Drop's. 
+    (Not by Seagulls though.. would you like me to add this? 
+     It would however not be clear, wheter Seagulls should hurt Zombies or Zombies should hurt Seagulls)
 
-4) we have to introduce a new type of weapon, so that one can get rid of the seagulls.. or should they be kind of invulnerable?
-DPX: I would suggest invul except the ultra carp
+# 4) we have to introduce a new type of weapon, so that one can get rid of the seagulls.. or should they be kind of invulnerable?
+# DPX: I would suggest invul except the ultra carp
 
 5) Should the camera also follow a certain y-changement? I think that would add a nice effect. (Like xOffset, yOffset)
 DPX: no it should, or you wouldnt see the next one down...
+SC: HAHA. No it should.. Eeer.. ok.. (?)
+    And you still would see the next one(what) down..
 
 ----------------------------------------------------------------------------
 TODO SC:
@@ -49,8 +51,6 @@ TODO SC:
  -implement own ideas
  
 TODO DPX:
-#-Added "Eel"
-#-Added new system: key is now use your abilities, you can change you abilities by clicking 1(carp) or 2(eel) 
  -Reformat all classes to fit the new made rules above
  -Add Menu (if this is okay?) [Yes it is]
  -Add more support for more than one lvl
