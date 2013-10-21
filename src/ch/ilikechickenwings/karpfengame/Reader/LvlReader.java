@@ -28,6 +28,7 @@ public class LvlReader {
 			Level.maxLife =Integer.parseInt(prop.getProperty("maxLife"));
 			Level.maxCoffee =Integer.parseInt(prop.getProperty("maxCoffee"));
 			Level.enableSkill[0] =Boolean.valueOf(prop.getProperty("enableSkill"));
+			Level.enableSkill[1] =Boolean.valueOf(prop.getProperty("enableSkill"));
 			Level.nextLevel =Integer.parseInt(prop.getProperty("nextLevel"));
 			in.close();
 		}catch(IOException ex){
