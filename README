@@ -21,24 +21,27 @@ In the future, before commiting we both have rewatch our code and see what could
 And if we pull, we have to rewatch the code the other person wrote to see if we can improve the code
 Lines marked with a # in front may be deleted - but no others. Mark them with #, if you want to get rid of them.
 -----------------------------------------Questions---------------------------------------------
-#NEW QUESTIONS by SC 15.10.2013 00:51
-#- how many Skills did we have?
-#DPX: dunno... let's just start and add them...
-#- should Projectiles "kill" Items?
-#DPX: Well, I like this idea, how ever, I let you have the decision ;)
 
 NEW QUESTIONS by SC 18.10-2013 03:53
-1) How should Seagulls shoot? a) just drop their Drop, b) aim at the player, c) drop the drop at a 45° angle.
-2) How should Seagulls spawn? it doesn't make sense, to spawn them atop of walls, as they all fly out of the viewing field. 
-3) Should Drop fall through walls as they do right now.. or not?
-4) we have to introduce a new type of weapon, so that one can get rid of the seagulls.. or should they be kind of invulnerable?
-5) Should the camera also follow a certain y-changement? I think that would add a nice effect. (Like xOffset, yOffset)
+1) How should Seagulls shoot? a) just drop their Drop, b) aim at the player, c) drop the drop at a 45�� angle.
+DPX: You decide
 
+2) How should Seagulls spawn? it doesn't make sense, to spawn them atop of walls, as they all fly out of the viewing field. 
+DPX: They should spawn randomly like "Test every 10 sec or something..."
+
+3) Should Drop fall through walls as they do right now.. or not?
+DPX:Maybe be platforms should get whiter and whiter? ;)
+	BUT we have to change the mec, that the zombies get damage by seagulls
+
+4) we have to introduce a new type of weapon, so that one can get rid of the seagulls.. or should they be kind of invulnerable?
+DPX: I would suggest invul except the ultra carp
+
+5) Should the camera also follow a certain y-changement? I think that would add a nice effect. (Like xOffset, yOffset)
+DPX: no it should, or you wouldnt see the next one down...
 
 ----------------------------------------------------------------------------
 TODO SC:
  -implement physical jumping (with a parabolic jump courve or so XD)
-# -implement seagull with it's projetile [DONE by SC: 18.10.2013]
  -correct the wall setting algorithm, as some walls are to high/low
  -all the variables that vary from level to level are static. they shouldn't be...
  -Seagull fly a bit more naturally
@@ -46,6 +49,8 @@ TODO SC:
  -implement own ideas
  
 TODO DPX:
+#-Added "Eel"
+#-Added new system: key is now use your abilities, you can change you abilities by clicking 1(carp) or 2(eel) 
  -Reformat all classes to fit the new made rules above
  -Add Menu (if this is okay?) [Yes it is]
  -Add more support for more than one lvl
