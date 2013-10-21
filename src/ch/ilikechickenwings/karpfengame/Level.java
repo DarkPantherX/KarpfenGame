@@ -10,6 +10,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.*;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
@@ -186,6 +187,12 @@ public class Level {
 				}else if(ent instanceof Drop){
 					Drop drop=(Drop) ent;
 					drop.update(inHandler);
+				}else if(ent instanceof Eel){
+					Eel eel=(Eel) ent;
+					eel.update(inHandler);
+					if((System.currentTimeMillis()-eel.getLifeTime())>eel.getLifeSpan()){
+						entities.remove(eel);
+					}
 				}
 				
 				// Entity - Player
@@ -207,10 +214,10 @@ public class Level {
 						    entities.remove(ent);
 						}
 					}else if(ent instanceof Coffee){
-						if(player.getCoffee()<=maxCoffee){
+						if(player.getCoffee()<=maxCoffee-50){
 							player.getCaffeined((Coffee) ent);
 							entities.remove(ent);
-						}
+							}
 					}else if(ent instanceof Projectile){
 						player.getDamaged((Projectile) ent);
 						entities.remove(ent);
@@ -272,6 +279,8 @@ public class Level {
 				((Carp) en).draw(g2, xOffset);
 			}else if(en instanceof Drop){
 				((Drop) en).draw(g2, xOffset);
+			}else if(en instanceof Eel){
+				((Eel) en).draw(g2, xOffset);
 			}
 		}
 	}
