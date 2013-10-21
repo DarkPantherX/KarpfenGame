@@ -26,8 +26,8 @@ public class Player extends Entity{
 	private boolean invincible=false;
 	private long currTimeInvincible;
 	private long oldTimeInvincible;
-	private long[] currTimeSkill= new long[Skill.nr];
-	private long[] oldTimeSkill= new long[Skill.nr];
+	private long[] currTimeSkill= new long[Skill.getNr()];
+	private long[] oldTimeSkill= new long[Skill.getNr()];
 	private int dir=0;
 	private boolean[] enableSkill;
 	private int enabledSkill=1;

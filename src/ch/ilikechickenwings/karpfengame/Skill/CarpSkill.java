@@ -5,6 +5,7 @@ public class CarpSkill extends Skill{
 	
 	public CarpSkill(){
 		setCoffee(10);
+		setId(0);
 	}
 
 }

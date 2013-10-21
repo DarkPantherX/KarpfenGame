@@ -35,7 +35,7 @@ public class Level {
 
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
-	public static Skill[] skills = new Skill[Skill.nr];
+	public static Skill[] skills = new Skill[Skill.getNr()];
 	public Player player;
 	public static Level lv;
 
@@ -67,7 +67,7 @@ public class Level {
 	// Coffee:
 	public static int maxCoffee;
 	// Skills: 
-	public static boolean[] enableSkill= new boolean[Skill.nr]; // [0] = CarpSkill
+	public static boolean[] enableSkill= new boolean[Skill.getNr()]; // [0] = CarpSkill
 	// this has multiple uses. in the beginning its used as a initial boolean, whether to play with this specific skill or not.. AND as a timing variable in Player.java
 	public static int nextLevel;
 	

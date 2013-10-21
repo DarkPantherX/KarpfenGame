@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import ch.ilikechickenwings.karpfengame.Level;
+import ch.ilikechickenwings.karpfengame.Skill.Skill;
 
 public class LvlReader {
 
@@ -27,8 +28,9 @@ public class LvlReader {
 			Level.spawnCoffee =Integer.parseInt(prop.getProperty("spawnCoffee"));
 			Level.maxLife =Integer.parseInt(prop.getProperty("maxLife"));
 			Level.maxCoffee =Integer.parseInt(prop.getProperty("maxCoffee"));
-			Level.enableSkill[0] =Boolean.valueOf(prop.getProperty("enableSkill"));
-			Level.enableSkill[1] =Boolean.valueOf(prop.getProperty("enableSkill"));
+			for(int i=0;i<Skill.getNr();i++){
+			Level.enableSkill[i] =Boolean.valueOf(prop.getProperty("enableSkill"));
+			}
 			Level.nextLevel =Integer.parseInt(prop.getProperty("nextLevel"));
 			in.close();
 		}catch(IOException ex){
