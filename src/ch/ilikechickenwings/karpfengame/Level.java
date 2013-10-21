@@ -214,7 +214,7 @@ public class Level {
 						    entities.remove(ent);
 						}
 					}else if(ent instanceof Coffee){
-						if(player.getCoffee()<=maxCoffee-50){
+						if(player.getCoffee()<=maxCoffee){
 							player.getCaffeined((Coffee) ent);
 							entities.remove(ent);
 							}
