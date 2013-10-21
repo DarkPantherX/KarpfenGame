@@ -14,6 +14,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 
 public class Player extends Entity{
@@ -29,6 +30,7 @@ public class Player extends Entity{
 	private long[] oldTimeSkill= new long[Skill.nr];
 	private int dir=0;
 	private boolean[] enableSkill;
+	private int enabledSkill=1;
 	private int xVel;
 	private int yVel;
 	
@@ -60,7 +62,13 @@ public class Player extends Entity{
 		}else{
 			currTimeSkill[0]=System.currentTimeMillis();
 		}
-		if(inHandler.getKeys()[KeyEvent.VK_K]&&enableSkill[0]){ // Carp
+		if(currTimeSkill[1]>=oldTimeSkill[0]+4000){
+			enableSkill[1]=true;
+		}else{
+			currTimeSkill[1]=System.currentTimeMillis();
+		}
+		
+		if(inHandler.getKeys()[KeyEvent.VK_K]&&enableSkill[0]&&enabledSkill==1){ // Carp
 			Skill skill=(Skill) Level.getSkills()[0];
 			if(getCoffee()>=skill.getCoffee()){
 				setCoffee(getCoffee()-skill.getCoffee());
@@ -71,6 +79,28 @@ public class Player extends Entity{
 			}
 			
 		}
+		
+		if(inHandler.getKeys()[KeyEvent.VK_K]&&enableSkill[1]&&enabledSkill==2){ // Carp
+			Skill skill=(Skill) Level.getSkills()[1];
+			if(getCoffee()>=skill.getCoffee()){
+				setCoffee(getCoffee()-skill.getCoffee());
+				enableSkill[1]=false;
+				oldTimeSkill[1]=System.currentTimeMillis();
+				Eel eel=new Eel(getX_Point()+getWidth(),getY_Point()+getHeight()/2,this);
+			    Level.getEntities().add(eel);
+			}
+			
+		}
+		
+		
+		if(inHandler.getKeys()[KeyEvent.VK_1]){ // Carp
+			enabledSkill=1;
+		}else if(inHandler.getKeys()[KeyEvent.VK_2]){ // Carp
+				enabledSkill=2;
+				}
+			
+		
+		
 		
 			// movement
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
