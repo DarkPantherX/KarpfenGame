@@ -25,6 +25,7 @@ public class Seagull extends Mob{
 		setDamage(10);
 		oldTimeDrop=System.currentTimeMillis();
 		setCooldown(5000);
+		setGravityOn(false); // this might be changed for a more realistic fly
 	}
 
     public void update(InputHandler inHandler) {

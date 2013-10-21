@@ -18,6 +18,7 @@ public class Carp extends Projectile{
 		setyVel(0);
 		setDamage(50);
 		setDamageLoss(1);
+		setGravityOn(false); // or shall this be changed?
 	}
 	
 	public void update(InputHandler inHandler){

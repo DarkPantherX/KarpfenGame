@@ -9,7 +9,6 @@ public class Item extends Entity{
 	public Item(){
 		
 		setLifes(1);
-		
 	}
 
 	/**

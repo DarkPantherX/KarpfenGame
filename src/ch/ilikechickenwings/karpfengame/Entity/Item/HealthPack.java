@@ -13,7 +13,6 @@ public class HealthPack extends Item{
 		setHeight(10);
 		setX_Point(x-(getWidth()/2));
 		setY_Point(y-getHeight());
-
 		setHealth(10);
 	}
 	

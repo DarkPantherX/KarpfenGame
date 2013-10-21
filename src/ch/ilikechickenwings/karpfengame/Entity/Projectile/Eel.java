@@ -23,6 +23,7 @@ public class Eel extends Projectile{
 		setLifeTime(System.currentTimeMillis());
 		setLifeSpan(2000l);
 		setPlayer(player);
+		setGravityOn(false);
 	}
 	
 	public void update(InputHandler inHandler){

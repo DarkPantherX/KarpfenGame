@@ -20,7 +20,7 @@ public class WalkZombie extends Mob{
 		setxVel(4);
 		setyVel(0);
 		setDamage(10);
-		
+		setGravityOn(false);
 	}
 
 

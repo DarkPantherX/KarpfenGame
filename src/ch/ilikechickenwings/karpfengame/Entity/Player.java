@@ -33,6 +33,7 @@ public class Player extends Entity{
 	private int enabledSkill=1;
 	private int xVel;
 	private int yVel;
+	private boolean gravityOn;
 	
 	// coffee:
 	private int coffee;
@@ -49,6 +50,7 @@ public class Player extends Entity{
 		setCoffee(coffee);
 		setInvincible(false);
 		setEnableSkill(enableSkill);
+		setGravityOn(true);
 		//super(x, y, lifes);
 		// TODO Auto-generated constructor stub
 	}
@@ -160,9 +162,13 @@ public class Player extends Entity{
 		}
 	}
 	
+	
+	
 	private void walk(int i){
 		setX_Point(getX_Point() + i);
 	}
+	
+	
 	
 	public void getDamaged(Mob mob){
 		if(!invincible){
@@ -208,6 +214,16 @@ public class Player extends Entity{
 
 	
 	
+	public boolean isGravityOn() {
+		return gravityOn;
+	}
+
+
+	public void setGravityOn(boolean gravityOn) {
+		this.gravityOn = gravityOn;
+	}
+
+
 	public int getxVel() {
 		return xVel;
 	}

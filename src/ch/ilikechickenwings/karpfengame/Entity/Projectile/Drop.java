@@ -15,6 +15,7 @@ public class Drop extends Projectile{
 		setxVel(xvel);
 		setyVel(yvel);
 		setDamage(50);
+		setGravityOn(true);
 	}
 	
 	public void update(InputHandler inHandler){

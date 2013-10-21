@@ -8,7 +8,7 @@ public class Projectile extends Entity {
 	private int damage;
 	private int xVel;
 	private int yVel;
-	
+	private boolean gravityOn;
 	
 	public Projectile(){
 		
@@ -18,6 +18,14 @@ public class Projectile extends Entity {
 	
 	
 	
+	public boolean isGravityOn() {
+		return gravityOn;
+	}
+
+	public void setGravityOn(boolean gravityOn) {
+		this.gravityOn = gravityOn;
+	}
+
 	public int getxVel() {
 		return xVel;
 	}

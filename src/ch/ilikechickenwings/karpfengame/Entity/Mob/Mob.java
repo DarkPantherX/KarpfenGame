@@ -8,7 +8,7 @@ public class Mob extends Entity{
 	private int damage;
 	private int xVel;
 	private int yVel;
-	
+	private boolean gravityOn;
 	
 	public Mob(){
 		
@@ -24,6 +24,16 @@ public class Mob extends Entity{
 	
 	
 	
+	public boolean isGravityOn() {
+		return gravityOn;
+	}
+
+
+	public void setGravityOn(boolean gravityOn) {
+		this.gravityOn = gravityOn;
+	}
+
+
 	public int getxVel() {
 		return xVel;
 	}
