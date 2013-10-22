@@ -19,13 +19,6 @@ Lines marked with a # in front may be deleted - but no others. Mark them with #,
 -----------------------------------------Questions---------------------------------------------
 
 NEW QUESTIONS by SC 18.10-2013 03:53
-#1) How should Seagulls shoot? a) just drop their Drop, b) aim at the player, c) drop the drop at a 45�� angle.
-#DPX: You decide
-#SC: a)
-
-#2) How should Seagulls spawn? it doesn't make sense, to spawn them atop of walls, as they all fly out of the viewing field. 
-#DPX: They should spawn randomly like "Test every 10 sec or something..."
-
 3) Should Drop fall through walls as they do right now.. or not?
 DPX:Maybe be platforms should get whiter and whiter? ;)
 	BUT we have to change the mec, that the zombies get damage by seagulls
@@ -33,23 +26,31 @@ SC: So they should collide with the walls. (?) And the zombies already get damag
     (Not by Seagulls though.. would you like me to add this? 
      It would however not be clear, wheter Seagulls should hurt Zombies or Zombies should hurt Seagulls)
 
-# 4) we have to introduce a new type of weapon, so that one can get rid of the seagulls.. or should they be kind of invulnerable?
-# DPX: I would suggest invul except the ultra carp
+DPX:Sorry that was a little wrong: i meant the projectiles (aka the seagull-shit) should make the platform whiter...
+	I dont want the seagulls to fly deeper... 
+	What I want is, that the zombies DON'T get damaged by seagull projectiles...
 
 5) Should the camera also follow a certain y-changement? I think that would add a nice effect. (Like xOffset, yOffset)
 DPX: no it should, or you wouldnt see the next one down...
 SC: HAHA. No it should.. Eeer.. ok.. (?)
     And you still would see the next one(what) down..
 
-NEW QUESTIONS by SC 22.10.2013 03:14
-1) Is it possible to have a list in a .prop file?
-like:
-enableSkill=true, true, false, false
-If so then its great, if not, we will have to have different enableSkills for every Skill...
+DPX: If you like this idea this much you can try it... But be aware, that we might change it back...
+
+#NEW QUESTIONS by SC 22.10.2013 03:14
+#1) Is it possible to have a list in a .prop file?
+#like:
+#enableSkill=true, true, false, false
+#If so then its great, if not, we will have to have different enableSkills for every Skill...
+#
+#[implemented by DPX]
 
 ----------------------------------------------------------------------------
+Prioritie: 1-5
+1:(very important, in the next few days)
+5:(ehh.. let's do this later on... Maybe never...)
+
 TODO SC:
-# -implement physical jumping (with a parabolic jump courve or so XD) [SC DONE: 22.10.2013 03:13]
  -correct the wall setting algorithm, as some walls are to high/low
  -all the variables that vary from level to level are static. they shouldn't be...
  -Seagull fly a bit more naturally
@@ -59,9 +60,11 @@ TODO SC:
  -I think i made a coffee-bug.. I have to fix it!
  -Variable FPS support
  -implement own ideas
+ -Code clean up and commenting the whole code (1)
  
 TODO DPX:
- -Reformat all classes to fit the new made rules above
- -Add Menu 
-# (if this is okay?) [Yes it is]
-# -Add more support for more than one lvl [DONE by DPX]
+ -Reformat all classes to fit the new made rules above (2)
+ -Add Menu (1)
+ -Add Soundsystem! (That's going to be hard this time...)(3)
+ -Add Achievement-system (Because i like them...)(5)
+ -Code clean up and commenting the whole code (1)
