@@ -313,8 +313,8 @@ public class Level {
 																				// space
 
 			int dyOffset = r.nextInt(2 * dyVar) - dyVar;
-			if (wi.getY_Point() + dyOffset + height > KarpfenGame.HEIGHT
-					|| wi.getY_Point() + dyOffset < 0) { // makes walls outside
+			if (wi.getY_Point() + dyOffset + player.getHeight() > KarpfenGame.HEIGHT
+					|| wi.getY_Point() + dyOffset + wi.getHeight() < 0) { // makes walls outside
 															// of the window
 															// impossible
 				dyOffset *= -1;
