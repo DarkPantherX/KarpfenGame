@@ -26,7 +26,7 @@ public class Player extends Entity{
 	private long[] oldTimeSkill= new long[Skill.getNr()];
 	private int dir=0;
 	private boolean[] enableSkill;
-	private int enabledSkill=1;
+	private int enabledSkill=0;
 	private int xVel;
 	private int yVel;
 	private boolean gravityOn;
@@ -59,49 +59,40 @@ public class Player extends Entity{
 	public void update(InputHandler inHandler) {
 		
 		//Skill
-		if(currTimeSkill[0]>=oldTimeSkill[0]+500){
-			enableSkill[0]=true;
-		}else{
-			currTimeSkill[0]=System.currentTimeMillis();
+		for(int i=0;i<Skill.getNr();i++){
+		    if(currTimeSkill[i]>=oldTimeSkill[i]+500){
+			    enableSkill[i]=true;
+		    }else{
+			    currTimeSkill[i]=System.currentTimeMillis();
+		    }
 		}
-		if(currTimeSkill[1]>=oldTimeSkill[0]+4000){
-			enableSkill[1]=true;
-		}else{
-			currTimeSkill[1]=System.currentTimeMillis();
-		}
-		
-		if(inHandler.getKeys()[KeyEvent.VK_K]&&enableSkill[0]&&enabledSkill==1){ // Carp
-			Skill skill=(Skill) Level.getSkills()[0];
-			if(getCoffee()>=skill.getCoffee()){
-				setCoffee(getCoffee()-skill.getCoffee());
-				enableSkill[0]=false;
-				oldTimeSkill[0]=System.currentTimeMillis();
-				Carp carp=new Carp(getX_Point()+getWidth(),getY_Point()+getHeight()/2);
-			    Level.getEntities().add(carp);
-			}
-			
-		}
-		
-		if(inHandler.getKeys()[KeyEvent.VK_K]&&enableSkill[1]&&enabledSkill==2){ // Carp
-			Skill skill=(Skill) Level.getSkills()[1];
-			if(getCoffee()>=skill.getCoffee()){
-				setCoffee(getCoffee()-skill.getCoffee());
-				enableSkill[1]=false;
-				oldTimeSkill[1]=System.currentTimeMillis();
-				Eel eel=new Eel(getX_Point()+getWidth(),getY_Point()+getHeight()/2,this);
-			    Level.getEntities().add(eel);
-			}
-			
-		}
-		
 		
 		if(inHandler.getKeys()[KeyEvent.VK_1]){ // Carp
+			enabledSkill=0;
+		}else if(inHandler.getKeys()[KeyEvent.VK_2]){ // Eel
 			enabledSkill=1;
-		}else if(inHandler.getKeys()[KeyEvent.VK_2]){ // Carp
-				enabledSkill=2;
-				}
-			
+		}
 		
+		for(int i=0;i<Skill.getNr();i++){
+			if(inHandler.getKeys()[KeyEvent.VK_S]&&enableSkill[i]&&enabledSkill==i){ // Carp
+				Skill skill=(Skill) Level.getSkills()[i];
+				if(getCoffee()>=skill.getCoffee()){
+					setCoffee(getCoffee()-skill.getCoffee());
+					enableSkill[i]=false;
+					oldTimeSkill[i]=System.currentTimeMillis();
+					switch(i){
+					    case 0:
+					    Carp carp=new Carp(getX_Point()+getWidth(),getY_Point()+getHeight()/2);
+					    Level.getEntities().add(carp);
+					    break;
+					    case 1:
+					    Eel eel=new Eel(getX_Point()+getWidth(),getY_Point()+getHeight()/2,this);
+					    Level.getEntities().add(eel);
+					    break;
+					}
+				}
+			}
+		}
 		
 		
 			// movement
@@ -137,9 +128,6 @@ public class Player extends Entity{
 			    }	
 			}
 			
-			
-
-		
 	}
 
 	
