@@ -8,6 +8,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
+import ch.ilikechickenwings.karpfengame.Entity.Item.Item;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
@@ -137,16 +138,20 @@ public class Level {
 		
 		// Entities update:
 		if (!(entities.size() == 0)) {
-			Entity ent = entities.get(0);
-			
-			if (ent.getX_Point() + ent.getWidth() * 10 < xOffset || ent.getX_Point() > xOffset+ preCalcWalls) { // unnice
-				entities.remove(0);
-			}
+
 			for (int wz = 0; wz < entities.size(); wz++) {
-				ent = (Entity) entities.get(wz);
-				if(ent instanceof WalkZombie){ // WalkZombie
+				Entity ent = (Entity) entities.get(wz);
 				
-					WalkZombie wZombie= (WalkZombie) entities.get(wz);
+				// despawn because out of range
+			    if (ent.getX_Point() + ent.getWidth() * 10 < xOffset || ent.getX_Point() > xOffset+ preCalcWalls) { // unnice
+				    entities.remove(ent);
+			    }
+				
+			    // SINGLE UPDATES
+			    
+			    // update Mobs
+				if(ent instanceof WalkZombie){ // WalkZombie
+					WalkZombie wZombie= (WalkZombie) ent;
 					// check if they are still on the platform
 					for (int w = 0; w < walls.size(); w++) {
 						Wall wall = (Wall) walls.get(w);
@@ -154,14 +159,15 @@ public class Level {
 								&& wZombie.getX_Point() + wZombie.getWidth() > wall
 								.getX_Point() + wall.getWidth()
 								&& wZombie.getX_Point() < wall.getX_Point()
-								+ wall.getWidth()) {
+								+ wall.getWidth()) 
+						{ // if Zombie is about to walk off the wall at the right side.
 							wZombie.setDir(false); // change direction
 							w = walls.size();
 						} else if (!wZombie.isDir()
 								&& wZombie.getX_Point() < wall.getX_Point()
 								&& wZombie.getX_Point() + wZombie.getWidth() > wall
-								.getX_Point()) {
-
+								.getX_Point())
+						{  // if Zombie is about to walk off the wall on the left side.
 							wZombie.setDir(true); // change direction
 							w = walls.size();
 						}
@@ -170,7 +176,9 @@ public class Level {
 				}else if(ent instanceof Seagull){
 					Seagull seagull=(Seagull) ent;
 					seagull.update(inHandler);
-				}else if(ent instanceof Carp){
+				}
+				// update Projectiles
+				else if(ent instanceof Carp){
 					Carp carp=(Carp) ent;
 					carp.update(inHandler);
 				}else if(ent instanceof Drop){
@@ -183,6 +191,8 @@ public class Level {
 						entities.remove(eel);
 					}
 				}
+				
+				// END SINGLE UPDATES
 				
 				// Entity - Player
 				// we have to talk about this after we made the graphics...
@@ -198,22 +208,22 @@ public class Level {
 					if(ent instanceof Mob){
 					    player.getDamaged((Mob) ent);
 					}else if(ent instanceof HealthPack){
-						if(player.getLifes()<=maxLife){
+						if(player.getLifes()<maxLife){
 						    player.getHealed((HealthPack) ent);
 						    entities.remove(ent);
 						}
 					}else if(ent instanceof Coffee){
-						if(player.getCoffee()<=maxCoffee){
+						if(player.getCoffee()<maxCoffee){
 							player.getCaffeined((Coffee) ent);
 							entities.remove(ent);
 							}
-					}else if(ent instanceof Projectile){
-						player.getDamaged((Projectile) ent);
+					}else if(ent instanceof Drop){
+						player.getDamaged((Drop) ent);
 						entities.remove(ent);
 					}
 				}
 				
-				// Entity - Monster
+				// Monster (ent) - Entity (entity)
 				if(ent instanceof Mob){
 					for (int pr = 0; pr < entities.size(); pr++) { // pr for projetiles
 						Entity entity=entities.get(pr);
@@ -229,19 +239,42 @@ public class Level {
 										+ entity.getHeight()) // if Projectile entity intersects Mob ent
 						{
 							Mob mob=(Mob) ent;
-							mob.getDamaged((Projectile) entity);
-							if(! (entity instanceof Eel)){
-							    entities.remove(entity);
+							// damage Mob, as long as it is not a Seagull-Drop
+							if(!(entity instanceof Drop)){
+							    mob.getDamaged((Projectile) entity);
 							}
-							if(mob.getLifes()<=0){
-								entities.remove(mob);
+							// delete Projectile entity, if it is a Carp
+							if(entity instanceof Carp){
+							    entities.remove(entity);
 							}
 						}
 					}
 				}
-				
-			}
-		}
+				// Item (ent) - Entity (entity)
+				else if(ent instanceof Item){
+					for (int pr = 0; pr < entities.size(); pr++) { // pr for projetiles
+						Entity entity=entities.get(pr);
+						if(entity instanceof Drop && 
+								ent.getX_Point() + ent.getWidth() > entity
+								.getX_Point()
+								&& ent.getX_Point() < entity.getX_Point()
+										+ entity.getWidth()
+								&& ent.getY_Point() + ent.getHeight() > entity
+										.getY_Point()
+								&& ent.getY_Point() < entity.getY_Point()
+										+ entity.getHeight()) // if Drop entity intersects Item ent
+						{
+							Item item=(Item) ent;
+							item.setLifes(0);
+							pr=entities.size();
+						}
+					}
+				}
+				if(ent.getLifes()<=0){
+					entities.remove(ent);
+				}
+			} // end for each Entity
+		} // end if there are Entities at all
 		
 		if(lastWall.isPlayerStandingOn()){
 			nextLevel();
