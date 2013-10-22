@@ -99,29 +99,6 @@ public class Level {
 
         addWalls();
 	}
-
-	
-	public boolean PlayerWallCollide(Wall wall,Player player){
-		if (player.getX_Point() + player.getxVel() < wall.getX_Point() + wall.getWidth()
-			&& player.getX_Point() + player.getWidth() + player.getxVel() > wall.getX_Point()
-			&& wall.getY_Point() < player.getY_Point() + player.getHeight() + player.getyVel()
-			&& wall.getY_Point() + wall.getHeight() > player.getY_Point() + player.getHeight() + player.getyVel()
-			&& player.getyVel()>0)
-		{ // direct collide
-			return true;
-		}else if(player.getyVel()>=wall.getHeight()/2 )
-			{// player's y is too fast
-				for(int i=0;i<player.getyVel();i+=wall.getHeight()/2){ 
-					if(player.getX_Point() + player.getxVel()*i/player.getyVel() <= wall.getX_Point() + wall.getWidth()
-					   && player.getX_Point() + player.getWidth() + player.getxVel()*i/player.getyVel() >= wall.getX_Point()
-					   && wall.getY_Point() <= player.getY_Point() + player.getHeight() + i
-					   && wall.getY_Point() + wall.getHeight() >= player.getY_Point() + player.getHeight() + i){
-						return true;
-					}
-				}
-			}
-	    return false;
-	}
 	
 	public void update(InputHandler inHandler) {
 
@@ -241,6 +218,7 @@ public class Level {
 					for (int pr = 0; pr < entities.size(); pr++) { // pr for projetiles
 						Entity entity=entities.get(pr);
 						if(entity instanceof Projectile && 
+							!(entity instanceof Drop) &&
 								ent.getX_Point() + ent.getWidth() > entity
 								.getX_Point()
 								&& ent.getX_Point() < entity.getX_Point()
@@ -295,6 +273,28 @@ public class Level {
 				((Eel) en).draw(g2, xOffset);
 			}
 		}
+	}
+	
+	public boolean PlayerWallCollide(Wall wall,Player player){
+		if (player.getX_Point() + player.getxVel() < wall.getX_Point() + wall.getWidth()
+			&& player.getX_Point() + player.getWidth() + player.getxVel() > wall.getX_Point()
+			&& wall.getY_Point() < player.getY_Point() + player.getHeight() + player.getyVel()
+			&& wall.getY_Point() + wall.getHeight() > player.getY_Point() + player.getHeight() + player.getyVel()
+			&& player.getyVel()>0)
+		{ // direct collide
+			return true;
+		}else if(player.getyVel()>=wall.getHeight()/2 )
+			{// player's y is too fast
+				for(int i=0;i<player.getyVel();i+=wall.getHeight()/2){ 
+					if(player.getX_Point() + player.getxVel()*i/player.getyVel() <= wall.getX_Point() + wall.getWidth()
+					   && player.getX_Point() + player.getWidth() + player.getxVel()*i/player.getyVel() >= wall.getX_Point()
+					   && wall.getY_Point() <= player.getY_Point() + player.getHeight() + i
+					   && wall.getY_Point() + wall.getHeight() >= player.getY_Point() + player.getHeight() + i){
+						return true;
+					}
+				}
+			}
+	    return false;
 	}
 
 	private void addWalls() {
