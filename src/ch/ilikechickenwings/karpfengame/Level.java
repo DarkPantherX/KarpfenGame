@@ -254,7 +254,7 @@ public class Level {
 				else if(ent instanceof Item){
 					for (int pr = 0; pr < entities.size(); pr++) { // pr for projetiles
 						Entity entity=entities.get(pr);
-						if(entity instanceof Drop && 
+						if(entity instanceof Projectile && 
 								ent.getX_Point() + ent.getWidth() > entity
 								.getX_Point()
 								&& ent.getX_Point() < entity.getX_Point()
@@ -262,7 +262,7 @@ public class Level {
 								&& ent.getY_Point() + ent.getHeight() > entity
 										.getY_Point()
 								&& ent.getY_Point() < entity.getY_Point()
-										+ entity.getHeight()) // if Drop entity intersects Item ent
+										+ entity.getHeight()) // if Projectile entity intersects Item ent
 						{
 							Item item=(Item) ent;
 							item.setLifes(0);
