@@ -2,11 +2,9 @@ package ch.ilikechickenwings.karpfengame.Reader;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.Properties;
 
 import ch.ilikechickenwings.karpfengame.Level;
-import ch.ilikechickenwings.karpfengame.Skill.Skill;
 
 public class LvlReader {
 
