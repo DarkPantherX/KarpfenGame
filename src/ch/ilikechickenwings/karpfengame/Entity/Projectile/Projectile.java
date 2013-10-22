@@ -9,12 +9,15 @@ public class Projectile extends Entity {
 	private int xVel;
 	private int yVel;
 	private boolean gravityOn;
+	private int g=1; 
 	
 	public Projectile(){
 		
 	}
 
-	
+	public void updateGravity(){
+		setyVel(getyVel()+g);
+	}
 	
 	
 	

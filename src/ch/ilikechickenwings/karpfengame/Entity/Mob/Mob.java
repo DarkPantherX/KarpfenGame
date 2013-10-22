@@ -9,6 +9,7 @@ public class Mob extends Entity{
 	private int xVel;
 	private int yVel;
 	private boolean gravityOn;
+	private int g=1; // actually 9.81 m/s^-2
 	
 	public Mob(){
 		
@@ -20,7 +21,9 @@ public class Mob extends Entity{
 		setLifes(getLifes()-pr.getDamage());
 	}
 	
-	
+	public void updateGravity(){
+		setyVel(getyVel()+g);
+	}
 	
 	
 	

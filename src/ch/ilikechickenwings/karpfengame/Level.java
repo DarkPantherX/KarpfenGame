@@ -100,6 +100,29 @@ public class Level {
         addWalls();
 	}
 
+	
+	public boolean PlayerWallCollide(Wall wall,Player player){
+		if (player.getX_Point() + player.getxVel() < wall.getX_Point() + wall.getWidth()
+			&& player.getX_Point() + player.getWidth() + player.getxVel() > wall.getX_Point()
+			&& wall.getY_Point() < player.getY_Point() + player.getHeight() + player.getyVel()
+			&& wall.getY_Point() + wall.getHeight() > player.getY_Point() + player.getHeight() + player.getyVel()
+			&& player.getyVel()>0)
+		{ // direct collide
+			return true;
+		}else if(player.getyVel()>=wall.getHeight()/2 )
+			{// player's y is too fast
+				for(int i=0;i<player.getyVel();i+=wall.getHeight()/2){ 
+					if(player.getX_Point() + player.getxVel()*i/player.getyVel() <= wall.getX_Point() + wall.getWidth()
+					   && player.getX_Point() + player.getWidth() + player.getxVel()*i/player.getyVel() >= wall.getX_Point()
+					   && wall.getY_Point() <= player.getY_Point() + player.getHeight() + i
+					   && wall.getY_Point() + wall.getHeight() >= player.getY_Point() + player.getHeight() + i){
+						return true;
+					}
+				}
+			}
+	    return false;
+	}
+	
 	public void update(InputHandler inHandler) {
 
 		// follow the player with camera
@@ -110,34 +133,23 @@ public class Level {
 		// update Walls:
 		addWalls();
 		
-		// update Player
-		if (!player.isJumping()) {
-			player.setFalling(true);
-		}
 		// checks collision of player with walls
 		// TODO: This check does probably not work if there's more than one wall
 		// above each other.. (witch is not possible yet)
 		for (int w = 0; w < walls.size(); w++) {
 			Wall wall = (Wall) walls.get(w);
-			if (player.getX_Point() < wall.getX_Point() + wall.getWidth()
-					&& player.getX_Point() + player.getWidth() > wall
-							.getX_Point()) {// player's x is not on a wall
-				if (wall.getY_Point() < player.getY_Point()
-						+ player.getHeight()
-						&& wall.getY_Point() + wall.getHeight() > player
-								.getY_Point() + player.getHeight()) { // player's
-																		// y is
-																		// on a
-																		// wall
-					player.setY_Point(wall.getY_Point() + 1
-							- player.getHeight());
-					player.setFalling(false);
-					player.setJumping(false);
-					wall.setPlayerStandingOn(true);
-				} else if (!player.isJumping()) {
-					player.setFalling(true);
-				}
-
+			if(player.isGravityOn()){
+				wall.setPlayerStandingOn(false);
+			}
+			if(PlayerWallCollide(wall,player)){
+				player.setY_Point(wall.getY_Point() + 1 - player.getHeight());
+				player.setGravityOn(false);
+				wall.setPlayerStandingOn(true);	
+			}
+			if(wall.isPlayerStandingOn() && 
+			   (player.getX_Point()>wall.getX_Point()+wall.getWidth() ||
+			    player.getX_Point()+player.getWidth()<wall.getX_Point())){
+				player.setGravityOn(true);
 			}
 		}
 		player.update(inHandler);

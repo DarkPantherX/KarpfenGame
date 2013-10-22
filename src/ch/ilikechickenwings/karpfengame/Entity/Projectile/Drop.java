@@ -19,6 +19,9 @@ public class Drop extends Projectile{
 	}
 	
 	public void update(InputHandler inHandler){
+		if(isGravityOn()){
+			updateGravity();
+		}
 		setX_Point(getX_Point()-getxVel());
 		setY_Point(getY_Point()+getyVel());
 	}

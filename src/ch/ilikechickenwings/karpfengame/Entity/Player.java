@@ -19,10 +19,6 @@ import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 
 public class Player extends Entity{
 
-	private boolean falling=true;
-	private boolean jumping=false;
-	private int gravity=10;
-	private int jumped=0;
 	private boolean invincible=false;
 	private long currTimeInvincible;
 	private long oldTimeInvincible;
@@ -34,6 +30,7 @@ public class Player extends Entity{
 	private int xVel;
 	private int yVel;
 	private boolean gravityOn;
+	private int g=1;
 	
 	// coffee:
 	private int coffee;
@@ -45,7 +42,7 @@ public class Player extends Entity{
 		setLifes(lifes);
 		setWidth(30);
 		setHeight(70);
-		setxVel(4);
+		setxVel(0);
 		setyVel(0);
 		setCoffee(coffee);
 		setInvincible(false);
@@ -105,25 +102,28 @@ public class Player extends Entity{
 		
 		
 			// movement
-			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!jumping&&!falling) { // 
-				jumping=true;
-				falling=false;
+			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!isGravityOn()) { // 
+				setGravityOn(true);
+				setyVel(-15); // TODO this should be defined up in the constructor
 				setDir(3);
 			}
-			
-			jump();
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
-				walk(-getxVel());
+				setxVel(-4); // TODO this should be defined before.
 				setDir(2);
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
-				walk(getxVel());
+				setxVel(4); // TODO
 				setDir(1);
 			}
-			  if(falling){
-			     setY_Point(getY_Point()+gravity);
+			if(!(inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]||inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT])){
+				setxVel(0);
+			}
+			if(isGravityOn()){
+				setyVel(getyVel()+g);
 		    }
+			
+			walk();
 			
 			//Added Cooldown for damage
 			if(invincible){
@@ -133,6 +133,8 @@ public class Player extends Entity{
 				    setInvincible(false);
 			    }	
 			}
+			
+			
 
 		
 	}
@@ -164,8 +166,9 @@ public class Player extends Entity{
 	
 	
 	
-	private void walk(int i){
-		setX_Point(getX_Point() + i);
+	private void walk(){
+		setX_Point(getX_Point() + getxVel());
+		setY_Point(getY_Point()+getyVel());
 	}
 	
 	
@@ -197,22 +200,11 @@ public class Player extends Entity{
 		}
 	}
 	
-	
-	private void jump() {
-		
-		if(jumping==true){
-		jumped++;
-		if(jumped>9){
-			falling=true;
-			jumping=false;
-			jumped=0;
-		}
-		setY_Point(getY_Point()-10);
-		}
+	public void updateGravity(){
+		setyVel(getyVel()+g);
 	}
 	
-
-	
+	// Getters and Setters:
 	
 	public boolean isGravityOn() {
 		return gravityOn;
@@ -221,6 +213,7 @@ public class Player extends Entity{
 
 	public void setGravityOn(boolean gravityOn) {
 		this.gravityOn = gravityOn;
+		setyVel(0);
 	}
 
 
@@ -268,22 +261,6 @@ public class Player extends Entity{
 
 	public void setCoffee(int coffee) {
 		this.coffee = coffee;
-	}
-
-	public boolean isFalling() {
-		return falling;
-	}
-
-	public void setFalling(boolean falling) {
-		this.falling = falling;
-	}
-
-	public boolean isJumping() {
-		return jumping;
-	}
-
-	public void setJumping(boolean jumping) {
-		this.jumping = jumping;
 	}
 
 	/**
