@@ -32,6 +32,9 @@ public class Player extends Entity{
 	private boolean gravityOn;
 	private int g=1;
 	
+	private int jumpVel=-15;
+	private int xAbsVel=4;
+	
 	// coffee:
 	private int coffee;
 
@@ -104,16 +107,16 @@ public class Player extends Entity{
 			// movement
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!isGravityOn()) { // 
 				setGravityOn(true);
-				setyVel(-15); // TODO this should be defined up in the constructor
+				setyVel(getJumpVel()); 
 				setDir(3);
 			}
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
-				setxVel(-4); // TODO this should be defined before.
+				setxVel(-getxAbsVel());
 				setDir(2);
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
-				setxVel(4); // TODO
+				setxVel(getxAbsVel()); 
 				setDir(1);
 			}
 			if(!(inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]||inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT])){
@@ -208,6 +211,26 @@ public class Player extends Entity{
 	
 	public boolean isGravityOn() {
 		return gravityOn;
+	}
+
+
+	public int getJumpVel() {
+		return jumpVel;
+	}
+
+
+	public void setJumpVel(int jumpVel) {
+		this.jumpVel = jumpVel;
+	}
+
+
+	public int getxAbsVel() {
+		return xAbsVel;
+	}
+
+
+	public void setxAbsVel(int xAbsVel) {
+		this.xAbsVel = xAbsVel;
 	}
 
 
