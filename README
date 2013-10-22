@@ -41,16 +41,27 @@ DPX: no it should, or you wouldnt see the next one down...
 SC: HAHA. No it should.. Eeer.. ok.. (?)
     And you still would see the next one(what) down..
 
+NEW QUESTIONS by SC 22.10.2013 03:14
+1) Is it possible to have a list in a .prop file?
+like:
+enableSkill=true, true, false, false
+If so then its great, if not, we will have to have different enableSkills for every Skill...
+
 ----------------------------------------------------------------------------
 TODO SC:
- -implement physical jumping (with a parabolic jump courve or so XD)
+# -implement physical jumping (with a parabolic jump courve or so XD) [SC DONE: 22.10.2013 03:13]
  -correct the wall setting algorithm, as some walls are to high/low
  -all the variables that vary from level to level are static. they shouldn't be...
  -Seagull fly a bit more naturally
  -Projectiles should "kill" Items
+ -Fix Seagull spawning
+ -Fix hierarchy: e.g. Level.update() -> Entity.update -> Mob.update -> Seagull.update
+ -I think i made a coffee-bug.. I have to fix it!
+ -Variable FPS support
  -implement own ideas
  
 TODO DPX:
  -Reformat all classes to fit the new made rules above
- -Add Menu (if this is okay?) [Yes it is]
- -Add more support for more than one lvl
+ -Add Menu 
+# (if this is okay?) [Yes it is]
+# -Add more support for more than one lvl [DONE by DPX]
