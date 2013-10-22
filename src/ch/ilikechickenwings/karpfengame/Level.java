@@ -230,7 +230,9 @@ public class Level {
 						{
 							Mob mob=(Mob) ent;
 							mob.getDamaged((Projectile) entity);
-							entities.remove(entity);
+							if(! (entity instanceof Eel)){
+							    entities.remove(entity);
+							}
 							if(mob.getLifes()<=0){
 								entities.remove(mob);
 							}
