@@ -12,6 +12,7 @@ public class Projectile extends Entity {
 	private int g=1; 
 	
 	public Projectile(){
+		setLifes(2);
 		
 	}
 

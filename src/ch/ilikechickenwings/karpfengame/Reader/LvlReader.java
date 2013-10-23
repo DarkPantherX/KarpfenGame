@@ -29,7 +29,7 @@ public class LvlReader {
 			Level.maxCoffee =Integer.parseInt(prop.getProperty("maxCoffee"));
 			String strin[] = prop.getProperty("enableSkill").split(",");
 			for(int i=0;i<strin.length;i++){
-			Level.enableSkill[i] =Boolean.valueOf(strin[i]);
+			Level.useableSkill[i] =Boolean.valueOf(strin[i]);
 			}
 			Level.nextLevel =Integer.parseInt(prop.getProperty("nextLevel"));
 			in.close();

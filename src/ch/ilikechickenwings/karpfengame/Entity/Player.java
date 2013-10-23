@@ -26,6 +26,7 @@ public class Player extends Entity{
 	private long[] oldTimeSkill= new long[Skill.getNr()];
 	private int dir=0;
 	private boolean[] enableSkill;
+	private boolean[] forbiddenSkill;
 	private int enabledSkill=0;
 	private int xVel;
 	private int yVel;
@@ -38,7 +39,7 @@ public class Player extends Entity{
 	// coffee:
 	private int coffee;
 
-	public Player(int x, int y, int lifes, int coffee, boolean[] enableSkill) {
+	public Player(int x, int y, int lifes, int coffee, boolean[] useableSkill) {
 		
 		setX_Point(x);
 		setY_Point(y);
@@ -49,7 +50,8 @@ public class Player extends Entity{
 		setyVel(0);
 		setCoffee(coffee);
 		setInvincible(false);
-		setEnableSkill(enableSkill);
+		setEnableSkill(useableSkill);
+		setForbiddenSkill(useableSkill);
 		setGravityOn(true);
 		//super(x, y, lifes);
 		// TODO Auto-generated constructor stub
@@ -74,7 +76,9 @@ public class Player extends Entity{
 		}
 		
 		for(int i=0;i<Skill.getNr();i++){
-			if(inHandler.getKeys()[KeyEvent.VK_S]&&enableSkill[i]&&enabledSkill==i){ // Carp
+			System.out.println(Level.useableSkill[1]);
+			//The problem lies here... i debugged the game and the forbiddenskill always jumps back to true!
+			if(inHandler.getKeys()[KeyEvent.VK_S]&&enableSkill[i]&&forbiddenSkill[i]&&enabledSkill==i){ // Carp
 				Skill skill=(Skill) Level.getSkills()[i];
 				if(getCoffee()>=skill.getCoffee()){
 					setCoffee(getCoffee()-skill.getCoffee());
@@ -253,8 +257,8 @@ public class Player extends Entity{
 	}
 
 
-	public void setEnableSkill(boolean[] enableSkill) {
-		this.enableSkill = enableSkill;
+	public void setEnableSkill(boolean[] useableSkill) {
+		this.enableSkill = useableSkill;
 	}
 
 
@@ -286,6 +290,22 @@ public class Player extends Entity{
 	 */
 	public void setDir(int dir) {
 		this.dir = dir;
+	}
+
+
+	/**
+	 * @return the forbiddenSkill
+	 */
+	public boolean[] getForbiddenSkill() {
+		return forbiddenSkill;
+	}
+
+
+	/**
+	 * @param forbiddenSkill the forbiddenSkill to set
+	 */
+	public void setForbiddenSkill(boolean[] forbiddenSkill) {
+		this.forbiddenSkill = forbiddenSkill;
 	}
 
 }

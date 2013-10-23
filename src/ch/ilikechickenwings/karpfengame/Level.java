@@ -68,7 +68,7 @@ public class Level {
 	// Coffee:
 	public static int maxCoffee;
 	// Skills: 
-	public static boolean[] enableSkill= new boolean[Skill.getNr()]; // [0] = CarpSkill
+	public static boolean[] useableSkill= new boolean[Skill.getNr()]; // [0] = CarpSkill
 	// this has multiple uses. in the beginning its used as a initial boolean, whether to play with this specific skill or not.. AND as a timing variable in Player.java
 	public static int nextLevel;
 	
@@ -79,15 +79,14 @@ public class Level {
 	
 	// constructor
 	public Level(int lvl, KarpfenGame karpfenGame) {
-		
 		lv=this;
 		this.setLvl(lvl);
 		this.setKarpfenGame(karpfenGame);
 		new LvlReader("lvl"+Integer.toString(lvl)+".pros");		
-		player = new Player(0, 0, maxLife, maxCoffee, enableSkill);
+		player = new Player(0, 0, maxLife, maxCoffee, useableSkill);
 
 		for(int i=0;i<skills.length;i++){
-			if(enableSkill[i]){
+			if(useableSkill[i]){
 				Skill skill=new Skill();
 				skills[i]=skill;
 			}
