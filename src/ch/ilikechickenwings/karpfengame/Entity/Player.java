@@ -76,9 +76,9 @@ public class Player extends Entity{
 		}
 		
 		for(int i=0;i<Skill.getNr();i++){
-			System.out.println(Level.useableSkill[1]);
+			System.out.println(forbiddenSkill[1]);
 			//The problem lies here... i debugged the game and the forbiddenskill always jumps back to true!
-			if(inHandler.getKeys()[KeyEvent.VK_S]&&enableSkill[i]&&forbiddenSkill[i]&&enabledSkill==i){ // Carp
+			if(inHandler.getKeys()[KeyEvent.VK_S]&&(enableSkill)[i]&&(forbiddenSkill[i])&&enabledSkill==i){ // Carp
 				Skill skill=(Skill) Level.getSkills()[i];
 				if(getCoffee()>=skill.getCoffee()){
 					setCoffee(getCoffee()-skill.getCoffee());
