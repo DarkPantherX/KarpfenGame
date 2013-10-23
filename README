@@ -18,25 +18,6 @@ And if we pull, we have to rewatch the code the other person wrote to see if we 
 Lines marked with a # in front may be deleted - but no others. Mark them with #, if you want to get rid of them.
 -----------------------------------------Questions---------------------------------------------
 
-#NEW QUESTIONS by SC 18.10-2013 03:53
-#3) Should Drop fall through walls as they do right now.. or not?
-#DPX:Maybe be platforms should get whiter and whiter? ;)
-#BUT we have to change the mec, that the zombies get damage by seagulls
-#SC: So they should collide with the walls. (?) And the zombies already get damaged by Drop's. 
-#    (Not by Seagulls though.. would you like me to add this? 
-#     It would however not be clear, wheter Seagulls should hurt Zombies or Zombies should hurt Seagulls)
-
-#DPX:Sorry that was a little wrong: i meant the projectiles (aka the seagull-shit) should make the platform whiter...
-#	I dont want the seagulls to fly deeper... 
-#	What I want is, that the zombies DON'T get damaged by seagull projectiles...
-# [IMPEMENTED by SC: 23.10.2013]
-
-#5) Should the camera also follow a certain y-changement? I think that would add a nice effect. (Like xOffset, yOffset)
-#DPX: no it should, or you wouldnt see the next one down...
-#SC: HAHA. No it should.. Eeer.. ok.. (?)
-#    And you still would see the next one(what) down..
-
-#DPX: If you like this idea this much you can try it... But be aware, that we might change it back...
 
 ----------------------------------------------------------------------------
 Prioritie: 1-5
@@ -44,13 +25,9 @@ Prioritie: 1-5
 5:(ehh.. let's do this later on... Maybe never...)
 
 TODO SC:
-# -correct the wall setting algorithm, as some walls are to high/low [IMPLEMENTED by SC 23.10.2013]
  -all the variables that vary from level to level are static. they shouldn't be... (3)
  -Seagull fly a bit more naturally (4)
-# -Projectiles should "kill" Items [IMPLEMENTED by SC 23.10.2013]
  -Fix Seagull spawning (2)
-# -Fix hierarchy: e.g. Level.update() -> Entity.update -> Mob.update -> Seagull.update // Not neccessary after all
-# -I think i made a coffee-bug.. I have to fix it! [IMPLEMENTED by SC 23.10.2013]
  -Variable FPS support (5)
  -implement own ideas (always)
  -Code clean up and commenting the whole code (always)
