@@ -17,7 +17,16 @@ In the future, before commiting we both have rewatch our code and see what could
 And if we pull, we have to rewatch the code the other person wrote to see if we can improve the code
 Lines marked with a # in front may be deleted - but no others. Mark them with #, if you want to get rid of them.
 -----------------------------------------Questions---------------------------------------------
+New questions 24.10.2013:
 
+1.)DPX:WHY? WHY? WHY? SC; WHY?
+		I had to bugfix the shit out of this game... please next time use the .clone() command for arrays, if you just
+		do it like this this.newArray=oldArray; you'll make me cry, because you just make a new pointer for the SAME object....
+		(See Player.java line 257 & 258, I fixed it now...)
+
+2.)DPX:Why would you wanna change the lvl Variables? Is it so important? And isn't it more Resource heavy afterwards?
+
+3.)DPX:Next thing I'll do is add the menu, okay? What's you next patch?
 
 ----------------------------------------------------------------------------
 Prioritie: 1-5
