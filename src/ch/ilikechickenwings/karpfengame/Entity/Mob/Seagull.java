@@ -16,15 +16,15 @@ public class Seagull extends Mob{
 
 
 	public Seagull(int x){
+		Random r=new Random();
 		setWidth(30);
 		setHeight(30);
 		setX_Point(x);
 		setY_Point(0);
 		setLifes(100);
-		setxVel(2);
+		setxVel(1+r.nextInt(3));
 		setyVel(0);
 		setDamage(10);
-		Random r=new Random();
 		oldTimeDrop=System.currentTimeMillis()-r.nextInt(5000);
 		setCooldown(5000);
 		setGravityOn(false); // this might be changed for a more realistic fly
