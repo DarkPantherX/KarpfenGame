@@ -59,10 +59,10 @@ public class Level {
 	public static int dyVar; // maximal y-offset (+ or -) (-> e.g. wall is
 								// higher than the one before)
 	// Monsters:
-	public static int spawnWalkZombie; // in %
-	public static int spawnSeagull;
-	public static int spawnHealthPack; // in %
-	public static int spawnCoffee; // in %
+	public static int spawnWalkZombie; // in % on walls
+	public static int spawnSeagull; // after so many pixels the next Seagull spawns (up to + spawnSeagull), 0 = they do not spawn, 1 = they spawn a very very lot
+	public static int spawnHealthPack; // in % on walls
+	public static int spawnCoffee; // in % on walls
 	// Player:
 	public static int maxLife;
 	// Coffee:
@@ -91,6 +91,9 @@ public class Level {
 				skills[i]=skill;
 			}
 		}
+		
+		// mobs preparations
+		Seagull.setLastSeagull(null);
 		
 		Wall wall = new Wall(0, KarpfenGame.HEIGHT / 2, widthMu, height); // first
 		// wall
@@ -133,6 +136,20 @@ public class Level {
 		// die
 		if (player.getY_Point() > KarpfenGame.HEIGHT || player.getLifes() <= 0) {
 			die();
+		}
+		
+		// Spawn Seagulls
+		if(Seagull.getLastSeagull()==null && spawnSeagull!=0){
+			Seagull sg=new Seagull(xOffset+KarpfenGame.WIDTH);
+			entities.add(sg);
+			Seagull.setLastSeagull(sg);
+		}else if(spawnSeagull!=0){ // there already is a Seagull
+			if(Seagull.getLastSeagull().getX_Point()+spawnSeagull<xOffset+KarpfenGame.WIDTH){
+				Random r = new Random();
+				Seagull sg = new Seagull(xOffset+KarpfenGame.WIDTH+r.nextInt(spawnSeagull));
+				entities.add(sg);
+				Seagull.setLastSeagull(sg);
+			}
 		}
 		
 		// Entities update:
@@ -361,10 +378,6 @@ public class Level {
 			if (spawnWalkZombie >= r.nextInt(100)) {
 				WalkZombie wz = new WalkZombie(wi.getX_Point(), wi.getY_Point());
 				entities.add(wz);
-			}
-			if(spawnSeagull>=r.nextInt(100)){
-				Seagull sg = new Seagull(wi.getX_Point());
-				entities.add(sg);
 			}
 			if (spawnHealthPack >= r.nextInt(100)) {
 				HealthPack hp = new HealthPack(wi.getX_Point()+(wi.getWidth()/2), wi.getY_Point());

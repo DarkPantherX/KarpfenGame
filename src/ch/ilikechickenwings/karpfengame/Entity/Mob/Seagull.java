@@ -11,7 +11,7 @@ public class Seagull extends Mob{
 	
 	private int cooldown; // in millisecs
 	private long oldTimeDrop;
-	
+	private static Seagull lastSeagull=null;
 
 
 	public Seagull(int x){
@@ -50,4 +50,15 @@ public class Seagull extends Mob{
 	public void setCooldown(int cooldown) {
 		this.cooldown = cooldown;
 	}
+
+	public static Seagull getLastSeagull() {
+		return lastSeagull;
+	}
+
+	public static void setLastSeagull(Seagull lastSeagull) {
+		Seagull.lastSeagull = lastSeagull;
+	}
+	
+	
+	
 }
