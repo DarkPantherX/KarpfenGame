@@ -13,6 +13,8 @@ public class Seagull extends Mob{
 	private int cooldown; // in millisecs
 	private long oldTimeDrop;
 	private static Seagull lastSeagull=null;
+	
+	private int upAc=4; // for realistic flying, upwards acceleration, > 1, high number=small difference
 
 
 	public Seagull(int x){
@@ -27,11 +29,21 @@ public class Seagull extends Mob{
 		setDamage(10);
 		oldTimeDrop=System.currentTimeMillis()-r.nextInt(5000);
 		setCooldown(5000);
-		setGravityOn(false); // this might be changed for a more realistic fly
+		setGravityOn(true); 
 	}
 
     public void update(InputHandler inHandler) {
+    	// movement
 		setX_Point(getX_Point()-getxVel());
+		setY_Point(getY_Point()+getyVel());
+		if(isGravityOn()){
+			updateGravity();
+			if(getY_Point()>getHeight()){
+		    setyVel(getyVel()-upAc);
+		    }
+		}
+		
+		// "droping"
 		if(System.currentTimeMillis()>oldTimeDrop+cooldown){
 			oldTimeDrop=System.currentTimeMillis();
 			Drop drop=new Drop(getX_Point(),getY_Point()+getHeight(),getxVel(),getxVel());
