@@ -23,10 +23,29 @@ New questions 24.10.2013:
 		I had to bugfix the shit out of this game... please next time use the .clone() command for arrays, if you just
 		do it like this this.newArray=oldArray; you'll make me cry, because you just make a new pointer for the SAME object....
 		(See Player.java line 257 & 258, I fixed it now...)
+ANSWER:
+Thats my understanding of Pointers:
+Pointer p1=new Pointer;
+Pointer p2=new Pointer;
+If you put:
+p1=p2;
+then both p1 and p2 show the same object. The object pointed by p1 has now no pointer any more, and such can not be reverenced. The data is lost.
+So in "MY BUG" i just made newArray point on the object of oldArray. The content of newArray will be lost.
+I see, that my code does not make sense.
+But I don't know how this can result in a null-pointer-exception?
+
 
 2.)DPX:Why would you wanna change the lvl Variables? Is it so important? And isn't it more Resource heavy afterwards?
+ANSWER:
+As far as i know is int lvl the number of the actual level, wich is of course crucial for the game to know where it is.
+What do you mean by lvl Variables?
 
-3.)DPX:Next thing I'll do is add the menu, okay? What's you next patch?
+
+#3.)DPX:Next thing I'll do is add the menu, okay? What's you next patch?
+#ANSWER:
+#Do that.
+#I dunno. Any suggestions?
+
 
 ----------------------------------------------------------------------------
 Prioritie: 1-5
@@ -35,8 +54,8 @@ Prioritie: 1-5
 
 TODO SC:
  -all the variables that vary from level to level are static. they shouldn't be... (3)
- -Seagull fly a bit more naturally (4)
- -Fix Seagull spawning (2)
+# -Seagull fly a bit more naturally (4) [DONE BY SC 11.11.2013]
+# -Fix Seagull spawning (2) [DONE BY SC 11.11.2013]
  -Variable FPS support (5)
  -implement own ideas (always)
  -Code clean up and commenting the whole code (always)
