@@ -28,6 +28,7 @@ import javax.swing.KeyStroke;
 
 import ch.ilikechickenwings.karpfengame.Handler.ComponentHandler;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Menu.LoadMenu;
 import ch.ilikechickenwings.karpfengame.Menu.Menu;
 
 public class KarpfenGame extends JPanel implements Runnable{
@@ -68,7 +69,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 		addKeyListener(inHandler);
 		addComponentListener(compHandler);
 		// sets the menu to the IntroScreenMenu (at the begin of the game)
-		setMenu(new Menu());
+		setMenu(new LoadMenu());
 
 		this.lvl = new Level(1, this);
 		// start the game thread (run-method)
@@ -76,7 +77,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 	}
 
 	private void update() {
-
+		if(menu==null){
 		lvl.update(inHandler);
 		long timeElapsed = System.currentTimeMillis() - oldTime;
 		// System.out.println(timeElapsed);
@@ -89,15 +90,23 @@ public class KarpfenGame extends JPanel implements Runnable{
 			}
 		}
 		oldTime = System.currentTimeMillis();
-
+		}else{
+			menu.update(this, inHandler);
+			
+		}
 	}
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
+		if(menu==null){
+		
 		g2.setColor(Color.black);
 		g2.fillRect(0, 0, WIDTH, HEIGHT);
 
 		lvl.draw(g2);
+		}else{
+			menu.draw(g2);
+		}
 
 	}
 
@@ -205,7 +214,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 		return menu;
 	}
 	
-	private void setMenu(Menu menu) {
+	public void setMenu(Menu menu) {
 		this.menu = menu;
 
 	}
