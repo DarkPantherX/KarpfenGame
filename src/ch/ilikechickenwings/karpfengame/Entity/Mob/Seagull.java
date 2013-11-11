@@ -2,6 +2,7 @@ package ch.ilikechickenwings.karpfengame.Entity.Mob;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.util.Random;
 
 import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
@@ -23,7 +24,8 @@ public class Seagull extends Mob{
 		setxVel(2);
 		setyVel(0);
 		setDamage(10);
-		oldTimeDrop=System.currentTimeMillis();
+		Random r=new Random();
+		oldTimeDrop=System.currentTimeMillis()-r.nextInt(5000);
 		setCooldown(5000);
 		setGravityOn(false); // this might be changed for a more realistic fly
 	}
