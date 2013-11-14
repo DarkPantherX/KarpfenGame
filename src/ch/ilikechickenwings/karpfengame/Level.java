@@ -75,7 +75,7 @@ public class Level {
 	public static int nextLevel;
 	
 	// Stuff:
-    private static KarpfenGame karpfenGame; 
+    private KarpfenGame karpfenGame; 
 	private int lvl;
 	private Wall lastWall;
 	
@@ -226,7 +226,7 @@ public class Level {
 				}else if(ent instanceof GiantCarp){
 					GiantCarp gc=(GiantCarp) ent;
 					gc.update(inHandler);
-					if(gc.getX_Point()>xOffset+getKarpfenGame().WIDTH){
+					if(gc.getX_Point()>xOffset+KarpfenGame.WIDTH){
 						entities.remove(gc);
 					}
 				}
@@ -496,7 +496,7 @@ public class Level {
 	/**
 	 * @return the karpfenGame
 	 */
-	public static KarpfenGame getKarpfenGame() {
+	public KarpfenGame getKarpfenGame() {
 		return karpfenGame;
 	}
 
