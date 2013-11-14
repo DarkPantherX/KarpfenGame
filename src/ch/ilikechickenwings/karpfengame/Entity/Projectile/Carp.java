@@ -12,8 +12,8 @@ public class Carp extends Projectile{
 	public Carp(int x, int y){
 		setX_Point(x);
 		setY_Point(y);
-		setWidth(20);
-		setHeight(20);
+		setWidth(10);
+		setHeight(10);
 		setxVel(10);
 		setyVel(0);
 		setDamage(50);

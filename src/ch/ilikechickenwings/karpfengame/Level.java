@@ -12,11 +12,13 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.Item;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.GiantCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.*;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Reader.LvlReader;
-import ch.ilikechickenwings.karpfengame.Skill.Skill;
+import ch.ilikechickenwings.karpfengame.Skill.*;
+
 
 /*
  *  TODO: Please add support for eternal wall-creating, now it is limited and resource heavy, the platforms have to be removed out of the array-> to reduce resouces needed -DPX 9.10.2013
@@ -73,7 +75,7 @@ public class Level {
 	public static int nextLevel;
 	
 	// Stuff:
-    private KarpfenGame karpfenGame; 
+    private static KarpfenGame karpfenGame; 
 	private int lvl;
 	private Wall lastWall;
 	
@@ -87,8 +89,20 @@ public class Level {
 
 		for(int i=0;i<skills.length;i++){
 			if(useableSkill[i]){
-				Skill skill=new Skill();
+				switch(i){
+				case 0:
+				CarpSkill cs=new CarpSkill();
+				skills[i]=cs;
+				break;
+				case 1:
+				EelSkill es=new EelSkill();	
+				skills[i]=es;
+				break;
+				case 2:
+				Karpfokalypse skill = new Karpfokalypse();
 				skills[i]=skill;
+				break;
+				}
 			}
 		}
 		
@@ -133,6 +147,9 @@ public class Level {
 			}
 		}
 		player.update(inHandler);
+		if(player.getX_Point()<xOffset){ // player can't fall off the walls by walking backwards
+			player.setX_Point(xOffset);
+		}
 		// die
 		if (player.getY_Point() > KarpfenGame.HEIGHT || player.getLifes() <= 0) {
 			die();
@@ -205,6 +222,12 @@ public class Level {
 					eel.update(inHandler);
 					if((System.currentTimeMillis()-eel.getLifeTime())>eel.getLifeSpan()){
 						entities.remove(eel);
+					}
+				}else if(ent instanceof GiantCarp){
+					GiantCarp gc=(GiantCarp) ent;
+					gc.update(inHandler);
+					if(gc.getX_Point()>xOffset+getKarpfenGame().WIDTH){
+						entities.remove(gc);
 					}
 				}
 				
@@ -322,6 +345,8 @@ public class Level {
 				((Drop) en).draw(g2, xOffset);
 			}else if(en instanceof Eel){
 				((Eel) en).draw(g2, xOffset);
+			}else if(en instanceof GiantCarp){
+				((GiantCarp) en).draw(g2, xOffset);
 			}
 		}
 	}
@@ -444,6 +469,14 @@ public class Level {
 	
 	
 	
+	public static int getxOffset() {
+		return xOffset;
+	}
+
+	public static void setxOffset(int xOffset) {
+		Level.xOffset = xOffset;
+	}
+
 	public static int getMaxLife() {
 		return maxLife;
 	}
@@ -463,7 +496,7 @@ public class Level {
 	/**
 	 * @return the karpfenGame
 	 */
-	public KarpfenGame getKarpfenGame() {
+	public static KarpfenGame getKarpfenGame() {
 		return karpfenGame;
 	}
 
