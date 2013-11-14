@@ -12,12 +12,12 @@ public class WalkZombie extends Mob{
 	
 	
 	public WalkZombie(int x,int y) {
-		setWidth(30);
-		setHeight(70);
+		setWidth(20);
+		setHeight(40);
 		setX_Point(x);
 		setY_Point(y-getHeight());
 		setLifes(100);
-		setxVel(4);
+		setxVel(3);
 		setyVel(0);
 		setDamage(10);
 		setGravityOn(false);

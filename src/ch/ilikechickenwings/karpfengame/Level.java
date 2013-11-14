@@ -133,6 +133,9 @@ public class Level {
 			}
 		}
 		player.update(inHandler);
+		if(player.getX_Point()<xOffset){ // player can't fall off the walls by walking backwards
+			player.setX_Point(xOffset);
+		}
 		// die
 		if (player.getY_Point() > KarpfenGame.HEIGHT || player.getLifes() <= 0) {
 			die();

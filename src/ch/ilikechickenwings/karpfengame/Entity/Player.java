@@ -43,8 +43,8 @@ public class Player extends Entity{
 		setX_Point(x);
 		setY_Point(y);
 		setLifes(lifes);
-		setWidth(30);
-		setHeight(70);
+		setWidth(20);
+		setHeight(40);
 		setxVel(0);
 		setyVel(0);
 		setCoffee(coffee);
