@@ -7,7 +7,7 @@ public class Skill {
 	private int id; // 0=CarpSkill , 1=EelSkill, 2=GiantCarp .. may change in future
 	
 	public Skill(){
-		setCoffee(10);
+		
 	}
 
 	public int getCoffee() {

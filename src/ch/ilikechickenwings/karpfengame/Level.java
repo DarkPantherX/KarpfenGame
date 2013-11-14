@@ -17,7 +17,8 @@ import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.*;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Reader.LvlReader;
-import ch.ilikechickenwings.karpfengame.Skill.Skill;
+import ch.ilikechickenwings.karpfengame.Skill.*;
+
 
 /*
  *  TODO: Please add support for eternal wall-creating, now it is limited and resource heavy, the platforms have to be removed out of the array-> to reduce resouces needed -DPX 9.10.2013
@@ -88,8 +89,20 @@ public class Level {
 
 		for(int i=0;i<skills.length;i++){
 			if(useableSkill[i]){
-				Skill skill=new Skill();
+				switch(i){
+				case 0:
+				CarpSkill cs=new CarpSkill();
+				skills[i]=cs;
+				break;
+				case 1:
+				EelSkill es=new EelSkill();	
+				skills[i]=es;
+				break;
+				case 2:
+				Karpfokalypse skill = new Karpfokalypse();
 				skills[i]=skill;
+				break;
+				}
 			}
 		}
 		
