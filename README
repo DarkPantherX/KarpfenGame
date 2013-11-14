@@ -17,29 +17,18 @@ In the future, before commiting we both have rewatch our code and see what could
 And if we pull, we have to rewatch the code the other person wrote to see if we can improve the code
 Lines marked with a # in front may be deleted - but no others. Mark them with #, if you want to get rid of them.
 -----------------------------------------Questions---------------------------------------------
-New questions 24.10.2013:
 
+Questions: 14.11.2013 by SC:
 
-#1.)DPX:WHY? WHY? WHY? SC; WHY?
-#		I had to bugfix the shit out of this game... please next time use the .clone() command for arrays, if you just
-#		do it like this this.newArray=oldArray; you'll make me cry, because you just make a new pointer for the SAME object....
-#		(See Player.java line 257 & 258, I fixed it now...)
-#ANSWER:
-#Thats my understanding of Pointers:
-#Pointer p1=new Pointer;
-#Pointer p2=new Pointer;
-#If you put:
-#p1=p2;
-#then both p1 and p2 show the same object. The object pointed by p1 has now no pointer any more, and such can not be reverenced. The data is lost.
-#So in "MY BUG" i just made newArray point on the object of oldArray. The content of newArray will be lost.
-#I see, that my code does not make sense.
-#But I don't know how this can result in a null-pointer-exception?
-#
-#Answer 2: This was my problem, this ended up being the wrong array and in the method where this was referenced correctly, there was a mistake afterwards which made me the nullpointer out of this ;)
+- Idea for graphical background: The background moves slower than the foreground..?
+Or would we like to have the background move at the same speed as the walls?
+-> I would be interested in implementing that feature....
 
+- The GiantCarp currently destroys everything except the player.
+Should it destroy Items?
 
 ----------------------------------------------------------------------------
-Prioritie: 1-5
+Priority: 1-5
 1:(very important, in the next few days)
 5:(ehh.. let's do this later on... Maybe never...)
 
