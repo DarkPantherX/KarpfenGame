@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
 import ch.ilikechickenwings.karpfengame.Level;
+import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Skill.Skill;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
@@ -25,13 +26,16 @@ public class Player extends Entity{
 	private long oldTimeInvincible;
 	private long[] currTimeSkill= new long[Skill.getNr()];
 	private long[] oldTimeSkill= new long[Skill.getNr()];
-	private int dir=0;
+	private int dir=1;
+	private boolean walking=false;
 	private boolean[] enableSkill;
 	private int enabledSkill=0;
 	private int xVel;
 	private int yVel;
 	private boolean gravityOn;
 	private int g=1;
+	private int timeVar;
+	private long oldTime;
 	
 	private int jumpVel=-15;
 	private int xAbsVel=4;
@@ -58,6 +62,18 @@ public class Player extends Entity{
 
 
 	public void update(InputHandler inHandler) {
+		long currTime=System.currentTimeMillis();
+		if(isWalking()){
+		if(oldTime+200<currTime){
+			if(timeVar==0){
+				timeVar=1;
+			}else{
+				timeVar=0;
+			}
+			oldTime=currTime;
+		}
+		
+		}
 		
 		//Skill
 		for(int i=0;i<Skill.getNr();i++){
@@ -102,21 +118,24 @@ public class Player extends Entity{
 			}
 		}
 		
-		
+		setWalking(false);
 			// movement
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!isGravityOn()) { // 
 				setGravityOn(true);
 				setyVel(getJumpVel()); 
 				setDir(3);
+				setWalking(true);
 			}
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
 				setxVel(-getxAbsVel());
 				setDir(2);
+				setWalking(true);
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
 				setxVel(getxAbsVel()); 
 				setDir(1);
+				setWalking(true);
 			}
 			if(!(inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]||inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT])){
 				setxVel(0);
@@ -156,7 +175,8 @@ public class Player extends Entity{
 		
 		// player
 		g2.setColor(Color.green);
-		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		g2.drawImage(Tile.player[dir-1][timeVar],getX_Point()-xOffset, getY_Point(),null);
+		//g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
 		if(invincible){
 		g2.setColor(Color.blue);
 		g2.drawRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
@@ -294,6 +314,22 @@ public class Player extends Entity{
 	 */
 	public void setDir(int dir) {
 		this.dir = dir;
+	}
+
+
+	/**
+	 * @return the walking
+	 */
+	public boolean isWalking() {
+		return walking;
+	}
+
+
+	/**
+	 * @param walking the walking to set
+	 */
+	public void setWalking(boolean walking) {
+		this.walking = walking;
 	}
 
 

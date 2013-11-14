@@ -11,7 +11,7 @@ public class Tile {
 	public static Image coffee;
 	public static Image healthpacks;
 	public static Image platform;
-	public static BufferedImage[] player;
+	public static BufferedImage[][] player;
 	
 	
 	public Tile(){
@@ -20,13 +20,13 @@ public class Tile {
 		
 		BufferedImage playerSheet = null;
 		try {
-			playerSheet = ImageIO.read(getClass().getResource("/res/intro.png"));
+			playerSheet = ImageIO.read(getClass().getResource("/res/playerSheet.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		player= AnimatedTile.getAnimation(playerSheet, 3, 3, 30, 50);
+		player= AnimatedTile.getAnimation(playerSheet, 3, 3, 20, 40);
 		
 	}
 	
