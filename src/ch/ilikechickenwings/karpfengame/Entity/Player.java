@@ -15,6 +15,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.GiantCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 
 public class Player extends Entity{
@@ -71,6 +72,8 @@ public class Player extends Entity{
 			enabledSkill=0;
 		}else if(inHandler.getKeys()[KeyEvent.VK_2]){ // Eel
 			enabledSkill=1;
+		}else if(inHandler.getKeys()[KeyEvent.VK_3]){ // Karpocalypse
+			enabledSkill=2;
 		}
 		
 		for(int i=0;i<Skill.getNr();i++){
@@ -89,6 +92,10 @@ public class Player extends Entity{
 					    case 1:
 					    Eel eel=new Eel(getX_Point()+getWidth(),getY_Point()+getHeight()/2,this);
 					    Level.getEntities().add(eel);
+					    break;
+					    case 2:
+					    GiantCarp gc=new GiantCarp();
+					    Level.getEntities().add(gc);
 					    break;
 					}
 				}

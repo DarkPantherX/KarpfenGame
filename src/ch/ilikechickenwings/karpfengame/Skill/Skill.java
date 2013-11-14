@@ -2,9 +2,9 @@ package ch.ilikechickenwings.karpfengame.Skill;
 
 public class Skill {
 
-	private static int nr=2; // number of Skills
+	private static int nr=3; // number of Skills
 	private int coffee;
-	private int id; // 0=CarpSkill , 1=EelSkill
+	private int id; // 0=CarpSkill , 1=EelSkill, 2=GiantCarp .. may change in future
 	
 	public Skill(){
 		setCoffee(10);

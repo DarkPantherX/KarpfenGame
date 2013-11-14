@@ -1,11 +1,13 @@
 package ch.ilikechickenwings.karpfengame.Skill;
 
+import ch.ilikechickenwings.karpfengame.Level;
+
 public class Karpfokalypse extends Skill {
 
 	
 	public Karpfokalypse(){
 		
-		setCoffee(80);
+		setCoffee(Level.getMaxCoffee());
 		setId(2);
 	}
 	

@@ -12,6 +12,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.Item;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.GiantCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.*;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
@@ -73,7 +74,7 @@ public class Level {
 	public static int nextLevel;
 	
 	// Stuff:
-    private KarpfenGame karpfenGame; 
+    private static KarpfenGame karpfenGame; 
 	private int lvl;
 	private Wall lastWall;
 	
@@ -209,6 +210,12 @@ public class Level {
 					if((System.currentTimeMillis()-eel.getLifeTime())>eel.getLifeSpan()){
 						entities.remove(eel);
 					}
+				}else if(ent instanceof GiantCarp){
+					GiantCarp gc=(GiantCarp) ent;
+					gc.update(inHandler);
+					if(gc.getX_Point()>xOffset+getKarpfenGame().WIDTH){
+						entities.remove(gc);
+					}
 				}
 				
 				// END SINGLE UPDATES
@@ -325,6 +332,8 @@ public class Level {
 				((Drop) en).draw(g2, xOffset);
 			}else if(en instanceof Eel){
 				((Eel) en).draw(g2, xOffset);
+			}else if(en instanceof GiantCarp){
+				((GiantCarp) en).draw(g2, xOffset);
 			}
 		}
 	}
@@ -447,6 +456,14 @@ public class Level {
 	
 	
 	
+	public static int getxOffset() {
+		return xOffset;
+	}
+
+	public static void setxOffset(int xOffset) {
+		Level.xOffset = xOffset;
+	}
+
 	public static int getMaxLife() {
 		return maxLife;
 	}
@@ -466,7 +483,7 @@ public class Level {
 	/**
 	 * @return the karpfenGame
 	 */
-	public KarpfenGame getKarpfenGame() {
+	public static KarpfenGame getKarpfenGame() {
 		return karpfenGame;
 	}
 
