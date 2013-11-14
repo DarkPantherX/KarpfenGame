@@ -23,9 +23,15 @@ Questions: 14.11.2013 by SC:
 - Idea for graphical background: The background moves slower than the foreground..?
 Or would we like to have the background move at the same speed as the walls?
 -> I would be interested in implementing that feature....
+DPX: This will come as soon as ralph send konni the story board and she draws something
+
 
 - The GiantCarp currently destroys everything except the player.
 Should it destroy Items?
+
+
+Dunno, would be a good punishment for the use of this skill ;)
+(Maybe it should even destroy all the items in the lvl!)
 
 ----------------------------------------------------------------------------
 Priority: 1-5
@@ -40,6 +46,7 @@ TODO SC:
  -Camera y-movement (5)
  
 TODO DPX:
+ -Animations for Player, mobs etc. [14.11.2013 Added Framework for this]
  -Reformat all classes to fit the new made rules above (2)
  -Add Menu (1)[11.11.2013 Added first menu, more to come]
  -Add Soundsystem! (That's going to be hard this time...)(3)
