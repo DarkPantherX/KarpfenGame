@@ -3,6 +3,9 @@ package ch.ilikechickenwings.karpfengame;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 public class Tile {
 	public static Image coffee;
@@ -15,8 +18,13 @@ public class Tile {
 		coffee= Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/java-logo[1].gif"));
 		
-		BufferedImage playerSheet= (BufferedImage) Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("/res/java-logo[1].gif"));
+		BufferedImage playerSheet = null;
+		try {
+			playerSheet = ImageIO.read(getClass().getResource("/res/intro.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		player= AnimatedTile.getAnimation(playerSheet, 3, 3, 30, 50);
 		
