@@ -6,6 +6,7 @@ import java.util.Random;
 
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
+import ch.ilikechickenwings.karpfengame.Entity.VisionObstructer;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Item;
@@ -41,6 +42,7 @@ public class Level {
 	public static Skill[] skills = new Skill[Skill.getNr()];
 	public Player player;
 	public static Level lv;
+	public static VisionObstructer visa;
 
 	// TODO: decide whether all those things have to be public/private, static/non-static.. - SC 14.10.2013
 	// These parameters may vary from level to level
@@ -176,9 +178,9 @@ public class Level {
 				Entity ent = (Entity) entities.get(wz);
 				
 				// despawn because out of range
-			    if (ent.getX_Point() + ent.getWidth() * 10 < xOffset || ent.getX_Point() > xOffset+ preCalcWalls) { // unnice
+			   if (ent.getX_Point() + ent.getWidth() * 10 < xOffset || ent.getX_Point() > xOffset+ preCalcWalls) { // unnice
 				    entities.remove(ent);
-			    }
+			   }
 				
 			    // SINGLE UPDATES
 			    
@@ -229,7 +231,12 @@ public class Level {
 					if(gc.getX_Point()>xOffset+KarpfenGame.WIDTH){
 						entities.remove(gc);
 					}
-				}
+				}else if(ent instanceof VisionObstructer){
+						VisionObstructer vis = (VisionObstructer) ent;
+						if(player.hasObstructedVision()){
+							vis.update();
+						}
+					}
 				
 				// END SINGLE UPDATES
 				
@@ -257,8 +264,24 @@ public class Level {
 							entities.remove(ent);
 							}
 					}else if(ent instanceof Drop){
+						
 						player.getDamaged((Drop) ent);
 						entities.remove(ent);
+						
+						for(int i=0;i<5;i++){
+							int ui=(int) (Math.random()*10);
+							
+							player.setObstructedVision(true);
+							//TODO: RAPHI; BITTE LUEG MAL WARUM DAS DAS OBJECT IMMER VERSCHWINDET!
+								VisionObstructer s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit1);
+								entities.add(s);
+						
+							
+							
+							
+						}
+
+						
 					}
 				}
 				
@@ -318,7 +341,7 @@ public class Level {
 		if(lastWall.isPlayerStandingOn()){
 			nextLevel();
 		}
-		
+		System.out.println(entities.contains(visa));
 	}
 
 
@@ -333,8 +356,6 @@ public class Level {
 			Entity en= entities.get(wz);
 			if(en instanceof WalkZombie){
 			    ((WalkZombie) en).draw(g2, xOffset);
-			}else if(en instanceof Seagull){
-			    ((Seagull) en).draw(g2, xOffset);
 			}else if(en instanceof HealthPack){
 			    ((HealthPack) en).draw(g2, xOffset);
 			}else if(en instanceof Coffee){
@@ -347,6 +368,10 @@ public class Level {
 				((Eel) en).draw(g2, xOffset);
 			}else if(en instanceof GiantCarp){
 				((GiantCarp) en).draw(g2, xOffset);
+			}else if(en instanceof Seagull){
+			    ((Seagull) en).draw(g2, xOffset);
+			}else if(en instanceof VisionObstructer){
+				((VisionObstructer) en).draw(g2, xOffset);	
 			}
 		}
 	}

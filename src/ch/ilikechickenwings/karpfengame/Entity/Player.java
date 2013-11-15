@@ -36,6 +36,7 @@ public class Player extends Entity{
 	private int g=1;
 	private int timeVar;
 	private long oldTime;
+	private boolean obstructedVision;
 	
 	private int jumpVel=-15;
 	private int xAbsVel=4;
@@ -74,6 +75,8 @@ public class Player extends Entity{
 		}
 		
 		}
+		
+	
 		
 		//Skill
 		for(int i=0;i<Skill.getNr();i++){
@@ -330,6 +333,22 @@ public class Player extends Entity{
 	 */
 	public void setWalking(boolean walking) {
 		this.walking = walking;
+	}
+
+
+	/**
+	 * @return the obstrucetedVision
+	 */
+	public boolean hasObstructedVision() {
+		return obstructedVision;
+	}
+
+
+	/**
+	 * @param obstrucetedVision the obstrucetedVision to set
+	 */
+	public void setObstructedVision(boolean obstructedVision) {
+		this.obstructedVision = obstructedVision;
 	}
 
 
