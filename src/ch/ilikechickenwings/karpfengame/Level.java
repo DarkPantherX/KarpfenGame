@@ -42,7 +42,7 @@ public class Level {
 	public static Skill[] skills = new Skill[Skill.getNr()];
 	public Player player;
 	public static Level lv;
-	public static VisionObstructer visa;
+
 
 	// TODO: decide whether all those things have to be public/private, static/non-static.. - SC 14.10.2013
 	// These parameters may vary from level to level
@@ -272,8 +272,12 @@ public class Level {
 							int ui=(int) (Math.random()*10);
 							
 							player.setObstructedVision(true);
-							//TODO: RAPHI; BITTE LUEG MAL WARUM DAS DAS OBJECT IMMER VERSCHWINDET!
-								VisionObstructer s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit1);
+							VisionObstructer s;
+							if(ui<5){
+								s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit1);
+							}else{
+								s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit2);
+							}
 								entities.add(s);
 						
 							
@@ -341,7 +345,7 @@ public class Level {
 		if(lastWall.isPlayerStandingOn()){
 			nextLevel();
 		}
-		System.out.println(entities.contains(visa));
+
 	}
 
 

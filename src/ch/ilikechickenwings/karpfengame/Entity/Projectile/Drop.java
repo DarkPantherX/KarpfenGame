@@ -14,7 +14,7 @@ public class Drop extends Projectile{
 		setY_Point(y);
 		setxVel(xvel);
 		setyVel(yvel);
-		setDamage(50);
+		setDamage(10);
 		setGravityOn(true);
 	}
 	

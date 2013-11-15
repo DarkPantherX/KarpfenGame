@@ -28,7 +28,7 @@ public class Seagull extends Mob{
 		setyVel(0);
 		setDamage(10);
 		oldTimeDrop=System.currentTimeMillis()-r.nextInt(5000);
-		setCooldown(500);
+		setCooldown(2000);
 		setGravityOn(true); 
 		
 	}
