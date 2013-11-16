@@ -9,9 +9,10 @@ import javax.sound.sampled.Clip;
 
 public class SoundSystem {
 
-	public static void playSound(final URL url){
+	public static synchronized void playSound(final URL url){
 		
-	    
+		new Thread(new Runnable() { 
+            public void run() {
 	          try {
 	            Clip clip = AudioSystem.getClip();
 	            AudioInputStream inputStream = AudioSystem.getAudioInputStream(url);
@@ -23,11 +24,12 @@ public class SoundSystem {
 	        }
 	   
 		
+		}).start();
 		
 		
 	}
 	
 	
 	
-	
+}
 
