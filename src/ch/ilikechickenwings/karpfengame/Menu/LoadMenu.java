@@ -13,6 +13,7 @@ import java.io.IOException;
 import ch.ilikechickenwings.karpfengame.KarpfenGame;
 import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Sound.Sounds;
 
 public class LoadMenu extends Menu{
 	private long timeOld;
@@ -40,6 +41,7 @@ public class LoadMenu extends Menu{
 		
 		//Load the used Images
 		new Tile();
+		new Sounds();
 	
 	}
 	

@@ -10,6 +10,8 @@ import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Skill.Skill;
+import ch.ilikechickenwings.karpfengame.Sound.SoundSystem;
+import ch.ilikechickenwings.karpfengame.Sound.Sounds;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
@@ -105,6 +107,7 @@ public class Player extends Entity{
 					oldTimeSkill[i]=System.currentTimeMillis();
 					switch(i){
 					    case 0:
+						SoundSystem.playSound(Sounds.playerShot);
 					    Carp carp=new Carp(getX_Point()+getWidth(),getY_Point()+getHeight()/2);
 					    Level.getEntities().add(carp);
 					    break;
@@ -120,7 +123,7 @@ public class Player extends Entity{
 				}
 			}
 		}
-		
+
 		setWalking(false);
 			// movement
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!isGravityOn()) { // 
