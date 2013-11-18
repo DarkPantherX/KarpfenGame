@@ -8,6 +8,7 @@ import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 public class GiantCarp extends Projectile {
+	int xOffset=0;
 	
 	public GiantCarp (){
 		setWidth(10);
@@ -23,9 +24,14 @@ public class GiantCarp extends Projectile {
 	
 	public void update(InputHandler inHandler){
 		setX_Point(getX_Point()+getxVel());
+		
+		if(getX_Point()>xOffset+KarpfenGame.WIDTH){
+			Level.entities.remove(this);
+		}
 	}
 
 	public void draw(Graphics2D g2,int xOffset){
+		this.xOffset=xOffset;
 		g2.setColor(Color.white);
 		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
 		

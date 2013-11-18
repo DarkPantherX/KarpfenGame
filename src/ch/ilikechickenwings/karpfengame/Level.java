@@ -6,6 +6,7 @@ import java.util.Random;
 
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
+import ch.ilikechickenwings.karpfengame.Entity.Updateable;
 import ch.ilikechickenwings.karpfengame.Entity.VisionObstructer;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
@@ -38,7 +39,7 @@ public class Level {
 															// something like "render"distance
 
 	public static ArrayList<Wall> walls = new ArrayList<Wall>();
-	public static ArrayList<Entity> entities = new ArrayList<Entity>();
+	public static ArrayList<Updateable> entities = new ArrayList<Updateable>();
 	public static Skill[] skills = new Skill[Skill.getNr()];
 	public Player player;
 	public static Level lv;
@@ -183,65 +184,9 @@ public class Level {
 			   }
 				
 			    // SINGLE UPDATES
-			    
-			    // update Mobs
-			   
-			   
-			   //TODO: Move this into WalkZombie.update()
-				if(ent instanceof WalkZombie){ // WalkZombie
-					WalkZombie wZombie= (WalkZombie) ent;
-					// check if they are still on the platform
-					for (int w = 0; w < walls.size(); w++) {
-						Wall wall = (Wall) walls.get(w);
-						if (wZombie.isDir()
-								&& wZombie.getX_Point() + wZombie.getWidth() > wall
-								.getX_Point() + wall.getWidth()
-								&& wZombie.getX_Point() < wall.getX_Point()
-								+ wall.getWidth()) 
-						{ // if Zombie is about to walk off the wall at the right side.
-							wZombie.setDir(false); // change direction
-							w = walls.size();
-						} else if (!wZombie.isDir()
-								&& wZombie.getX_Point() < wall.getX_Point()
-								&& wZombie.getX_Point() + wZombie.getWidth() > wall
-								.getX_Point())
-						{  // if Zombie is about to walk off the wall on the left side.
-							wZombie.setDir(true); // change direction
-							w = walls.size();
-						}
-					}
-					wZombie.update(inHandler);
-				}else if(ent instanceof Seagull){
-					Seagull seagull=(Seagull) ent;
-					seagull.update(inHandler);
-				}
-				// update Projectiles
-				else if(ent instanceof Carp){
-					Carp carp=(Carp) ent;
-					carp.update(inHandler);
-				}else if(ent instanceof Drop){
-					Drop drop=(Drop) ent;
-					drop.update(inHandler);
-				}else if(ent instanceof Eel){
-					Eel eel=(Eel) ent;
-					eel.update(inHandler);
-					if((System.currentTimeMillis()-eel.getLifeTime())>eel.getLifeSpan()){
-						entities.remove(eel);
-					}
-				}else if(ent instanceof GiantCarp){
-					GiantCarp gc=(GiantCarp) ent;
-					gc.update(inHandler);
-					if(gc.getX_Point()>xOffset+KarpfenGame.WIDTH){
-						entities.remove(gc);
-					}
-				}else if(ent instanceof VisionObstructer){
-						VisionObstructer vis = (VisionObstructer) ent;
-						if(player.hasObstructedVision()){
-							vis.update(inHandler);
-						}
-					}
+				ent.update(inHandler);
+					
 				
-				// END SINGLE UPDATES
 				
 				// Entity - Player
 				// we have to talk about this after we made the graphics...
@@ -295,7 +240,7 @@ public class Level {
 				// Monster (ent) - Entity (entity)
 				if(ent instanceof Mob){
 					for (int pr = 0; pr < entities.size(); pr++) { // pr for projetiles
-						Entity entity=entities.get(pr);
+						Entity entity=(Entity)entities.get(pr);
 						if(entity instanceof Projectile && 
 							!(entity instanceof Drop) &&
 								ent.getX_Point() + ent.getWidth() > entity
@@ -322,7 +267,7 @@ public class Level {
 				// Item (ent) - Entity (entity)
 				else if(ent instanceof Item){
 					for (int pr = 0; pr < entities.size(); pr++) { // pr for projetiles
-						Entity entity=entities.get(pr);
+						Entity entity=(Entity) entities.get(pr);
 						if(entity instanceof Projectile && 
 								ent.getX_Point() + ent.getWidth() > entity
 								.getX_Point()
@@ -360,26 +305,8 @@ public class Level {
 			wall.draw(g2, xOffset);
 		}
 		for (int wz = 0; wz < entities.size(); wz++) {
-			Entity en= entities.get(wz);
-			if(en instanceof WalkZombie){
-			    ((WalkZombie) en).draw(g2, xOffset);
-			}else if(en instanceof HealthPack){
-			    ((HealthPack) en).draw(g2, xOffset);
-			}else if(en instanceof Coffee){
-				((Coffee) en).draw(g2, xOffset);
-			}else if(en instanceof Carp){
-				((Carp) en).draw(g2, xOffset);
-			}else if(en instanceof Drop){
-				((Drop) en).draw(g2, xOffset);
-			}else if(en instanceof Eel){
-				((Eel) en).draw(g2, xOffset);
-			}else if(en instanceof GiantCarp){
-				((GiantCarp) en).draw(g2, xOffset);
-			}else if(en instanceof Seagull){
-			    ((Seagull) en).draw(g2, xOffset);
-			}else if(en instanceof VisionObstructer){
-				((VisionObstructer) en).draw(g2, xOffset);	
-			}
+			Entity en= (Entity)entities.get(wz);
+			en.draw(g2, xOffset);
 		}
 	}
 	
@@ -489,11 +416,11 @@ public class Level {
 		Level.skills = skills;
 	}
 
-	public static ArrayList<Entity> getEntities() {
+	public static ArrayList<Updateable> getEntities() {
 		return entities;
 	}
 
-	public static void setEntities(ArrayList<Entity> entities) {
+	public static void setEntities(ArrayList<Updateable> entities) {
 		Level.entities = entities;
 	}
 

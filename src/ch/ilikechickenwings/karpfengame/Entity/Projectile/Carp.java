@@ -28,6 +28,7 @@ public class Carp extends Projectile{
 		}else if(getDamage()<0){
 			setDamage(0);
 		}
+
 	}
 
 	public void draw(Graphics2D g2,int xOffset){

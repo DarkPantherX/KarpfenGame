@@ -3,6 +3,7 @@ package ch.ilikechickenwings.karpfengame.Entity.Projectile;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
@@ -29,6 +30,9 @@ public class Eel extends Projectile{
 	public void update(InputHandler inHandler){
 		setX_Point(player.getX_Point()+player.getWidth());
 		setY_Point(player.getY_Point()+getHeight()/2);
+		if((System.currentTimeMillis()-getLifeTime())>getLifeSpan()){
+			Level.entities.remove(this);
+		}
 	}
 
 	public void draw(Graphics2D g2,int xOffset){
