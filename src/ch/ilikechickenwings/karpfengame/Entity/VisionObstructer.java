@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 
 import ch.ilikechickenwings.karpfengame.Level;
+import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 public class VisionObstructer extends Entity{
 	
@@ -21,7 +22,7 @@ public class VisionObstructer extends Entity{
 	}
 	
 	
-	public void update(){
+	public void update(InputHandler inhandler){
 		long currTime = System.currentTimeMillis();
 
 		if (firstTimeShit) {

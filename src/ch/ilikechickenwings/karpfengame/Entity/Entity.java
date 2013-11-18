@@ -1,6 +1,10 @@
 package ch.ilikechickenwings.karpfengame.Entity;
 
-public class Entity {
+import java.awt.Graphics2D;
+
+import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+
+public class Entity implements Updateable{
 	
 	private int x_Point;
 	private int y_Point;
@@ -61,6 +65,18 @@ public class Entity {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+
+
+
+	@Override
+	public void update(InputHandler inHandler) {
+	}
+
+
+
+	@Override
+	public void draw(Graphics2D g) {
 	}
 
 }

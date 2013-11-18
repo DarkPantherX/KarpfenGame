@@ -185,6 +185,9 @@ public class Level {
 			    // SINGLE UPDATES
 			    
 			    // update Mobs
+			   
+			   
+			   //TODO: Move this into WalkZombie.update()
 				if(ent instanceof WalkZombie){ // WalkZombie
 					WalkZombie wZombie= (WalkZombie) ent;
 					// check if they are still on the platform
@@ -234,7 +237,7 @@ public class Level {
 				}else if(ent instanceof VisionObstructer){
 						VisionObstructer vis = (VisionObstructer) ent;
 						if(player.hasObstructedVision()){
-							vis.update();
+							vis.update(inHandler);
 						}
 					}
 				
