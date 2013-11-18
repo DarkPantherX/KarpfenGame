@@ -13,8 +13,6 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Item;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
-import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
-import ch.ilikechickenwings.karpfengame.Entity.Projectile.GiantCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.*;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
@@ -305,7 +303,7 @@ public class Level {
 			wall.draw(g2, xOffset);
 		}
 		for (int wz = 0; wz < entities.size(); wz++) {
-			Entity en= (Entity)entities.get(wz);
+			Updateable en= (Updateable)entities.get(wz);
 			en.draw(g2, xOffset);
 		}
 	}
