@@ -28,7 +28,8 @@ public class Player extends Entity{
 	private long oldTimeInvincible;
 	private long[] currTimeSkill= new long[Skill.getNr()];
 	private long[] oldTimeSkill= new long[Skill.getNr()];
-	private int dir=1;
+	private int state=1;
+	private int dir;
 	private boolean walking=false;
 	private boolean[] enableSkill;
 	private int enabledSkill=0;
@@ -108,7 +109,7 @@ public class Player extends Entity{
 					switch(i){
 					    case 0:
 						SoundSystem.playSound(Sounds.playerShot);
-					    Carp carp=new Carp(getX_Point()+getWidth(),getY_Point()+getHeight()/2);
+					    Carp carp=new Carp(getX_Point()+(getWidth()*Math.max(0,getDir())),getY_Point()+getHeight()/2,getDir());
 					    Level.getEntities().add(carp);
 					    break;
 					    case 1:
@@ -116,7 +117,7 @@ public class Player extends Entity{
 					    Level.getEntities().add(eel);
 					    break;
 					    case 2:
-					    GiantCarp gc=new GiantCarp();
+					    GiantCarp gc=new GiantCarp(getDir());
 					    Level.getEntities().add(gc);
 					    break;
 					}
@@ -129,17 +130,19 @@ public class Player extends Entity{
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!isGravityOn()) { // 
 				setGravityOn(true);
 				setyVel(getJumpVel()); 
-				setDir(3);
+				setState(3);
 				setWalking(true);
 			}
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
 				setxVel(-getxAbsVel());
-				setDir(2);
+				setState(2);
+				setDir(-1);
 				setWalking(true);
 			}
 			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
 				setxVel(getxAbsVel()); 
+				setState(1);
 				setDir(1);
 				setWalking(true);
 			}
@@ -181,7 +184,7 @@ public class Player extends Entity{
 		
 		// player
 		g2.setColor(Color.green);
-		g2.drawImage(Tile.player[dir-1][timeVar],getX_Point()-xOffset, getY_Point(),null);
+		g2.drawImage(Tile.player[state-1][timeVar],getX_Point()-xOffset, getY_Point(),null);
 		//g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
 		if(invincible){
 		g2.setColor(Color.blue);
@@ -311,15 +314,15 @@ public class Player extends Entity{
 	/**
 	 * @return the dir
 	 */
-	public int getDir() {
-		return dir;
+	public int getState() {
+		return state;
 	}
 
 	/**
 	 * @param dir the dir to set
 	 */
-	public void setDir(int dir) {
-		this.dir = dir;
+	public void setState(int dir) {
+		this.state = dir;
 	}
 
 
@@ -352,6 +355,22 @@ public class Player extends Entity{
 	 */
 	public void setObstructedVision(boolean obstructedVision) {
 		this.obstructedVision = obstructedVision;
+	}
+
+
+	/**
+	 * @return the dir
+	 */
+	public int getDir() {
+		return dir;
+	}
+
+
+	/**
+	 * @param i the dir to set
+	 */
+	public void setDir(int i) {
+		this.dir = i;
 	}
 
 

@@ -10,22 +10,23 @@ import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 public class GiantCarp extends Projectile {
 	int xOffset=0;
 	
-	public GiantCarp (){
+	public GiantCarp (int dir){
 		setWidth(10);
 		setHeight(KarpfenGame.HEIGHT);
 		setX_Point(Level.getxOffset()-getWidth());
 		setY_Point(0);
 		setxVel(10);
 		setyVel(0);
+		setDir(dir);
 		setDamage(1000);
 		setGravityOn(false); 
 	}
 	
 	
 	public void update(InputHandler inHandler){
-		setX_Point(getX_Point()+getxVel());
+		setX_Point(getX_Point()+(getxVel()*getDir()));
 		
-		if(getX_Point()>xOffset+KarpfenGame.WIDTH){
+		if(getX_Point()>xOffset+KarpfenGame.WIDTH || getX_Point()>xOffset+0){
 			Level.entities.remove(this);
 		}
 	}

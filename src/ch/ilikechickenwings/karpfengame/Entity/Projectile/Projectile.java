@@ -8,6 +8,7 @@ public class Projectile extends Entity {
 	private int damage;
 	private int xVel;
 	private int yVel;
+	private int dir;
 	private boolean gravityOn;
 	private int g=1; 
 	
@@ -44,6 +45,20 @@ public class Projectile extends Entity {
 
 	public void setyVel(int yVel) {
 		this.yVel = yVel;
+	}
+
+	/**
+	 * @return the dir
+	 */
+	public int getDir() {
+		return dir;
+	}
+
+	/**
+	 * @param dir the dir to set
+	 */
+	public void setDir(int dir) {
+		this.dir = dir;
 	}
 
 	public int getDamage() {

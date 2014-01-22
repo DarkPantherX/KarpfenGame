@@ -14,8 +14,9 @@ public class Eel extends Projectile{
 	private Player player;
 	
 	public Eel(int x, int y, Player player){
+		setDir(player.getDir());
 		setX_Point(x);
-		setY_Point(y);
+		setY_Point(y);	
 		setWidth(50);
 		setHeight(20);
 		setxVel(10);
@@ -28,7 +29,12 @@ public class Eel extends Projectile{
 	}
 	
 	public void update(InputHandler inHandler){
-		setX_Point(player.getX_Point()+player.getWidth());
+		if(player.getDir()==1){
+			setX_Point(player.getX_Point()+player.getWidth());
+		}else{
+			setX_Point(player.getX_Point()-getWidth());
+			}
+		
 		setY_Point(player.getY_Point()+getHeight()/2);
 		if((System.currentTimeMillis()-getLifeTime())>getLifeSpan()){
 			Level.entities.remove(this);
