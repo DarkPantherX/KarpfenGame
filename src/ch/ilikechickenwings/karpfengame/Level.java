@@ -117,7 +117,36 @@ public class Level {
 
         addWalls();
 	}
+	public Level(int lvl, KarpfenGame karpfenGame,boolean bosslevel){
+		lv=this;
+		this.setLvl(lvl);
+		this.setKarpfenGame(karpfenGame);
+		new LvlReader("lvl"+Integer.toString(lvl)+".pros");		
+		player = new Player(0, 0, maxLife, maxCoffee, useableSkill);
+
+		for(int i=0;i<skills.length;i++){
+			if(useableSkill[i]){
+				switch(i){
+				case 0:
+				CarpSkill cs=new CarpSkill();
+				skills[i]=cs;
+				break;
+				case 1:
+				EelSkill es=new EelSkill();	
+				skills[i]=es;
+				break;
+				case 2:
+				Karpfokalypse skill = new Karpfokalypse();
+				skills[i]=skill;
+				break;
+				}
+			}
+		}
+		
+		
+	}
 	
+
 	public void update(InputHandler inHandler) {
 
 		// follow the player with camera
@@ -394,11 +423,11 @@ public class Level {
 	
 	private void nextLevel() {
 		resetLevel();
-		karpfenGame.setLvl(new Level(nextLevel, karpfenGame));
+		karpfenGame.setLvl(new BossLevel(1, karpfenGame));
 		
 	}
 
-	private void resetLevel(){
+	protected void resetLevel(){
 		walls.clear();
 		entities.clear();
 		xOffset = 0;
@@ -406,6 +435,12 @@ public class Level {
 	
 	
 	
+	public Player getPlayer() {
+		return player;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
 	public static Skill[] getSkills() {
 		return skills;
 	}
