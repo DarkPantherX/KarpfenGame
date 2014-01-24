@@ -11,7 +11,6 @@ public class Eel extends Projectile{
 
 	private long lifeTime;
 	private long lifeSpan;
-	private Player player;
 	
 	public Eel(int x, int y, Player player){
 		setDir(player.getDir());
@@ -29,10 +28,10 @@ public class Eel extends Projectile{
 	}
 	
 	public void update(InputHandler inHandler){
-			setX_Point(player.getX_Point()+(player.getWidth()*Math.max(0, player.getDir()))+(getWidth()*Math.min(0, player.getDir())));
+			setX_Point(getPlayer().getX_Point()+(getPlayer().getWidth()*Math.max(0, getPlayer().getDir()))+(getWidth()*Math.min(0, getPlayer().getDir())));
 		
 		
-		setY_Point(player.getY_Point()+getHeight()/2);
+		setY_Point(getPlayer().getY_Point()+getHeight()/2);
 		if((System.currentTimeMillis()-getLifeTime())>getLifeSpan()){
 			Level.entities.remove(this);
 		}
@@ -72,18 +71,5 @@ public class Eel extends Projectile{
 		this.lifeSpan = lifeSpan;
 	}
 
-	/**
-	 * @return the player
-	 */
-	public Player getPlayer() {
-		return player;
-	}
 
-	/**
-	 * @param player the player to set
-	 */
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
-	
 }

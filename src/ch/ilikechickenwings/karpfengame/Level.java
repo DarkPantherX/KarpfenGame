@@ -103,6 +103,10 @@ public class Level {
 				Karpfokalypse skill = new Karpfokalypse();
 				skills[i]=skill;
 				break;
+				case 3:
+				FlyingCarpSkill fc = new FlyingCarpSkill();
+				skills[i]=fc;
+				break;
 				}
 			}
 		}
@@ -138,6 +142,10 @@ public class Level {
 				case 2:
 				Karpfokalypse skill = new Karpfokalypse();
 				skills[i]=skill;
+				break;
+				case 3:
+				FlyingCarpSkill fc = new FlyingCarpSkill();
+				skills[i]=fc;
 				break;
 				}
 			}

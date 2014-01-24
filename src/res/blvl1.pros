@@ -1,4 +1,4 @@
 maxCoffee=100
 wall=225,400,200,10, 10,300,200,10, 425,300,200,10, 140,225,50,10, 50,160,150,10, 260,100,125,10
-enableSkill=true,true,false
+enableSkill=true,true,false,true
 nextLevel=2

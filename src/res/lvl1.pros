@@ -12,5 +12,5 @@ spawnCoffee=40
 maxLife=100
 velPlayer=4
 maxCoffee=100
-enableSkill=true,false,true
+enableSkill=true,true,true,true
 nextLevel=2

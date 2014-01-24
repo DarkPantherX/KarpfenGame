@@ -1,6 +1,7 @@
 package ch.ilikechickenwings.karpfengame.Entity.Projectile;
 
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
+import ch.ilikechickenwings.karpfengame.Entity.Player;
 
 
 public class Projectile extends Entity {
@@ -11,6 +12,7 @@ public class Projectile extends Entity {
 	private int dir;
 	private boolean gravityOn;
 	private int g=1; 
+	private Player player;
 	
 	public Projectile(){
 		setLifes(2);
@@ -67,6 +69,20 @@ public class Projectile extends Entity {
 
 	public void setDamage(int damage) {
 		this.damage = damage;
+	}
+
+	/**
+	 * @return the player
+	 */
+	public Player getPlayer() {
+		return player;
+	}
+
+	/**
+	 * @param player the player to set
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	
