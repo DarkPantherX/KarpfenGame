@@ -222,7 +222,6 @@ public class Level {
 				ent.update(inHandler);
 					
 				
-				
 				// Entity - Player
 				// we have to talk about this after we made the graphics...
 				if (player.getX_Point() + player.getWidth() > ent

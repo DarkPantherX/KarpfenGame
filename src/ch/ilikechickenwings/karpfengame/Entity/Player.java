@@ -18,6 +18,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.Mob;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.FlyingCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.GiantCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 
@@ -46,6 +47,7 @@ public class Player extends Entity{
 	
 	// coffee:
 	private int coffee;
+	private boolean flying;
 
 	public Player(int x, int y, int lifes, int coffee, boolean[] useableSkill) {
 		
@@ -96,6 +98,8 @@ public class Player extends Entity{
 			enabledSkill=1;
 		}else if(inHandler.getKeys()[KeyEvent.VK_3]){ // Karpocalypse
 			enabledSkill=2;
+		}else if(inHandler.getKeys()[KeyEvent.VK_4]){ // FlyingCarp
+			enabledSkill=3;
 		}
 		
 		for(int i=0;i<Skill.getNr();i++){
@@ -119,6 +123,10 @@ public class Player extends Entity{
 					    case 2:
 					    GiantCarp gc=new GiantCarp(getDir());
 					    Level.getEntities().add(gc);
+					    break;
+					    case 3:
+						FlyingCarp fc=new FlyingCarp(this);
+						Level.getEntities().add(fc);
 					    break;
 					}
 				}
@@ -196,7 +204,10 @@ public class Player extends Entity{
 	
 	private void walk(){
 		setX_Point(getX_Point() + getxVel());
-		setY_Point(getY_Point()+getyVel());
+		
+		if(!flying){
+			setY_Point(getY_Point()+getyVel());
+		}
 	}
 	
 	
@@ -374,4 +385,13 @@ public class Player extends Entity{
 	}
 
 
+	public void setFlying(boolean b) {
+		this.flying=b;
+		
+	}
+
+	public boolean isFlying() {
+		return flying;
+		
+	}
 }
