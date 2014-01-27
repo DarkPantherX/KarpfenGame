@@ -39,6 +39,8 @@ public class KarpfenGame extends JPanel implements Runnable{
 	 * 
 	 * 
 	 * 09.10.2013 - I should concentrate on my studies...
+	 * 
+	 * 27.01.2014 - First commit on the new Computer by Strichcoder :D
 	 */
 
 	
