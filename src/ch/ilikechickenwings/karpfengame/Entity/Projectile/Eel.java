@@ -28,8 +28,10 @@ public class Eel extends Projectile{
 	}
 	
 	public void update(InputHandler inHandler){
-			setX_Point(getPlayer().getX_Point()+(getPlayer().getWidth()*Math.max(0, getPlayer().getDir()))+(getWidth()*Math.min(0, getPlayer().getDir())));
-		
+			setX_Point(getPlayer().getX_Point()+
+					(getPlayer().getWidth()*Math.max(0, getPlayer().getDir()))+
+					(getWidth()*Math.min(0, getPlayer().getDir())));
+			
 		
 		setY_Point(getPlayer().getY_Point()+getHeight()/2);
 		if((System.currentTimeMillis()-getLifeTime())>getLifeSpan()){

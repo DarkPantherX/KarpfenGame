@@ -30,7 +30,7 @@ public class Player extends Entity{
 	private long[] currTimeSkill= new long[Skill.getNr()];
 	private long[] oldTimeSkill= new long[Skill.getNr()];
 	private int state=1;
-	private int dir;
+	private int dir; // -1 or 1
 	private boolean walking=false;
 	private boolean[] enableSkill;
 	private int enabledSkill=0;
@@ -62,6 +62,7 @@ public class Player extends Entity{
 		setInvincible(false);
 		setEnableSkill(useableSkill);
 		setGravityOn(true);
+		setDir(1);
 		//super(x, y, lifes);
 		// TODO Auto-generated constructor stub
 	}
