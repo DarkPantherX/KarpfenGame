@@ -13,6 +13,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Item.Coffee;
 import ch.ilikechickenwings.karpfengame.Entity.Item.Item;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.Grenade;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Mob.*;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
@@ -107,6 +108,10 @@ public class Level {
 				FlyingCarpSkill fc = new FlyingCarpSkill();
 				skills[i]=fc;
 				break;
+				case 4:
+				GrenadeSkill gs = new GrenadeSkill();
+				skills[i]=gs;
+				break;
 				}
 			}
 		}
@@ -165,6 +170,7 @@ public class Level {
 		// update Walls:
 		addWalls();
 		
+		// Player
 		// checks collision of player with walls
 		// TODO: This check does probably not work if there's more than one wall
 		// above each other.. (witch is not possible yet)
@@ -220,7 +226,15 @@ public class Level {
 				
 			    // SINGLE UPDATES
 				ent.update(inHandler);
-					
+				
+				// Entity - Walls
+				for (int w = 0; w < walls.size() && ent instanceof Grenade; w++) {
+					Wall wall = (Wall) walls.get(w);
+					Projectile pr = (Projectile)ent;
+					if(ProjectileWallCollide(wall,pr)){
+						pr.setLifes(0);	
+					}
+				}
 				
 				// Entity - Player
 				// we have to talk about this after we made the graphics...
@@ -260,14 +274,8 @@ public class Level {
 							}else{
 								s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit2);
 							}
-								entities.add(s);
-						
-							
-							
-							
+								entities.add(s);	
 						}
-
-						
 					}
 				}
 				
@@ -277,22 +285,19 @@ public class Level {
 						Entity entity=(Entity)entities.get(pr);
 						if(entity instanceof Projectile && 
 							!(entity instanceof Drop) &&
-								ent.getX_Point() + ent.getWidth() > entity
-								.getX_Point()
-								&& ent.getX_Point() < entity.getX_Point()
-										+ entity.getWidth()
-								&& ent.getY_Point() + ent.getHeight() > entity
-										.getY_Point()
-								&& ent.getY_Point() < entity.getY_Point()
-										+ entity.getHeight()) // if Projectile entity intersects Mob ent
+								ent.getX_Point() + ent.getWidth() > entity.getX_Point()
+								&& ent.getX_Point() < entity.getX_Point() + entity.getWidth()
+								&& ent.getY_Point() + ent.getHeight() > entity.getY_Point()
+								&& ent.getY_Point() < entity.getY_Point()+ entity.getHeight()) 
+							    // if Projectile entity intersects Mob ent
 						{
 							Mob mob=(Mob) ent;
 							// damage Mob, as long as it is not a Seagull-Drop
 							if(!(entity instanceof Drop)){
 							    mob.getDamaged((Projectile) entity);
 							}
-							// delete Projectile entity, if it is a Carp
-							if(entity instanceof Carp){
+							// delete Projectile entity, if it is a Carp or a Grenade
+							if(entity instanceof Carp || entity instanceof Grenade){
 							    entities.remove(entity);
 							}
 						}
@@ -302,15 +307,12 @@ public class Level {
 				else if(ent instanceof Item){
 					for (int pr = 0; pr < entities.size(); pr++) { // pr for projetiles
 						Entity entity=(Entity) entities.get(pr);
-						if(entity instanceof Projectile && 
-								ent.getX_Point() + ent.getWidth() > entity
-								.getX_Point()
-								&& ent.getX_Point() < entity.getX_Point()
-										+ entity.getWidth()
-								&& ent.getY_Point() + ent.getHeight() > entity
-										.getY_Point()
-								&& ent.getY_Point() < entity.getY_Point()
-										+ entity.getHeight()) // if Projectile entity intersects Item ent
+						if(entity instanceof Projectile 
+								&& ent.getX_Point() + ent.getWidth() > entity.getX_Point()
+								&& ent.getX_Point() < entity.getX_Point() + entity.getWidth()
+								&& ent.getY_Point() + ent.getHeight() > entity.getY_Point()
+								&& ent.getY_Point() < entity.getY_Point() + entity.getHeight()) 
+							    // if Projectile entity intersects Item ent
 						{
 							Item item=(Item) ent;
 							item.setLifes(0);
@@ -359,6 +361,28 @@ public class Level {
 					   && player.getX_Point() + player.getWidth() + player.getxVel()*i/player.getyVel() >= wall.getX_Point()
 					   && wall.getY_Point() <= player.getY_Point() + player.getHeight() + i
 					   && wall.getY_Point() + wall.getHeight() >= player.getY_Point() + player.getHeight() + i){
+						return true;
+					}
+				}
+			}
+	    return false;
+	}
+	
+	public boolean ProjectileWallCollide(Wall wall,Projectile pr){
+		if (pr.getX_Point() + pr.getxVel() < wall.getX_Point() + wall.getWidth()
+			&& pr.getX_Point() + pr.getWidth() + pr.getxVel() > wall.getX_Point()
+			&& wall.getY_Point() < pr.getY_Point() + pr.getHeight() + pr.getyVel()
+			&& wall.getY_Point() + wall.getHeight() > pr.getY_Point() + pr.getHeight() + pr.getyVel()
+			&& pr.getyVel()>0)
+		{ // direct collide
+			return true;
+		}else if(pr.getyVel()>=wall.getHeight()/2 )
+			{// player's y is too fast
+				for(int i=0;i<pr.getyVel();i+=wall.getHeight()/2){ 
+					if(pr.getX_Point() + pr.getxVel()*i/pr.getyVel() <= wall.getX_Point() + wall.getWidth()
+					   && pr.getX_Point() + pr.getWidth() + pr.getxVel()*i/pr.getyVel() >= wall.getX_Point()
+					   && wall.getY_Point() <= pr.getY_Point() + pr.getHeight() + i
+					   && wall.getY_Point() + wall.getHeight() >= pr.getY_Point() + pr.getHeight() + i){
 						return true;
 					}
 				}

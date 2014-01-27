@@ -20,6 +20,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.FlyingCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.GiantCarp;
+import ch.ilikechickenwings.karpfengame.Entity.Projectile.Grenade;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 
 public class Player extends Entity{
@@ -101,7 +102,10 @@ public class Player extends Entity{
 			enabledSkill=2;
 		}else if(inHandler.getKeys()[KeyEvent.VK_4]){ // FlyingCarp
 			enabledSkill=3;
+		}else if(inHandler.getKeys()[KeyEvent.VK_5]){ // Grenade
+			enabledSkill=4;
 		}
+		
 		
 		for(int i=0;i<Skill.getNr();i++){
 			//The problem lies here... i debugged the game and the forbiddenskill always jumps back to true!
@@ -128,6 +132,10 @@ public class Player extends Entity{
 					    case 3:
 						FlyingCarp fc=new FlyingCarp(this);
 						Level.getEntities().add(fc);
+					    break;
+					    case 4:
+					    Grenade gr=new Grenade(getX_Point()+getWidth()/2,getY_Point(),getDir());
+					    Level.getEntities().add(gr);
 					    break;
 					}
 				}
