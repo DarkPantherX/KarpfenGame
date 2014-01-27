@@ -26,7 +26,7 @@ public class GiantCarp extends Projectile {
 	public void update(InputHandler inHandler){
 		setX_Point(getX_Point()+(getxVel()*getDir()));
 		
-		if(getX_Point()>xOffset+KarpfenGame.WIDTH || getX_Point()>xOffset){
+		if(getX_Point()>xOffset+KarpfenGame.WIDTH || getX_Point()<xOffset){
 			Level.entities.remove(this);
 		}
 	}
