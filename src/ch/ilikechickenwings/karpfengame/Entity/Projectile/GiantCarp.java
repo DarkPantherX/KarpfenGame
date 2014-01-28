@@ -10,14 +10,14 @@ import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 public class GiantCarp extends Projectile {
 	int xOffset=0;
 	
-	public GiantCarp (int dir){
+	public GiantCarp (){
 		setWidth(10);
 		setHeight(KarpfenGame.HEIGHT);
 		setX_Point(Level.getxOffset()-getWidth());
 		setY_Point(0);
 		setxVel(10);
 		setyVel(0);
-		setDir(dir);
+		setDir(1);
 		setDamage(1000);
 		setGravityOn(false); 
 	}

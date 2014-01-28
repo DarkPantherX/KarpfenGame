@@ -126,7 +126,7 @@ public class Player extends Entity{
 					    Level.getEntities().add(eel);
 					    break;
 					    case 2:
-					    GiantCarp gc=new GiantCarp(getDir());
+					    GiantCarp gc=new GiantCarp();
 					    Level.getEntities().add(gc);
 					    break;
 					    case 3:
