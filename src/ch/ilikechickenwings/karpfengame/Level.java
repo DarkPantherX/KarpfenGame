@@ -235,9 +235,9 @@ public class Level {
 						pr.setLifes(0);	
 						Grenade gr=(Grenade)pr;
 						if(gr.getSize()>1){
-							Grenade g1=new Grenade(gr.getX_Point(),gr.getY_Point(),gr.getxVel()/2,-gr.getyVel(),gr.getSize()-1);
-							Grenade g2=new Grenade(gr.getX_Point(),gr.getY_Point(),-gr.getxVel(),-gr.getyVel(),gr.getSize()-1);
-							Grenade g3=new Grenade(gr.getX_Point(),gr.getY_Point(),0,-gr.getyVel()/2,gr.getSize()-1);
+							Grenade g1=new Grenade(gr.getX_Point(),gr.getY_Point(),gr.getxVel(),-gr.getyVel(),gr.getSize()-1);
+							Grenade g2=new Grenade(gr.getX_Point(),gr.getY_Point(),-gr.getxVel()/2,-gr.getyVel()/2,gr.getSize()-2);
+							Grenade g3=new Grenade(gr.getX_Point(),gr.getY_Point(),gr.getxVel()/4,-gr.getyVel()/2,gr.getSize()-1);
 
 							entities.add(g1);
 							entities.add(g2);

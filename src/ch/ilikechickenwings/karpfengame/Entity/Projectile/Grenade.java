@@ -8,7 +8,7 @@ import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 public class Grenade extends Projectile {
 	
 	/*
-	 * 
+	 *   This Projectile does not use the variable dir to calculate do the update
 	 * 
 	 */
 	
@@ -22,9 +22,8 @@ public class Grenade extends Projectile {
 		setY_Point(y);
 		setWidth(10*getSize());
 		setHeight(10*getSize());
-		setxVel(10);
+		setxVel(10*dir);
 		setyVel(-10);
-		setDir(dir);
 		setDamage(50*getSize());
 		setGravityOn(true); 
 	}
@@ -50,7 +49,7 @@ public class Grenade extends Projectile {
 		if(isGravityOn()){
 			updateGravity();
 		}
-		setX_Point(getX_Point()+getxVel()*getDir());
+		setX_Point(getX_Point()+getxVel());
 		setY_Point(getY_Point()+getyVel());
 
 	}
