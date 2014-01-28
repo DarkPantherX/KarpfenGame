@@ -233,6 +233,7 @@ public class Level {
 					Projectile pr = (Projectile)ent;
 					if(ProjectileWallCollide(wall,pr)){
 						pr.setLifes(0);	
+						pr.setY_Point(wall.getY_Point() + 1 - pr.getHeight());
 						Grenade gr=(Grenade)pr;
 						if(gr.getSize()>1){
 							Grenade g1=new Grenade(gr.getX_Point(),gr.getY_Point(),gr.getxVel(),-gr.getyVel(),gr.getSize()-1);

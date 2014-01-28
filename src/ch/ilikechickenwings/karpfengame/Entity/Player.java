@@ -104,6 +104,10 @@ public class Player extends Entity{
 			enabledSkill=3;
 		}else if(inHandler.getKeys()[KeyEvent.VK_5]){ // Grenade
 			enabledSkill=4;
+		}else if(inHandler.isTypedReady(KeyEvent.VK_Q)){ // switch weapon to the left
+			enabledSkill=(enabledSkill+Skill.getNr()-1)%Skill.getNr();
+		}else if(inHandler.isTypedReady(KeyEvent.VK_E)){ // switch weapon to the right
+			enabledSkill=(enabledSkill+1)%Skill.getNr();
 		}
 		
 		

@@ -9,7 +9,7 @@ public class Grenade extends Projectile {
 	
 	/*
 	 *   This Projectile does not use the variable dir to calculate do the update
-	 * 
+	 *   TODO
 	 */
 	
 	
