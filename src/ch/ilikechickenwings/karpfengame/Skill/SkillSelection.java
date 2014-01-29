@@ -69,6 +69,7 @@ public class SkillSelection {
 		    }
 		}
 		
+		// Select Skill
 		if(inHandler.getKeys()[KeyEvent.VK_1]){ // Carp
 			enabledSkill=0;
 			setyOffset(getWidth()*2);
@@ -92,9 +93,8 @@ public class SkillSelection {
 			setyOffset(getWidth()*2);
 		}
 		
-		
+		// Use Skills
 		for(int i=0;i<Skill.getNr();i++){
-			//The problem lies here... i debugged the game and the forbiddenskill always jumps back to true!
 			if(inHandler.getKeys()[KeyEvent.VK_S]&&enableSkill[i]&&Level.useableSkill[i]&&enabledSkill==i){ // Carp
 				Skill skill=(Skill) Level.getSkills()[i];
 				if(getPlayer().getCoffee()>=skill.getCoffee()){

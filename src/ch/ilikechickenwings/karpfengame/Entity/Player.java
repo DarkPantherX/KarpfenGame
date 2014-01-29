@@ -29,19 +29,14 @@ public class Player extends Entity{
 	private boolean invincible=false;
 	private long currTimeInvincible;
 	private long oldTimeInvincible;
-	//private long[] currTimeSkill= new long[Skill.getNr()];
-	//private long[] oldTimeSkill= new long[Skill.getNr()];
 	private int state=1;
 	private int dir; // -1 or 1
 	private boolean walking=false;
-	//private boolean[] enableSkill;
-	//private int enabledSkill=0;
 	private int xVel;
 	private int yVel;
 	private boolean gravityOn;
 	private int g=1;
 	private int timeVar;
-	//private long oldTime;
 	private boolean obstructedVision;
 	
 	private int jumpVel=-15;
@@ -76,83 +71,9 @@ public class Player extends Entity{
 
 	public void update(InputHandler inHandler) {
 		
+		// Skill
 		skillselection.update(inHandler);
-//		long currTime=System.currentTimeMillis();
-//		if(isWalking()){
-//		if(oldTime+200<currTime){
-//			if(timeVar==0){
-//				timeVar=1;
-//			}else{
-//				timeVar=0;
-//			}
-//			oldTime=currTime;
-//		}
-//		
-//		}
-//		
-//	
-//		
-//		//Skill
-//		for(int i=0;i<Skill.getNr();i++){
-//		    if(currTimeSkill[i]>=oldTimeSkill[i]+500){
-//			    enableSkill[i]=true;
-//		    }else{
-//			    currTimeSkill[i]=System.currentTimeMillis();
-//		    }
-//		}
-//		
-//		if(inHandler.getKeys()[KeyEvent.VK_1]){ // Carp
-//			enabledSkill=0;
-//		}else if(inHandler.getKeys()[KeyEvent.VK_2]){ // Eel
-//			enabledSkill=1;
-//		}else if(inHandler.getKeys()[KeyEvent.VK_3]){ // Karpocalypse
-//			enabledSkill=2;
-//		}else if(inHandler.getKeys()[KeyEvent.VK_4]){ // FlyingCarp
-//			enabledSkill=3;
-//		}else if(inHandler.getKeys()[KeyEvent.VK_5]){ // Grenade
-//			enabledSkill=4;
-//		}else if(inHandler.isTypedReady(KeyEvent.VK_Q)){ // switch weapon to the left
-//			enabledSkill=(enabledSkill+Skill.getNr()-1)%Skill.getNr();
-//		}else if(inHandler.isTypedReady(KeyEvent.VK_E)){ // switch weapon to the right
-//			enabledSkill=(enabledSkill+1)%Skill.getNr();
-//		}
-//		
-//		
-//		for(int i=0;i<Skill.getNr();i++){
-//			//The problem lies here... i debugged the game and the forbiddenskill always jumps back to true!
-//			if(inHandler.getKeys()[KeyEvent.VK_S]&&enableSkill[i]&&Level.useableSkill[i]&&enabledSkill==i){ // Carp
-//				Skill skill=(Skill) Level.getSkills()[i];
-//				if(getCoffee()>=skill.getCoffee()){
-//					setCoffee(getCoffee()-skill.getCoffee());
-//					enableSkill[i]=false;
-//					oldTimeSkill[i]=System.currentTimeMillis();
-//					switch(i){
-//					    case 0:
-//						SoundSystem.playSound(Sounds.playerShot);
-//					    Carp carp=new Carp(getX_Point()+(getWidth()*Math.max(0,getDir())),getY_Point()+getHeight()/2,getDir());
-//					    Level.getEntities().add(carp);
-//					    break;
-//					    case 1:
-//					    Eel eel=new Eel(getX_Point()+getWidth(),getY_Point()+getHeight()/2,this);
-//					    Level.getEntities().add(eel);
-//					    break;
-//					    case 2:
-//					    GiantCarp gc=new GiantCarp();
-//					    Level.getEntities().add(gc);
-//					    break;
-//					    case 3:
-//						FlyingCarp fc=new FlyingCarp(this);
-//						Level.getEntities().add(fc);
-//					    break;
-//					    case 4:
-//					    Grenade gr=new Grenade(getX_Point()+getWidth()/2,getY_Point(),getDir());
-//					    Level.getEntities().add(gr);
-//					    break;
-//					}
-//				}
-//			}
-//		}
-
+		
 		setWalking(false);
 			// movement
 			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!isGravityOn()) { // 
@@ -316,17 +237,6 @@ public class Player extends Entity{
 	public void setyVel(int yVel) {
 		this.yVel = yVel;
 	}
-
-//
-//	public boolean[] getEnableSkill() {
-//		return enableSkill;
-//	}
-//
-//
-//	public void setEnableSkill(boolean[] useableSkill) {
-//		this.enableSkill = useableSkill.clone();
-//	}
-
 
 	public boolean isInvincible(){
 		return invincible;

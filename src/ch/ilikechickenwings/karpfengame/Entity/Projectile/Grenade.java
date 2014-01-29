@@ -18,10 +18,10 @@ public class Grenade extends Projectile {
 	// Cheaty Constructor, (Grenade created by Player)
 	public Grenade(int x, int y, int dir){
 		setSize(3);
-		setX_Point(x);
-		setY_Point(y);
 		setWidth(10*getSize());
 		setHeight(10*getSize());
+		setX_Point(x-getWidth()/2);
+		setY_Point(y-getHeight());
 		setxVel(10*dir);
 		setyVel(-10);
 		setDamage(50*getSize());
