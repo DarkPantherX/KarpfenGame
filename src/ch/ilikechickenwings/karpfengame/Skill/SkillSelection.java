@@ -21,7 +21,8 @@ public class SkillSelection {
 	private Player player;
 	private int yOffset; // this variable makes it slowly disapear at the top...
 	private final int width=KarpfenGame.WIDTH/(2*Skill.getNr());
-	private int yvel=3; // the speed at wich the frame goes up
+	private int yvel=-80; // the speed at wich the frame goes up
+	private int g = 3; // just for fun some acceleration :D
 	
 	private long[] currTimeSkill= new long[Skill.getNr()];
 	private long[] oldTimeSkill= new long[Skill.getNr()];
@@ -41,8 +42,12 @@ public class SkillSelection {
 	
 	public void update(InputHandler inHandler){
 		
-		setyOffset(getyOffset()-yvel);
+		// update GUI
+		yvel=yvel+g;
+		setyOffset(getyOffset()-yvel/100);
 		
+		
+		// update Skills
 		long currTime=System.currentTimeMillis();
 		if(getPlayer().isWalking()){
 			if(oldTime+200<currTime){
