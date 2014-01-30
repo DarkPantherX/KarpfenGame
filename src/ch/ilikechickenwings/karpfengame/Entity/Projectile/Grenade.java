@@ -8,8 +8,7 @@ import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 public class Grenade extends Projectile {
 	
 	/*
-	 *   This Projectile does not use the variable dir to calculate do the update
-	 *   TODO
+	 *   This Projectile does NOT use the variable dir to calculate do the update
 	 */
 	
 	

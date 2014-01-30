@@ -13,6 +13,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Projectile.FlyingCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.GiantCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Grenade;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Handler.Timer;
 import ch.ilikechickenwings.karpfengame.Sound.SoundSystem;
 import ch.ilikechickenwings.karpfengame.Sound.Sounds;
 
@@ -21,8 +22,9 @@ public class SkillSelection {
 	private Player player;
 	private int yOffset; // this variable makes it slowly disapear at the top...
 	private final int width=KarpfenGame.WIDTH/(2*Skill.getNr());
-	private int yvel=-80; // the speed at wich the frame goes up
-	private int g = 3; // just for fun some acceleration :D
+	private int yvel=10; // the speed at wich the frame goes up
+	private Timer drawTimer;
+	private int drawTimerWait = 800; // millisec
 	
 	private long[] currTimeSkill= new long[Skill.getNr()];
 	private long[] oldTimeSkill= new long[Skill.getNr()];
@@ -43,8 +45,9 @@ public class SkillSelection {
 	public void update(InputHandler inHandler){
 		
 		// update GUI
-		yvel=yvel+g;
-		setyOffset(getyOffset()-yvel/100);
+		if(yOffset>0 && drawTimer.isReady()){
+			setyOffset(getyOffset()-yvel);
+		}
 		
 		
 		// update Skills
@@ -72,25 +75,25 @@ public class SkillSelection {
 		// Select Skill
 		if(inHandler.getKeys()[KeyEvent.VK_1]){ // Carp
 			enabledSkill=0;
-			setyOffset(getWidth()*2);
+			dropDown();
 		}else if(inHandler.getKeys()[KeyEvent.VK_2]){ // Eel
 			enabledSkill=1;
-			setyOffset(getWidth()*2);
+			dropDown();
 		}else if(inHandler.getKeys()[KeyEvent.VK_3]){ // Karpocalypse
 			enabledSkill=2;
-			setyOffset(getWidth()*2);
+			dropDown();
 		}else if(inHandler.getKeys()[KeyEvent.VK_4]){ // FlyingCarp
 			enabledSkill=3;
-			setyOffset(getWidth()*2);
+			dropDown();
 		}else if(inHandler.getKeys()[KeyEvent.VK_5]){ // Grenade
 			enabledSkill=4;
-			setyOffset(getWidth()*2);
+			dropDown();
 		}else if(inHandler.isTypedReady(KeyEvent.VK_Q)){ // switch weapon to the left
 			enabledSkill=(enabledSkill+Skill.getNr()-1)%Skill.getNr();
-			setyOffset(getWidth()*2);
+			dropDown();
 		}else if(inHandler.isTypedReady(KeyEvent.VK_E)){ // switch weapon to the right
 			enabledSkill=(enabledSkill+1)%Skill.getNr();
-			setyOffset(getWidth()*2);
+			dropDown();
 		}
 		
 		// Use Skills
@@ -149,6 +152,13 @@ public class SkillSelection {
 		    }
 		}
 	}
+	
+	private void dropDown(){
+		setyOffset(getWidth()*2);
+		drawTimer= new Timer(drawTimerWait);
+	}
+	
+	// Getters and Setters
 
 	public Player getPlayer() {
 		return player;
