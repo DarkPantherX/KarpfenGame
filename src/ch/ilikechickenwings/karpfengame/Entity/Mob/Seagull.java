@@ -7,9 +7,12 @@ import java.util.Random;
 import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Handler.Timer;
 
 public class Seagull extends Mob{
 	
+	private Timer dropTimer;
+	private int dropTimerWait = 2000;  // in millisecs
 	private int cooldown; // in millisecs
 	private long oldTimeDrop;
 	private static Seagull lastSeagull=null;
@@ -27,8 +30,9 @@ public class Seagull extends Mob{
 		setxVel(1+r.nextInt(3));
 		setyVel(0);
 		setDamage(10);
-		oldTimeDrop=System.currentTimeMillis()-r.nextInt(5000);
-		setCooldown(2000);
+		//oldTimeDrop=System.currentTimeMillis()-r.nextInt(5000);
+		//setCooldown(2000);
+		dropTimer=new Timer(r.nextInt(5000));
 		setGravityOn(true); 
 		
 	}
@@ -45,11 +49,17 @@ public class Seagull extends Mob{
 		}
 		
 		// "droping"
+		if(getDropTimer().isReady()){
+			setDropTimer(new Timer(getDropTimerWait()));
+			Drop drop=new Drop(getX_Point(),getY_Point()+getHeight(),getxVel(),getxVel());
+		    Level.getEntities().add(drop);
+		}
+		/*
 		if(System.currentTimeMillis()>oldTimeDrop+cooldown){
 			oldTimeDrop=System.currentTimeMillis();
 			Drop drop=new Drop(getX_Point(),getY_Point()+getHeight(),getxVel(),getxVel());
 		    Level.getEntities().add(drop);
-		}
+		}*/
 	}
     
     
@@ -73,6 +83,23 @@ public class Seagull extends Mob{
 	public static void setLastSeagull(Seagull lastSeagull) {
 		Seagull.lastSeagull = lastSeagull;
 	}
+
+	public Timer getDropTimer() {
+		return dropTimer;
+	}
+
+	public void setDropTimer(Timer dropTimer) {
+		this.dropTimer = dropTimer;
+	}
+
+	public int getDropTimerWait() {
+		return dropTimerWait;
+	}
+
+	public void setDropTimerWait(int dropTimerWait) {
+		this.dropTimerWait = dropTimerWait;
+	}
+	
 	
 	
 	

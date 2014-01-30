@@ -12,8 +12,7 @@ import ch.ilikechickenwings.karpfengame.Handler.Timer;
 public class FlyingCarp extends Projectile{
 	
 	private Timer flyingTimer;
-	private int flyingTimerWait=1200;
-	int updates = 30;
+	private int flyingTimerWait=1200; // millis
 	
 	public FlyingCarp(Player player){
 		setWidth(10);
@@ -29,27 +28,15 @@ public class FlyingCarp extends Projectile{
 	}
 	
 	public void update(InputHandler inhandler){
-		if(getFlyingTimer().isReady()){
+		if(getFlyingTimer().isReady()){ // time's out :)
 			getPlayer().setGravityOn(true);
 			Level.getEntities().remove(this);
 			getPlayer().setFlying(false);
 		}else{
 			getPlayer().setY_Point(getPlayer().getY_Point()-2);
 			getPlayer().setFlying(true);
-			updates--;
 		}
-		/*
-		if(updates>0){
-		getPlayer().setY_Point(getPlayer().getY_Point()-2);
-		getPlayer().setFlying(true);
-		updates--;
-		}else{
-			getPlayer().setGravityOn(true);
-			Level.getEntities().remove(this);
-			getPlayer().setFlying(false);
-			
-		}
-		*/
+		
 	}
 	
 	public void draw(Graphics2D g,int xOffset) {
