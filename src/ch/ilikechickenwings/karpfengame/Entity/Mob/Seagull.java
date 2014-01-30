@@ -13,8 +13,6 @@ public class Seagull extends Mob{
 	
 	private Timer dropTimer;
 	private int dropTimerWait = 2000;  // in millisecs
-	private int cooldown; // in millisecs
-	private long oldTimeDrop;
 	private static Seagull lastSeagull=null;
 	
 	private int upAc=4; // for realistic flying, upwards acceleration, > 1, high number=small difference
@@ -30,8 +28,6 @@ public class Seagull extends Mob{
 		setxVel(1+r.nextInt(3));
 		setyVel(0);
 		setDamage(10);
-		//oldTimeDrop=System.currentTimeMillis()-r.nextInt(5000);
-		//setCooldown(2000);
 		dropTimer=new Timer(r.nextInt(5000));
 		setGravityOn(true); 
 		
@@ -54,26 +50,12 @@ public class Seagull extends Mob{
 			Drop drop=new Drop(getX_Point(),getY_Point()+getHeight(),getxVel(),getxVel());
 		    Level.getEntities().add(drop);
 		}
-		/*
-		if(System.currentTimeMillis()>oldTimeDrop+cooldown){
-			oldTimeDrop=System.currentTimeMillis();
-			Drop drop=new Drop(getX_Point(),getY_Point()+getHeight(),getxVel(),getxVel());
-		    Level.getEntities().add(drop);
-		}*/
 	}
     
     
 	public void draw(Graphics2D g2,int xOffset){
 		g2.setColor(Color.yellow);
 		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
-	}
-	
-		public int getCooldown() {
-		return cooldown;
-	}
-
-	public void setCooldown(int cooldown) {
-		this.cooldown = cooldown;
 	}
 
 	public static Seagull getLastSeagull() {
