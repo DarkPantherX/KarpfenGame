@@ -105,6 +105,8 @@ public class Player extends Entity{
 			    }	
 			}
 			
+			if(getY_Point()<0){setY_Point(0);} // makes it impossible to fly out of the field of view
+			
 	}
 
 	

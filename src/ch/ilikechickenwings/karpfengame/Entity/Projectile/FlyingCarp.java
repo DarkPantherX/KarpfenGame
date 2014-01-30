@@ -22,9 +22,6 @@ public class FlyingCarp extends Projectile{
 		setDamage(10);
 		setGravityOn(false);
 		setPlayer(player);
-		
-		
-		
 	}
 	
 	public void update(InputHandler inhandler){
@@ -46,8 +43,6 @@ public class FlyingCarp extends Projectile{
 				20 + getPlayer().getHeight(), 20);
 
 	}
-	
-	
 	
 
 }

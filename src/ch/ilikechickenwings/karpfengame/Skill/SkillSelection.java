@@ -28,12 +28,8 @@ public class SkillSelection {
 	
 	private Timer[] skillTimer = new Timer[Skill.getNr()];
 	private int skillTimerWait = 500; // Millisec
-	private long[] currTimeSkill= new long[Skill.getNr()];
-	private long[] oldTimeSkill= new long[Skill.getNr()];
 	private boolean[] enableSkill;
 	private int enabledSkill=0;
-	private int timeVar;
-	private long oldTime;
 	
 	
 	
@@ -53,29 +49,6 @@ public class SkillSelection {
 		if(yOffset>0 && drawTimer.isReady()){
 			setyOffset(getyOffset()-yvel);
 		}
-		
-		/*
-		// update Skills
-		long currTime=System.currentTimeMillis();
-		if(getPlayer().isWalking()){
-			if(oldTime+200<currTime){
-				if(timeVar==0){
-					timeVar=1;
-				}else{
-					timeVar=0;
-				}
-				oldTime=currTime;
-			}
-		}*/
-		/*
-		//Skill
-		for(int i=0;i<Skill.getNr();i++){
-		    if(currTimeSkill[i]>=oldTimeSkill[i]+500){
-			    enableSkill[i]=true;
-		    }else{
-			    currTimeSkill[i]=System.currentTimeMillis();
-		    }
-		}*/
 		
 		// Select Skill
 		if(inHandler.getKeys()[KeyEvent.VK_1]){ // Carp
@@ -107,8 +80,6 @@ public class SkillSelection {
 				Skill skill=(Skill) Level.getSkills()[i];
 				if(getPlayer().getCoffee()>=skill.getCoffee()){
 					getPlayer().setCoffee(getPlayer().getCoffee()-skill.getCoffee());
-					//enableSkill[i]=false;
-					//oldTimeSkill[i]=System.currentTimeMillis();
 					skillTimer[i]=new Timer(skillTimerWait);
 					switch(i){
 					    case 0:
@@ -140,9 +111,6 @@ public class SkillSelection {
 	
 	public void draw(Graphics2D g2){
 		if(getyOffset()>0){
-			
-			
-		
 		    g2.setColor(Color.CYAN);
 		    g2.fillRect(0,getyOffset()-2*getWidth(),KarpfenGame.WIDTH-1, getWidth()*2);
 		    
