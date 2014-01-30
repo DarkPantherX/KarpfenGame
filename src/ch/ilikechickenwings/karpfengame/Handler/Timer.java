@@ -8,7 +8,6 @@ public class Timer {
 	public Timer(int millis){
 		setMillis(millis);
 		setStartMilli(System.currentTimeMillis());
-		System.out.println(getMillis());
 	}
 
 	public boolean isReady(){

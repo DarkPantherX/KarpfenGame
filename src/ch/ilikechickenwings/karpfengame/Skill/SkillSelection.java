@@ -26,6 +26,8 @@ public class SkillSelection {
 	private Timer drawTimer;
 	private int drawTimerWait = 800; // millisec
 	
+	private Timer[] skillTimer = new Timer[Skill.getNr()];
+	private int skillTimerWait = 500; // Millisec
 	private long[] currTimeSkill= new long[Skill.getNr()];
 	private long[] oldTimeSkill= new long[Skill.getNr()];
 	private boolean[] enableSkill;
@@ -39,6 +41,9 @@ public class SkillSelection {
 		setyOffset(0);
 		setPlayer(player);
 		setEnableSkill(useableSkill);
+		for(int i=0;i<Skill.getNr();i++){
+			skillTimer[i]=new Timer(skillTimerWait);
+		}
 		
 	}
 	
@@ -49,7 +54,7 @@ public class SkillSelection {
 			setyOffset(getyOffset()-yvel);
 		}
 		
-		
+		/*
 		// update Skills
 		long currTime=System.currentTimeMillis();
 		if(getPlayer().isWalking()){
@@ -61,8 +66,8 @@ public class SkillSelection {
 				}
 				oldTime=currTime;
 			}
-		}
-		
+		}*/
+		/*
 		//Skill
 		for(int i=0;i<Skill.getNr();i++){
 		    if(currTimeSkill[i]>=oldTimeSkill[i]+500){
@@ -70,7 +75,7 @@ public class SkillSelection {
 		    }else{
 			    currTimeSkill[i]=System.currentTimeMillis();
 		    }
-		}
+		}*/
 		
 		// Select Skill
 		if(inHandler.getKeys()[KeyEvent.VK_1]){ // Carp
@@ -98,12 +103,13 @@ public class SkillSelection {
 		
 		// Use Skills
 		for(int i=0;i<Skill.getNr();i++){
-			if(inHandler.getKeys()[KeyEvent.VK_S]&&enableSkill[i]&&Level.useableSkill[i]&&enabledSkill==i){ // Carp
+			if(inHandler.getKeys()[KeyEvent.VK_S]&&skillTimer[i].isReady()&&Level.useableSkill[i]&&enabledSkill==i){ // Carp
 				Skill skill=(Skill) Level.getSkills()[i];
 				if(getPlayer().getCoffee()>=skill.getCoffee()){
 					getPlayer().setCoffee(getPlayer().getCoffee()-skill.getCoffee());
-					enableSkill[i]=false;
-					oldTimeSkill[i]=System.currentTimeMillis();
+					//enableSkill[i]=false;
+					//oldTimeSkill[i]=System.currentTimeMillis();
+					skillTimer[i]=new Timer(skillTimerWait);
 					switch(i){
 					    case 0:
 						SoundSystem.playSound(Sounds.playerShot);
