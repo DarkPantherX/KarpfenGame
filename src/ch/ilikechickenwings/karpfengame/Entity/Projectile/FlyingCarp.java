@@ -7,9 +7,12 @@ import ch.ilikechickenwings.karpfengame.KarpfenGame;
 import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Handler.Timer;
 
 public class FlyingCarp extends Projectile{
 	
+	private Timer flyingTimer;
+	private int flyingTimerWait=1200;
 	int updates = 30;
 	
 	public FlyingCarp(Player player){
@@ -22,9 +25,20 @@ public class FlyingCarp extends Projectile{
 		setDamage(10);
 		setGravityOn(false);
 		setPlayer(player);
+		setFlyingTimer(new Timer(getFlyingTimerWait()));
 	}
 	
 	public void update(InputHandler inhandler){
+		if(getFlyingTimer().isReady()){
+			getPlayer().setGravityOn(true);
+			Level.getEntities().remove(this);
+			getPlayer().setFlying(false);
+		}else{
+			getPlayer().setY_Point(getPlayer().getY_Point()-2);
+			getPlayer().setFlying(true);
+			updates--;
+		}
+		/*
 		if(updates>0){
 		getPlayer().setY_Point(getPlayer().getY_Point()-2);
 		getPlayer().setFlying(true);
@@ -35,6 +49,7 @@ public class FlyingCarp extends Projectile{
 			getPlayer().setFlying(false);
 			
 		}
+		*/
 	}
 	
 	public void draw(Graphics2D g,int xOffset) {
@@ -43,6 +58,23 @@ public class FlyingCarp extends Projectile{
 				20 + getPlayer().getHeight(), 20);
 
 	}
+
+	public Timer getFlyingTimer() {
+		return flyingTimer;
+	}
+
+	public void setFlyingTimer(Timer flyingTimer) {
+		this.flyingTimer = flyingTimer;
+	}
+
+	public int getFlyingTimerWait() {
+		return flyingTimerWait;
+	}
+
+	public void setFlyingTimerWait(int flyingTimerWait) {
+		this.flyingTimerWait = flyingTimerWait;
+	}
+	
 	
 
 }
