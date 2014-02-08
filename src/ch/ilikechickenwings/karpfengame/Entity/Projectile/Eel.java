@@ -6,11 +6,12 @@ import java.awt.Graphics2D;
 import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Handler.Timer;
 
 public class Eel extends Projectile{
 
-	private long lifeTime;
-	private long lifeSpan;
+	private Timer lifeTimer;
+	private int lifeTimerWait;
 	
 	public Eel(int x, int y, Player player){
 		setDir(player.getDir());
@@ -21,20 +22,19 @@ public class Eel extends Projectile{
 		setxVel(10);
 		setyVel(0);
 		setDamage(100);
-		setLifeTime(System.currentTimeMillis());
-		setLifeSpan(2000l);
+		setLifeTimer(new Timer(getLifeTimerWait()));
 		setPlayer(player);
 		setGravityOn(false);
 	}
 	
 	public void update(InputHandler inHandler){
-			setX_Point(getPlayer().getX_Point()+
+		setX_Point(getPlayer().getX_Point()+
 					(getPlayer().getWidth()*Math.max(0, getPlayer().getDir()))+
 					(getWidth()*Math.min(0, getPlayer().getDir())));
-			
 		
 		setY_Point(getPlayer().getY_Point()+getHeight()/2);
-		if((System.currentTimeMillis()-getLifeTime())>getLifeSpan()){
+		
+		if(getLifeTimer().isReady()){
 			Level.entities.remove(this);
 		}
 	}
@@ -45,33 +45,22 @@ public class Eel extends Projectile{
 		
 	}
 
-	/**
-	 * @return the lifeTime
-	 */
-	public long getLifeTime() {
-		return lifeTime;
+	public Timer getLifeTimer() {
+		return lifeTimer;
 	}
 
-	/**
-	 * @param lifeTime the lifeTime to set
-	 */
-	public void setLifeTime(long lifeTime) {
-		this.lifeTime = lifeTime;
+	public void setLifeTimer(Timer lifeTimer) {
+		this.lifeTimer = lifeTimer;
 	}
 
-	/**
-	 * @return the lifeSpan
-	 */
-	public long getLifeSpan() {
-		return lifeSpan;
+	public int getLifeTimerWait() {
+		return lifeTimerWait;
 	}
 
-	/**
-	 * @param lifeSpan the lifeSpan to set
-	 */
-	public void setLifeSpan(long lifeSpan) {
-		this.lifeSpan = lifeSpan;
+	public void setLifeTimerWait(int lifeTimerWait) {
+		this.lifeTimerWait = lifeTimerWait;
 	}
+
 
 
 }

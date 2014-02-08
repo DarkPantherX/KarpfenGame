@@ -81,6 +81,8 @@ public class Level {
 	private int lvl;
 	private Wall lastWall;
 	
+	private Background background = new Background(0); // 0 = multipi TODO this should be defined in level.properties
+	
 	// constructor
 	public Level(int lvl, KarpfenGame karpfenGame) {
 		lv=this;
@@ -345,6 +347,9 @@ public class Level {
 
 
 	public void draw(Graphics2D g2) {
+		
+		background.draw(g2, xOffset);
+		
 		player.draw(g2, xOffset);
 
 		for (int w = 0; w < walls.size(); w++) {

@@ -14,6 +14,7 @@ public class Tile {
 	public static BufferedImage[][] player;
 	public static Image shit1;
 	public static Image shit2;
+	public static Image multipi;
 	
 	
 	public Tile(){
@@ -23,6 +24,8 @@ public class Tile {
 				getClass().getResource("/res/shit1.png"));
 		shit2= Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/shit2.png"));
+		multipi = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/multipi.jpg"));
 		BufferedImage playerSheet = null;
 		try {
 			playerSheet = ImageIO.read(getClass().getResource("/res/playerSheet.png"));
@@ -30,7 +33,6 @@ public class Tile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		player= AnimatedTile.getAnimation(playerSheet, 3, 3, 20, 40);
 		
 	}
