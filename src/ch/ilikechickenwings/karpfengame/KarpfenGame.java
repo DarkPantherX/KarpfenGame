@@ -70,6 +70,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 		inHandler = new InputHandler();
 		compHandler = new ComponentHandler();
 		addKeyListener(inHandler);
+		addMouseListener(inHandler);
 		addComponentListener(compHandler);
 		// sets the menu to the IntroScreenMenu (at the begin of the game)
 		setMenu(new LoadMenu());
