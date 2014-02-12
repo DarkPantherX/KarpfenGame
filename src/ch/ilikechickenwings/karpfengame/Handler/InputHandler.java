@@ -2,11 +2,19 @@ package ch.ilikechickenwings.karpfengame.Handler;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
-public class InputHandler implements KeyListener {
+import ch.ilikechickenwings.karpfengame.Wall;
+
+public class InputHandler implements KeyListener, MouseListener {
+	
 	public boolean keys[] = new boolean[500];
 	public boolean typed[]= new boolean[500]; // this array does NOT use the method keyTyped()
 	
+	public static ArrayList<Integer> mouse = new ArrayList<Integer>();
+
 	/*
 	 * Speed tutorial on typed[]: 
 	 * To detect if a Key was typed, do not use the standard keyTyped() method.
@@ -20,14 +28,34 @@ public class InputHandler implements KeyListener {
 	 * 
 	 */
 	
+	// constructor
 	public void KeyListener(){
 		for(int i=0;i<keys.length;i++){
 			keys[i]=false;
 			typed[i]=true;
 		}
+		mouse.clear();
+		
 	}
-
+	
+	// MOUSE
+	
+	@Override
+	public void mouseClicked(MouseEvent e){
+		mouse.add(e.getButton());
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent e){
+		mouse.remove(e.getButton());
+	}
+	
+	
+	
+	// KEYS
+	
 	//creates the KeyEvents and adds Keys to the boolean
+	@Override
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
 		if (code > 0 && code < keys.length) {
@@ -35,6 +63,7 @@ public class InputHandler implements KeyListener {
 		}
 	}
 
+	@Override
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
 		if (code > 0 && code < keys.length) {
@@ -78,6 +107,27 @@ public class InputHandler implements KeyListener {
 
 	public void setTyped(boolean[] typed) {
 		this.typed = typed;
+	}
+
+	
+	// MOUSE UNUSED
+	
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
