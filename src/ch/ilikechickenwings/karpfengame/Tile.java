@@ -15,17 +15,32 @@ public class Tile {
 	public static Image shit1;
 	public static Image shit2;
 	public static Image multipi;
+	public static Image lifeBar;
+	public static Image lifeHolderBar;
+	public static Image coffeeBar;
+	public static Image coffeeHolderBar;
+	public static Image healthPack;
 	
 	
 	public Tile(){
 		coffee= Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("/res/java-logo[1].gif"));
+				getClass().getResource("/res/coffee.png"));
 		shit1= Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/shit1.png"));
 		shit2= Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/shit2.png"));
 		multipi = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/multipi.jpg"));
+		lifeBar = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/lifebar.png"));
+		lifeHolderBar = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/lifeholderbar.png"));
+		coffeeBar = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/coffeebar.png"));
+		coffeeHolderBar = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/coffeeholderbar.png"));
+		healthPack = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/healthpack.png"));
 		BufferedImage playerSheet = null;
 		try {
 			playerSheet = ImageIO.read(getClass().getResource("/res/playerSheet.png"));

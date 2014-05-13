@@ -9,8 +9,8 @@ public class Coffee extends Item{
 	private int caffeine;
 	
 	public Coffee(int x, int y){
-		setWidth(30);
-		setHeight(30);
+		setWidth(15);
+		setHeight(15);
 		setX_Point(x-(getWidth()/2));
 		setY_Point(y-getHeight());
 		
