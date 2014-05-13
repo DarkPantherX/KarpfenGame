@@ -29,6 +29,7 @@ public class Player extends Entity{
 	private boolean gravityOn;
 	private int g=1;
 	private int timeVar;
+	private int timeVarPosi;
 	private boolean obstructedVision;
 	
 	private int jumpVel=-15;
@@ -73,7 +74,8 @@ public class Player extends Entity{
 				setGravityOn(true);
 				setyVel(getJumpVel()); 
 				setState(3);
-				setWalking(true);
+				setWalking(false);
+				timeVar=0;
 			}
 
 			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
@@ -142,20 +144,22 @@ public class Player extends Entity{
 		
 		if(isWalking()){
 		if(timer==null){
-			timer= new Timer(200);
+			timer= new Timer(150);
 		}
 		
 		
 		if(timer.isReady()){
+			
 			if(timeVar==0){
 			
-				timeVar=1;
-			}else{
+				timeVarPosi=1;
+			}else if(timeVar==2){
 
-				timeVar=0;
+				timeVarPosi=-1;
 
 			}
-			timer= new Timer(200);
+			timeVar+=timeVarPosi;
+			timer= new Timer(150);
 		}
 		}
 		
