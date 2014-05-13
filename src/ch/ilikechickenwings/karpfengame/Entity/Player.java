@@ -2,13 +2,13 @@ package ch.ilikechickenwings.karpfengame.Entity;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 
+import ch.ilikechickenwings.karpfengame.KarpfenGame;
 import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Handler.Timer;
 import ch.ilikechickenwings.karpfengame.Skill.SkillSelection;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
@@ -38,6 +38,7 @@ public class Player extends Entity{
 	private int coffee;
 	private boolean flying;
 	
+	private Timer timer;
 	private SkillSelection skillselection;
 
 	public Player(int x, int y, int lifes, int coffee, boolean[] useableSkill) {
@@ -114,17 +115,14 @@ public class Player extends Entity{
 		g2.setColor(Color.black);
 		//coffe shouldn't be above the player
 		
-		Image imge1 = null;
-			imge1 = Toolkit.getDefaultToolkit().getImage(
-					getClass().getResource("/res/loadingbar.png"));
+		
 		// coffee
-		g2.drawImage(imge1,5, 5, 150, 30,null);
-		g2.fillRect(5+(int)(150*coffee/100), 5,150,30);
+		g2.drawImage(Tile.coffeeBar,KarpfenGame.WIDTH-50,5+(int)(75-75*coffee/100),20,75*coffee/100,null);
+		g2.drawImage(Tile.coffeeHolderBar,KarpfenGame.WIDTH-50, 5, 20, 75,null);
 		// lifes
 		// TODO: Load life-image
-		g2.drawImage(imge1,160, 5, 150, 30,null);
-		g2.fillRect(160+(int)(150*getLifes()/100), 5,150,30);
-		
+		g2.drawImage(Tile.lifeBar,KarpfenGame.WIDTH-25,5+(int)(75-75*getLifes()/100),20,75*getLifes()/100,null);
+		g2.drawImage(Tile.lifeHolderBar,KarpfenGame.WIDTH-25, 5, 20, 75,null);
 		// player
 		g2.setColor(Color.green);
 		g2.drawImage(Tile.player[state-1][timeVar],getX_Point()-xOffset, getY_Point(),null);
@@ -141,6 +139,25 @@ public class Player extends Entity{
 	
 	private void walk(){
 		setX_Point(getX_Point() + getxVel());
+		
+		if(isWalking()){
+		if(timer==null){
+			timer= new Timer(200);
+		}
+		
+		
+		if(timer.isReady()){
+			if(timeVar==0){
+			
+				timeVar=1;
+			}else{
+
+				timeVar=0;
+
+			}
+			timer= new Timer(200);
+		}
+		}
 		
 		if(!flying){
 			setY_Point(getY_Point()+getyVel());
