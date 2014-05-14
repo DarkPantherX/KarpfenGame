@@ -2,6 +2,8 @@ package ch.ilikechickenwings.karpfengame;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.util.Random;
 
 public class Wall {
 	
@@ -11,6 +13,8 @@ public class Wall {
 	private int height=20;
 	private int pf=0; // what the heck is that? //DAFUQ? THIS ISNT FROM ME!
 	private boolean playerStandingOn=false;
+	private Image img[];
+	private int ant;
 	
 	public Wall(int x, int y, int width, int height){
 		this.setX_Point(x);
@@ -18,8 +22,43 @@ public class Wall {
 		this.setWidth(width);
 		this.setHeight(height);
 		
+		ant= (int) ((KarpfenGame.HEIGHT-getY_Point())/30);
+		img= new Image[ant];
+		
+		System.out.println(ant);
+		
+		for(int i=0;i<ant;i++){
+			Random rand = new Random();
+			int num= rand.nextInt(5)+1;
+			if(num==1){
+				img[i]=Tile.flat1;
+			}else if(num==2){
+				img[i]=Tile.flat2;
+			}else if(num==3){
+				img[i]=Tile.flat3;
+			}else if(num==4){
+				img[i]=Tile.flat4;
+			}else if(num==5){
+				img[i]=Tile.flat5;
+			}
+			
+			
+			
+		}
+		
 	}
 
+	
+	public void draw(Graphics2D g2,int xOffset){
+		g2.setColor(Color.red);
+		g2.drawImage(Tile.flat_ceiling,getX_Point()-xOffset, getY_Point(), getWidth(),
+				getHeight()+20,null);
+		for(int i=0;i<ant;i++){
+			g2.drawImage(img[i],getX_Point()-xOffset, getY_Point()+(i+1)*30, getWidth(),
+					30,null);
+		}
+	}
+	
 	/**
 	 * @return the x_Point
 	 */
@@ -104,11 +143,5 @@ public class Wall {
 		this.playerStandingOn = playerStandingOn;
 	}
 
-
-	public void draw(Graphics2D g2,int xOffset){
-		g2.setColor(Color.red);
-		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(),
-				getHeight());
-	}
 
 }
