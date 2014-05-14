@@ -144,7 +144,7 @@ public class Player extends Entity{
 		
 		if(isWalking()){
 		if(timer==null){
-			timer= new Timer(150);
+			timer= new Timer(75);
 		}
 		
 		
@@ -153,13 +153,13 @@ public class Player extends Entity{
 			if(timeVar==0){
 			
 				timeVarPosi=1;
-			}else if(timeVar==2){
+			}else if(timeVar==3){
 
 				timeVarPosi=-1;
 
 			}
 			timeVar+=timeVarPosi;
-			timer= new Timer(150);
+			timer= new Timer(75);
 		}
 		}
 		
