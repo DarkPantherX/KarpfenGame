@@ -10,7 +10,7 @@ public class Background {
 	public Background(int nr){
 		switch(nr){
 			case 0:
-				img = Tile.multipi;
+				img = Tile.background;
 			break;
 		}
 			
