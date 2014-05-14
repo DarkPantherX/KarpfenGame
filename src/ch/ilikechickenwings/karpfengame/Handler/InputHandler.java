@@ -4,14 +4,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 public class InputHandler implements KeyListener, MouseListener {
 	
 	public boolean keys[] = new boolean[500];
 	public boolean typed[]= new boolean[500]; // this array does NOT use the method keyTyped()
+	public boolean mouse[]= new boolean[4];
 	
-	public static ArrayList<Integer> mouse = new ArrayList<Integer>();
 
 	/*
 	 * Speed tutorial on typed[]: 
@@ -32,7 +31,10 @@ public class InputHandler implements KeyListener, MouseListener {
 			keys[i]=false;
 			typed[i]=true;
 		}
-		mouse.clear();
+		for(int i=0;i<mouse.length;i++){
+			mouse[i]=false;
+		}
+		
 		
 	}
 	
@@ -40,13 +42,12 @@ public class InputHandler implements KeyListener, MouseListener {
 	
 	@Override
 	public void mousePressed(MouseEvent e){
-		mouse.add(e.getButton());
-		System.out.println("Heello");
+		mouse[e.getButton()]=true;
 	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e){
-		mouse.remove(e.getButton());
+		mouse[e.getButton()]=false;
 	}
 	
 	
