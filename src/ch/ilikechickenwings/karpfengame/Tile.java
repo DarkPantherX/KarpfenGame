@@ -8,6 +8,12 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class Tile {
+	public static Image flat1;
+	public static Image flat2;
+	public static Image flat3;
+	public static Image flat4;
+	public static Image flat5;
+	public static Image flat_ceiling;
 	public static Image coffee;
 	public static Image healthpacks;
 	public static Image platform;
@@ -20,7 +26,7 @@ public class Tile {
 	public static BufferedImage[][] zombie4;
 	public static Image shit1;
 	public static Image shit2;
-	public static Image multipi;
+	public static Image background;
 	public static Image lifeBar;
 	public static Image lifeHolderBar;
 	public static Image coffeeBar;
@@ -37,8 +43,8 @@ public class Tile {
 				getClass().getResource("/res/shit1.png"));
 		shit2= Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/shit2.png"));
-		multipi = Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("/res/multipi.jpg"));
+		background = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/background.png"));
 		lifeBar = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/lifebar.png"));
 		lifeHolderBar = Toolkit.getDefaultToolkit().getImage(
@@ -51,7 +57,18 @@ public class Tile {
 				getClass().getResource("/res/healthpack.png"));
 		drop = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/drop.png"));
-
+		flat1 = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/flat1.png"));
+		flat2 = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/flat2.png"));		
+		flat3 = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/flat3.png"));
+		flat4 = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/flat4.png"));
+		flat5 = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/flat5.png"));
+		flat_ceiling = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/flat_ceiling.png"));
 		
 		BufferedImage playerSheet = null;
 		BufferedImage seagullSheet = null;
