@@ -119,12 +119,12 @@ public class Player extends Entity{
 		
 		
 		// coffee
-		g2.drawImage(Tile.coffeeBar,KarpfenGame.WIDTH-50,5+(int)(75-75*coffee/100),20,75*coffee/100,null);
-		g2.drawImage(Tile.coffeeHolderBar,KarpfenGame.WIDTH-50, 5, 20, 75,null);
+		g2.drawImage(Tile.coffeeBar,KarpfenGame.WIDTH-60,5+(int)(100-100*coffee/100),25,100*coffee/100,null);
+		g2.drawImage(Tile.coffeeHolderBar,KarpfenGame.WIDTH-60, 5, 25, 100,null);
 		// lifes
 		// TODO: Load life-image
-		g2.drawImage(Tile.lifeBar,KarpfenGame.WIDTH-25,5+(int)(75-75*getLifes()/100),20,75*getLifes()/100,null);
-		g2.drawImage(Tile.lifeHolderBar,KarpfenGame.WIDTH-25, 5, 20, 75,null);
+		g2.drawImage(Tile.lifeBar,KarpfenGame.WIDTH-30,5+(int)(100-100*getLifes()/100),25,100*getLifes()/100,null);
+		g2.drawImage(Tile.lifeHolderBar,KarpfenGame.WIDTH-30, 5, 25, 100,null);
 		// player
 		g2.setColor(Color.green);
 		g2.drawImage(Tile.player[state-1][timeVar],getX_Point()-xOffset, getY_Point(),null);

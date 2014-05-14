@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.util.Random;
 
 import ch.ilikechickenwings.karpfengame.Level;
+import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Handler.Timer;
@@ -14,6 +15,9 @@ public class Seagull extends Mob{
 	private Timer dropTimer;
 	private int dropTimerWait = 2000;  // in millisecs
 	private static Seagull lastSeagull=null;
+	private int timeVarPosi;
+	private int timeVar=0;
+	private Timer timer;
 	
 	private int upAc=4; // for realistic flying, upwards acceleration, > 1, high number=small difference
 
@@ -50,12 +54,31 @@ public class Seagull extends Mob{
 			Drop drop=new Drop(getX_Point(),getY_Point()+getHeight(),getxVel(),getxVel());
 		    Level.getEntities().add(drop);
 		}
+		if(timer==null){
+			timer= new Timer(100);
+		}
+		
+		
+		if(timer.isReady()){
+			
+			if(timeVar==0){
+			
+				timeVarPosi=1;
+			}else if(timeVar==3){
+
+				timeVarPosi=-1;
+
+			}
+			timeVar+=timeVarPosi;
+			timer= new Timer(100);
+		}
+
 	}
     
     
 	public void draw(Graphics2D g2,int xOffset){
 		g2.setColor(Color.yellow);
-		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		g2.drawImage(Tile.seagull[0][timeVar],getX_Point()-xOffset, getY_Point(),getWidth()+10,getHeight()+10,null);
 	}
 
 	public static Seagull getLastSeagull() {
