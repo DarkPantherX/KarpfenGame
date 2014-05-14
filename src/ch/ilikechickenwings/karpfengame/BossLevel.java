@@ -38,7 +38,7 @@ public class BossLevel extends Level{
 			// TODO: This check does probably not work if there's more than one wall
 			// above each other.. (witch is not possible yet)
 			for (int w = 0; w < walls.size(); w++) {
-				Wall wall = (Wall) walls.get(w);
+				BossWall wall = (BossWall) walls.get(w);
 				if(player.isGravityOn()){
 					wall.setPlayerStandingOn(false);
 				}

@@ -5,8 +5,8 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import ch.ilikechickenwings.karpfengame.BossLevel;
+import ch.ilikechickenwings.karpfengame.BossWall;
 import ch.ilikechickenwings.karpfengame.Level;
-import ch.ilikechickenwings.karpfengame.Wall;
 
 public class BossLvlReader {
 
@@ -22,7 +22,7 @@ public class BossLvlReader {
 			String stri[] = prop.getProperty("wall").replaceAll("\\s+","").split(",");
 			int x=0;
 			for(int i=0;i<stri.length/4;i++){
-			BossLevel.walls.add(new Wall(Integer.parseInt(stri[x]),Integer.parseInt(stri[x+1]),Integer.parseInt(stri[x+2]),Integer.parseInt(stri[x+3])));
+			BossLevel.walls.add(new BossWall(Integer.parseInt(stri[x]),Integer.parseInt(stri[x+1]),Integer.parseInt(stri[x+2]),Integer.parseInt(stri[x+3])));
 			x=x+4;
 			}
 			
