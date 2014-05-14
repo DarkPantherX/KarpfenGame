@@ -22,6 +22,7 @@ public class Tile {
 	public static Image coffeeBar;
 	public static Image coffeeHolderBar;
 	public static Image healthPack;
+	public static Image drop;
 
 
 	
@@ -44,6 +45,8 @@ public class Tile {
 				getClass().getResource("/res/coffeeholderbar.png"));
 		healthPack = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/healthpack.png"));
+		drop = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/drop.png"));
 
 		
 		BufferedImage playerSheet = null;
@@ -57,7 +60,7 @@ public class Tile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		player= AnimatedTile.getAnimation(playerSheet, 3, 3, 20, 40);
+		player= AnimatedTile.getAnimation(playerSheet, 3, 4, 20, 40);
 		seagull= AnimatedTile.getAnimation(seagullSheet, 1, 4, 30, 30);
 		carp= AnimatedTile.getAnimation(carpSheet, 2, 2, 15, 10);
 		
