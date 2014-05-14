@@ -278,14 +278,15 @@ public class Level {
 						entities.remove(ent);
 						
 						for(int i=0;i<5;i++){
-							int ui=(int) (Math.random()*10);
+							Random rand = new Random();
+							int ui=(int) (rand.nextInt(10)+1);
 							
 							player.setObstructedVision(true);
 							VisionObstructer s;
 							if(ui<5){
-								s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit1);
+								s= new VisionObstructer(rand.nextInt(KarpfenGame.WIDTH-250),rand.nextInt(KarpfenGame.HEIGHT-250),Tile.shit1);
 							}else{
-								s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit2);
+								s= new VisionObstructer(rand.nextInt(KarpfenGame.WIDTH-250),rand.nextInt(KarpfenGame.HEIGHT-250),Tile.shit2);
 							}
 								entities.add(s);	
 						}
@@ -421,7 +422,7 @@ public class Level {
 
 			int dyOffset = r.nextInt(2 * dyVar) - dyVar;
 			if (wi.getY_Point() + dyOffset + player.getHeight() > KarpfenGame.HEIGHT
-					|| wi.getY_Point() + dyOffset + wi.getHeight() < 0) { // makes walls outside
+					|| wi.getY_Point() + dyOffset + wi.getHeight() < 40) { // makes walls outside
 															// of the window
 															// impossible
 				dyOffset *= -1;
