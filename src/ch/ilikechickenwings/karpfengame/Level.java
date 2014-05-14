@@ -187,8 +187,8 @@ public class Level {
 				wall.setPlayerStandingOn(true);	
 			}
 			if(wall.isPlayerStandingOn() && 
-			   (player.getX_Point()>wall.getX_Point()+wall.getWidth() ||
-			    player.getX_Point()+player.getWidth()<wall.getX_Point())){
+			   (player.getX_Point()+5>wall.getX_Point()+wall.getWidth() ||
+			    player.getX_Point()+player.getWidth()-5<wall.getX_Point())){
 				player.setGravityOn(true);
 			}
 		}
@@ -357,6 +357,7 @@ public class Level {
 			Wall wall = (Wall) walls.get(w);
 			wall.draw(g2, xOffset);
 		}
+		player.draw(g2, xOffset);
 		for (int wz = 0; wz < entities.size(); wz++) {
 			Updateable en= (Updateable)entities.get(wz);
 			en.draw(g2, xOffset);
