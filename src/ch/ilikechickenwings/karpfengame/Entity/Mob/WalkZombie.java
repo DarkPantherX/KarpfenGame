@@ -4,14 +4,19 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import ch.ilikechickenwings.karpfengame.Level;
+import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Wall;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Handler.Timer;
 
 public class WalkZombie extends Mob{
 	
 
 	private boolean dir=true; // true = they walk to right, false = they walk to left
-	
+	private int timeVar;
+	private int timeVarPosi;
+	private Timer timer;
+	private int dire;
 	
 	public WalkZombie(int x,int y) {
 		setWidth(20);
@@ -30,8 +35,10 @@ public class WalkZombie extends Mob{
 		
 		if (dir) { // right
 			setX_Point(getX_Point()+getxVel());
+			dire=0;
 		} else {
 			setX_Point(getX_Point()-getxVel());
+			dire=1;
 		}
 	
 		for (int w = 0; w < Level.walls.size(); w++) {
@@ -54,11 +61,30 @@ public class WalkZombie extends Mob{
 			}
 		}
 	
+		if(timer==null){
+			timer= new Timer(75);
+		}
+		
+		
+		if(timer.isReady()){
+			
+			if(timeVar==0){
+			
+				timeVarPosi=1;
+			}else if(timeVar==3){
+
+				timeVarPosi=-1;
+
+			}
+			timeVar+=timeVarPosi;
+			timer= new Timer(75);
+		}
+		
 	}
 	
 	public void draw(Graphics2D g2,int xOffset){
 		g2.setColor(Color.blue);
-		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		g2.drawImage(Tile.zombie[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
 	}
 
 	public boolean isDir() {

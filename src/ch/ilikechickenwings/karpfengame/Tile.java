@@ -14,6 +14,7 @@ public class Tile {
 	public static BufferedImage[][] player;
 	public static BufferedImage[][] seagull;
 	public static BufferedImage[][] carp;
+	public static BufferedImage[][] zombie;
 	public static Image shit1;
 	public static Image shit2;
 	public static Image multipi;
@@ -52,10 +53,12 @@ public class Tile {
 		BufferedImage playerSheet = null;
 		BufferedImage seagullSheet = null;
 		BufferedImage carpSheet = null;
+		BufferedImage zombieSheet = null;
 		try {
 			playerSheet = ImageIO.read(getClass().getResource("/res/playerSheet.png"));
 			seagullSheet = ImageIO.read(getClass().getResource("/res/seagullSheet.png"));
 			carpSheet = ImageIO.read(getClass().getResource("/res/carpSheet.png"));
+			zombieSheet = ImageIO.read(getClass().getResource("/res/zombieSheet.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,6 +66,7 @@ public class Tile {
 		player= AnimatedTile.getAnimation(playerSheet, 3, 4, 20, 40);
 		seagull= AnimatedTile.getAnimation(seagullSheet, 1, 4, 30, 30);
 		carp= AnimatedTile.getAnimation(carpSheet, 2, 2, 15, 10);
+		zombie= AnimatedTile.getAnimation(zombieSheet, 3, 4, 20, 40);
 		
 	}
 	
