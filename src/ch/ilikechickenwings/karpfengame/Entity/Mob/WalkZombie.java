@@ -17,8 +17,9 @@ public class WalkZombie extends Mob{
 	private int timeVarPosi;
 	private Timer timer;
 	private int dire;
+	private int skin;
 	
-	public WalkZombie(int x,int y) {
+	public WalkZombie(int x,int y, int skin) {
 		setWidth(20);
 		setHeight(40);
 		setX_Point(x);
@@ -28,6 +29,7 @@ public class WalkZombie extends Mob{
 		setyVel(0);
 		setDamage(10);
 		setGravityOn(false);
+		setSkin(skin);
 	}
 
 
@@ -71,7 +73,7 @@ public class WalkZombie extends Mob{
 			if(timeVar==0){
 			
 				timeVarPosi=1;
-			}else if(timeVar==3){
+			}else if(timeVar==2){
 
 				timeVarPosi=-1;
 
@@ -84,7 +86,15 @@ public class WalkZombie extends Mob{
 	
 	public void draw(Graphics2D g2,int xOffset){
 		g2.setColor(Color.blue);
-		g2.drawImage(Tile.zombie[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
+		if(skin==1){
+			g2.drawImage(Tile.zombie1[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
+		}else if (skin==2){
+			g2.drawImage(Tile.zombie2[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
+		}else if(skin==3){
+			g2.drawImage(Tile.zombie3[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
+		}else{
+			g2.drawImage(Tile.zombie4[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
+		}
 	}
 
 	public boolean isDir() {
@@ -93,6 +103,16 @@ public class WalkZombie extends Mob{
 
 	public void setDir(boolean dir) {
 		this.dir = dir;
+	}
+
+
+	public int getSkin() {
+		return skin;
+	}
+
+
+	public void setSkin(int skin) {
+		this.skin = skin;
 	}
 	
 	

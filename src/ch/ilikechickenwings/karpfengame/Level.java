@@ -434,7 +434,8 @@ public class Level {
 			
 			// spawn Entities:
 			if (spawnWalkZombie >= r.nextInt(100)) {
-				WalkZombie wz = new WalkZombie(wi.getX_Point(), wi.getY_Point());
+				int skin=r.nextInt(4);
+				WalkZombie wz = new WalkZombie(wi.getX_Point(), wi.getY_Point(),skin);
 				entities.add(wz);
 			}
 			if (spawnHealthPack >= r.nextInt(100)) {
