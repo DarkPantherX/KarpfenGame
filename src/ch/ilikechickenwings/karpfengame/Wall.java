@@ -25,8 +25,6 @@ public class Wall {
 		ant= (int) ((KarpfenGame.HEIGHT-getY_Point())/30);
 		img= new Image[ant];
 		
-		System.out.println(ant);
-		
 		for(int i=0;i<ant;i++){
 			Random rand = new Random();
 			int num= rand.nextInt(5)+1;
