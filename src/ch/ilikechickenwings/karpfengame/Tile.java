@@ -33,6 +33,7 @@ public class Tile {
 	public static Image coffeeHolderBar;
 	public static Image healthPack;
 	public static Image drop;
+	public static Image baloonFish;
 
 
 	
@@ -57,6 +58,8 @@ public class Tile {
 				getClass().getResource("/res/healthpack.png"));
 		drop = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/drop.png"));
+		baloonFish = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/baloonfish.png"));
 		flat1 = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/flat1.png"));
 		flat2 = Toolkit.getDefaultToolkit().getImage(

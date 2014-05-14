@@ -1,8 +1,8 @@
 package ch.ilikechickenwings.karpfengame.Entity.Projectile;
 
-import java.awt.Color;
 import java.awt.Graphics2D;
 
+import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 
 public class Grenade extends Projectile {
@@ -54,8 +54,7 @@ public class Grenade extends Projectile {
 	}
 
 	public void draw(Graphics2D g2,int xOffset){
-		g2.setColor(Color.CYAN);
-		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		g2.drawImage(Tile.baloonFish,getX_Point()-xOffset, getY_Point(), getWidth(), getHeight(),null);
 		
 	}
 
