@@ -18,6 +18,7 @@ public class Tile {
 	public static Image healthpacks;
 	public static Image platform;
 	public static BufferedImage[][] player;
+	public static BufferedImage[][] eel;
 	public static BufferedImage[][] seagull;
 	public static BufferedImage[][] carp;
 	public static BufferedImage[][] zombie1;
@@ -73,6 +74,7 @@ public class Tile {
 		flat_ceiling = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/flat_ceiling.png"));
 		
+		BufferedImage eelSheet = null;
 		BufferedImage playerSheet = null;
 		BufferedImage seagullSheet = null;
 		BufferedImage carpSheet = null;
@@ -81,6 +83,7 @@ public class Tile {
 		BufferedImage zombieSheet3 = null;
 		BufferedImage zombieSheet4 = null;
 		try {
+			eelSheet = ImageIO.read(getClass().getResource("/res/eelSheet.png"));
 			playerSheet = ImageIO.read(getClass().getResource("/res/playerSheet.png"));
 			seagullSheet = ImageIO.read(getClass().getResource("/res/seagullSheet.png"));
 			carpSheet = ImageIO.read(getClass().getResource("/res/carpSheet.png"));
@@ -92,6 +95,7 @@ public class Tile {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		eel= AnimatedTile.getAnimation(eelSheet, 2, 3, 50, 20);
 		player= AnimatedTile.getAnimation(playerSheet, 3, 4, 20, 40);
 		seagull= AnimatedTile.getAnimation(seagullSheet, 1, 4, 30, 30);
 		carp= AnimatedTile.getAnimation(carpSheet, 2, 2, 15, 10);
