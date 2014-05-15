@@ -18,7 +18,7 @@ public class WalkZombie extends Mob{
 	private Timer timer;
 	private int dire;
 	private int skin;
-	
+
 	public WalkZombie(int x,int y, int skin) {
 		setWidth(20);
 		setHeight(40);
@@ -34,7 +34,6 @@ public class WalkZombie extends Mob{
 
 
 	public void update(InputHandler inHandler) {
-		
 		if (dir) { // right
 			setX_Point(getX_Point()+getxVel());
 			dire=0;
