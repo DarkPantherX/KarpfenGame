@@ -25,6 +25,7 @@ public class Tile {
 	public static BufferedImage[][] zombie2;
 	public static BufferedImage[][] zombie3;
 	public static BufferedImage[][] zombie4;
+	public static BufferedImage[][] explosion1;
 	public static Image shit1;
 	public static Image shit2;
 	public static Image background;
@@ -82,6 +83,7 @@ public class Tile {
 		BufferedImage zombieSheet2 = null;
 		BufferedImage zombieSheet3 = null;
 		BufferedImage zombieSheet4 = null;
+		BufferedImage explosionSheet1 = null;
 		try {
 			eelSheet = ImageIO.read(getClass().getResource("/res/eelSheet.png"));
 			playerSheet = ImageIO.read(getClass().getResource("/res/playerSheet.png"));
@@ -91,6 +93,7 @@ public class Tile {
 			zombieSheet2 = ImageIO.read(getClass().getResource("/res/zombieSheet2.png"));
 			zombieSheet3 = ImageIO.read(getClass().getResource("/res/zombieSheet3.png"));
 			zombieSheet4 = ImageIO.read(getClass().getResource("/res/zombieSheet4.png"));
+			explosionSheet1 = ImageIO.read(getClass().getResource("/res/explosionSheet1.png"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -103,6 +106,7 @@ public class Tile {
 		zombie2= AnimatedTile.getAnimation(zombieSheet2, 3, 4, 20, 40);
 		zombie3= AnimatedTile.getAnimation(zombieSheet3, 3, 4, 20, 40);
 		zombie4= AnimatedTile.getAnimation(zombieSheet4, 3, 4, 20, 40);
+		explosion1= AnimatedTile.getAnimation(explosionSheet1, 1, 6, 50, 50);
 	}
 	
 	

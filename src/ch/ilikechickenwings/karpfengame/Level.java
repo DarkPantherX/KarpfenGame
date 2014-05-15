@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
+import ch.ilikechickenwings.karpfengame.Entity.Explosion;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.Updateable;
 import ch.ilikechickenwings.karpfengame.Entity.VisionObstructer;
@@ -80,6 +81,7 @@ public class Level {
     private KarpfenGame karpfenGame; 
 	private int lvl;
 	private Wall lastWall;
+
 	
 	private Background background = new Background(0); // 0 = multipi TODO this should be defined in level.properties
 	
@@ -312,7 +314,8 @@ public class Level {
 							}
 							// delete Projectile entity, if it is a Carp or a Grenade
 							if(entity instanceof Carp || entity instanceof Grenade){
-							    entities.remove(entity);
+								entities.remove(entity);
+							    
 							}
 						}
 					}
@@ -335,7 +338,9 @@ public class Level {
 					}
 				}
 				if(ent.getLifes()<=0){
+					entities.add(new Explosion(ent.getX_Point(),ent.getY_Point(),50,50));
 					entities.remove(ent);
+					
 				}
 			} // end for each Entity
 		} // end if there are Entities at all

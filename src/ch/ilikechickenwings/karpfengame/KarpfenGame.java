@@ -58,6 +58,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 	private ComponentHandler compHandler;
 	private Menu menu;
 	private Level lvl;
+	private Story story;
 	private long oldTime = System.currentTimeMillis();
 	private boolean opened=false;
 
@@ -82,6 +83,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 
 	private void update() {
 		if(menu==null){
+			if(story==null){
 		lvl.update(inHandler);
 		long timeElapsed = System.currentTimeMillis() - oldTime;
 		// System.out.println(timeElapsed);
@@ -94,6 +96,10 @@ public class KarpfenGame extends JPanel implements Runnable{
 			}
 		}
 		oldTime = System.currentTimeMillis();
+			}else {
+				story.update(this,inHandler);
+				
+			}
 		}else{
 			menu.update(this, inHandler);
 			
@@ -102,12 +108,14 @@ public class KarpfenGame extends JPanel implements Runnable{
 
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
-		if(menu==null){
-		
-		g2.setColor(Color.black);
+			g2.setColor(Color.black);
 		g2.fillRect(0, 0, WIDTH, HEIGHT);
-
+		if(menu==null){
+		if(story==null){
 		lvl.draw(g2);
+			}else{
+				story.draw(g2);
+			}
 		}else{
 			menu.draw(g2);
 		}
