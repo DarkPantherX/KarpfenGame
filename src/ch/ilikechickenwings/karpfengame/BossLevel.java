@@ -25,10 +25,11 @@ public class BossLevel extends Level{
 
 		
 		// constructor
-		public BossLevel(int lvl, KarpfenGame karpfenGame) {
-			super(lvl, karpfenGame,true);
+		public BossLevel(String lv, KarpfenGame karpfenGame) {
+			super(lv, karpfenGame,true);
 			
-			new BossLvlReader("blvl"+Integer.toString(lvl)+".pros");
+			new BossLvlReader("blvl"+lv+".pros");
+			thisLevel="blvl"+lv+".pros";
 			entities.add(new FlyingZombie(300,300,getPlayer()));
 			}
 			
@@ -179,7 +180,13 @@ public class BossLevel extends Level{
 						entities.remove(ent);
 						if(ent instanceof BossMob){
 							resetLevel();
-							getKarpfenGame().setLvl(new Level(1, getKarpfenGame()));
+							if(nextLevel.startsWith("b")){
+								getKarpfenGame().setLvl(new BossLevel(nextLevel, getKarpfenGame()));
+								}else if(nextLevel.startsWith("s")){
+								getKarpfenGame().setStory(new Storyline(nextLevel, getKarpfenGame()));	
+								}else{
+								getKarpfenGame().setLvl(new Level(nextLevel, getKarpfenGame()));
+								}
 						}
 					}
 				} // end for each Entity
@@ -228,6 +235,6 @@ public class BossLevel extends Level{
 			
 		public void die() {
 			resetLevel();
-			getKarpfenGame().setLvl(new Level(1, getKarpfenGame()));
+			getKarpfenGame().setLvl(new Level(thisLevel, getKarpfenGame()));
 		}
 }

@@ -17,7 +17,7 @@ public class CommandExecutor {
 		}else if(str2[0].equals("clear")){
 			if(sec){
 			if(str2[1].equals("level")){
-			lv.getKarpfenGame().setLvl(new Level(1,lv.getKarpfenGame()));
+			lv.getKarpfenGame().setLvl(new Level(Level.thisLevel,lv.getKarpfenGame()));
 			System.out.println("Level has been reset");
 			}else if(str2[1].equals("entities")){
 				Level.entities.clear();

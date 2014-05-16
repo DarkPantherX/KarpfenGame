@@ -75,22 +75,24 @@ public class Level {
 	// Skills: 
 	public static boolean[] useableSkill= new boolean[Skill.getNr()]; // [0] = CarpSkill
 	// this has multiple uses. in the beginning its used as a initial boolean, whether to play with this specific skill or not.. AND as a timing variable in Player.java
-	public static int nextLevel;
+	public static String nextLevel;
+	public static String thisLevel;
 	
 	// Stuff:
     private KarpfenGame karpfenGame; 
-	private int lvl;
+	private String lvl;
 	private Wall lastWall;
 
 	
 	private Background background = new Background(0); // 0 = multipi TODO this should be defined in level.properties
 	
 	// constructor
-	public Level(int lvl, KarpfenGame karpfenGame) {
+	public Level(String lvl, KarpfenGame karpfenGame) {
 		lv=this;
 		this.setLvl(lvl);
 		this.setKarpfenGame(karpfenGame);
-		new LvlReader("lvl"+Integer.toString(lvl)+".pros");		
+		new LvlReader("lvl"+lvl+".pros");
+		thisLevel="blvl"+lvl+".pros";
 		player = new Player(0, 0, maxLife, maxCoffee, useableSkill);
 
 		for(int i=0;i<skills.length;i++){
@@ -130,11 +132,10 @@ public class Level {
 
         addWalls();
 	}
-	public Level(int lvl, KarpfenGame karpfenGame,boolean bosslevel){
+	public Level(String string, KarpfenGame karpfenGame,boolean bosslevel){
 		lv=this;
-		this.setLvl(lvl);
+		this.setLvl(string);
 		this.setKarpfenGame(karpfenGame);
-		new LvlReader("lvl"+Integer.toString(lvl)+".pros");		
 		player = new Player(0, 0, maxLife, maxCoffee, useableSkill);
 
 		for(int i=0;i<skills.length;i++){
@@ -472,13 +473,19 @@ public class Level {
 
 	public void die() {
 		resetLevel();
-		karpfenGame.setLvl(new Level(1, karpfenGame));
+		karpfenGame.setLvl(new Level(thisLevel, karpfenGame));
 	}
 
 	
 	private void nextLevel() {
 		resetLevel();
-		karpfenGame.setLvl(new BossLevel(1, karpfenGame));
+		if(nextLevel.startsWith("b")){
+		getKarpfenGame().setLvl(new BossLevel(nextLevel, getKarpfenGame()));
+		}else if(nextLevel.startsWith("s")){
+		getKarpfenGame().setStory(new Storyline(nextLevel, getKarpfenGame()));	
+		}else{
+		getKarpfenGame().setLvl(new Level(nextLevel, karpfenGame));
+		}
 		
 	}
 
@@ -558,16 +565,16 @@ public class Level {
 	/**
 	 * @return the lvl
 	 */
-	public int getLvl() {
+	public String getLvl() {
 		return lvl;
 	}
 
 	/**
-	 * @param lvl
+	 * @param string
 	 *            the lvl to set
 	 */
-	public void setLvl(int lvl) {
-		this.lvl = lvl;
+	public void setLvl(String string) {
+		this.lvl = string;
 	}
 
 	public static void executeCommand(String[] str2){

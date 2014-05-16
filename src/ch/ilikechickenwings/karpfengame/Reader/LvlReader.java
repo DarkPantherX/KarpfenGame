@@ -31,7 +31,7 @@ public class LvlReader {
 			for(int i=0;i<strin.length;i++){
 			Level.useableSkill[i] =Boolean.valueOf(strin[i]);
 			}
-			Level.nextLevel =Integer.parseInt(prop.getProperty("nextLevel"));
+			Level.nextLevel =prop.getProperty("nextLevel");
 			in.close();
 		}catch(IOException ex){
 			ex.printStackTrace();

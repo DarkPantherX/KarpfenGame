@@ -19,7 +19,7 @@ public class Explosion extends Entity{
 		setWidth(width);
 		setHeight(height);
 		setLifes(1);
-		timer= new Timer(35);
+		timer= new Timer(40);
 	}
 	
 	public void update(InputHandler inhandler){
@@ -27,7 +27,7 @@ public class Explosion extends Entity{
 		if(timer.isReady()){
 			if(timeVar<5){
 			timeVar++;
-		timer= new Timer(35);
+		timer= new Timer(40);
 		}else{
 			Level.entities.remove(this);
 			}

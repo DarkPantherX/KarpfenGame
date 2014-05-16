@@ -7,6 +7,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import ch.ilikechickenwings.karpfengame.Reader.TileReader;
+
 public class Tile {
 	public static Image flat1;
 	public static Image flat2;
@@ -37,9 +39,17 @@ public class Tile {
 	public static Image drop;
 	public static Image baloonFish;
 
+	
+	public static Image s1p0;
+	public static Image s1p1;
+	public static Image[] scenePics;
 
 	
 	public Tile(){
+		
+		new TileReader();
+		
+		
 		coffee= Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/coffee.png"));
 		shit1= Toolkit.getDefaultToolkit().getImage(
@@ -74,7 +84,10 @@ public class Tile {
 				getClass().getResource("/res/flat5.png"));
 		flat_ceiling = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/flat_ceiling.png"));
-		
+		s1p0 = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/s1p4.png"));
+		s1p1 = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/s1p8.png"));
 		BufferedImage eelSheet = null;
 		BufferedImage playerSheet = null;
 		BufferedImage seagullSheet = null;

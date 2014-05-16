@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 import ch.ilikechickenwings.karpfengame.KarpfenGame;
+import ch.ilikechickenwings.karpfengame.Storyline;
 import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Sound.Sounds;
@@ -96,6 +97,8 @@ public class LoadMenu extends Menu{
 		}
 		
 		if (currentTime > timeOld + 5000 ||inHandler.getKeys()[KeyEvent.VK_1]) { // a[5] = ENTER
+			
+			kgame.setStory(new Storyline("s1",kgame));
 			kgame.setMenu(null);
 		}
 		if (currentTime > timeOld + 2750 && currentTime < timeOld + 3000) {

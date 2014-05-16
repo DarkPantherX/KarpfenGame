@@ -76,7 +76,7 @@ public class KarpfenGame extends JPanel implements Runnable{
 		// sets the menu to the IntroScreenMenu (at the begin of the game)
 		setMenu(new LoadMenu());
 
-		this.lvl = new Level(1, this);
+		//this.lvl = new Level("1", this);
 		// start the game thread (run-method)
 		new Thread(this).start();
 	}
@@ -237,6 +237,15 @@ public class KarpfenGame extends JPanel implements Runnable{
 
 	public void setLvl(Level lvl) {
 		this.lvl = lvl;
+	}
+
+
+	public Story getStory() {
+		return story;
+	}
+
+	public void setStory(Story story) {
+		this.story = story;
 	}
 
 
