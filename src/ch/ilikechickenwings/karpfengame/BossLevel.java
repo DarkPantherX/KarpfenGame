@@ -29,7 +29,7 @@ public class BossLevel extends Level{
 			super(lv, karpfenGame,true);
 			
 			new BossLvlReader("blvl"+lv+".pros");
-			thisLevel="blvl"+lv+".pros";
+			thisLevel=lv;
 			entities.add(new FlyingZombie(300,300,getPlayer()));
 			}
 			

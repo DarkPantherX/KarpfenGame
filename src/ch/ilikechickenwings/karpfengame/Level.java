@@ -92,7 +92,7 @@ public class Level {
 		this.setLvl(lvl);
 		this.setKarpfenGame(karpfenGame);
 		new LvlReader("lvl"+lvl+".pros");
-		thisLevel="blvl"+lvl+".pros";
+		thisLevel=lvl;
 		player = new Player(0, 0, maxLife, maxCoffee, useableSkill);
 
 		for(int i=0;i<skills.length;i++){
