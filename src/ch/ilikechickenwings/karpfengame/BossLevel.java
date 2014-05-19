@@ -235,6 +235,6 @@ public class BossLevel extends Level{
 			
 		public void die() {
 			resetLevel();
-			getKarpfenGame().setLvl(new Level(thisLevel, getKarpfenGame()));
+			getKarpfenGame().setLvl(new BossLevel(thisLevel, getKarpfenGame()));
 		}
 }
