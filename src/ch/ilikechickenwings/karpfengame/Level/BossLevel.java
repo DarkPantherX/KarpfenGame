@@ -1,7 +1,12 @@
-package ch.ilikechickenwings.karpfengame;
+package ch.ilikechickenwings.karpfengame.Level;
 
 import java.awt.Graphics2D;
 
+import ch.ilikechickenwings.karpfengame.BossWall;
+import ch.ilikechickenwings.karpfengame.KarpfenGame;
+import ch.ilikechickenwings.karpfengame.Storyline;
+import ch.ilikechickenwings.karpfengame.Tile;
+import ch.ilikechickenwings.karpfengame.Wall;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.Updateable;
@@ -198,15 +203,15 @@ public class BossLevel extends Level{
 
 
 		public void draw(Graphics2D g2) {
-			player.draw(g2, xOffset);
+			player.draw(g2, xOffset, yOffset);
 
 			for (int w = 0; w < walls.size(); w++) {
 				Wall wall = (Wall) walls.get(w);
-				wall.draw(g2, xOffset);
+				wall.draw(g2, xOffset,yOffset);
 			}
 			for (int wz = 0; wz < entities.size(); wz++) {
 				Updateable en= (Updateable)entities.get(wz);
-				en.draw(g2, xOffset);
+				en.draw(g2, xOffset, yOffset);
 			}
 		}
 		

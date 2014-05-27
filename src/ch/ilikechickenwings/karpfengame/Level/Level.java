@@ -1,9 +1,15 @@
-package ch.ilikechickenwings.karpfengame;
+package ch.ilikechickenwings.karpfengame.Level;
 
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
+import ch.ilikechickenwings.karpfengame.Background;
+import ch.ilikechickenwings.karpfengame.CommandExecutor;
+import ch.ilikechickenwings.karpfengame.KarpfenGame;
+import ch.ilikechickenwings.karpfengame.Storyline;
+import ch.ilikechickenwings.karpfengame.Tile;
+import ch.ilikechickenwings.karpfengame.Wall;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Explosion;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
@@ -31,6 +37,7 @@ public class Level {
 
 	public static int widht; // TODO: Variable width?
 	public static int xOffset;
+	public static int yOffset;
 	public static int playerTrigger = 250; // as soon as the player reached this
 											// position in the window, the
 											// screen will follow the player.
@@ -132,7 +139,7 @@ public class Level {
 
         addWalls();
 	}
-	public Level(String string, KarpfenGame karpfenGame,boolean bosslevel){
+	public Level(String string, KarpfenGame karpfenGame,boolean otherLevel){
 		lv=this;
 		this.setLvl(string);
 		this.setKarpfenGame(karpfenGame);
@@ -357,16 +364,16 @@ public class Level {
 		
 		background.draw(g2, xOffset);
 		
-		player.draw(g2, xOffset);
+		player.draw(g2, xOffset, yOffset);
 
 		for (int w = 0; w < walls.size(); w++) {
 			Wall wall = (Wall) walls.get(w);
-			wall.draw(g2, xOffset);
+			wall.draw(g2, xOffset,yOffset);
 		}
-		player.draw(g2, xOffset);
+		player.draw(g2, xOffset, yOffset);
 		for (int wz = 0; wz < entities.size(); wz++) {
 			Updateable en= (Updateable)entities.get(wz);
-			en.draw(g2, xOffset);
+			en.draw(g2, xOffset, yOffset);
 		}
 	}
 	
