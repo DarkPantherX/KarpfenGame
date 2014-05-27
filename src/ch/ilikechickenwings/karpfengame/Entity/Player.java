@@ -5,10 +5,10 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import ch.ilikechickenwings.karpfengame.KarpfenGame;
-import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Handler.Timer;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 import ch.ilikechickenwings.karpfengame.Skill.SkillSelection;
 import ch.ilikechickenwings.karpfengame.Entity.Entity;
 import ch.ilikechickenwings.karpfengame.Entity.Item.HealthPack;
@@ -113,7 +113,7 @@ public class Player extends Entity{
 	}
 
 	
-	public void draw(Graphics2D g2,int xOffset){
+	public void draw(Graphics2D g2,int xOffset, int yOffset){
 		g2.setColor(Color.black);
 		//coffe shouldn't be above the player
 		
@@ -126,8 +126,7 @@ public class Player extends Entity{
 		g2.drawImage(Tile.lifeBar,KarpfenGame.WIDTH-30,5+(int)(100-100*getLifes()/100),25,100*getLifes()/100,null);
 		g2.drawImage(Tile.lifeHolderBar,KarpfenGame.WIDTH-30, 5, 25, 100,null);
 		// player
-		g2.setColor(Color.green);
-		g2.drawImage(Tile.player[state-1][timeVar],getX_Point()-xOffset, getY_Point(),null);
+		g2.drawImage(Tile.player[state-1][timeVar],getX_Point()-xOffset, getY_Point()+yOffset,null);
 		//g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
 		if(invincible){
 		g2.setColor(Color.blue);

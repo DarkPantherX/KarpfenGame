@@ -3,11 +3,11 @@ package ch.ilikechickenwings.karpfengame.Entity.Projectile;
 
 import java.awt.Graphics2D;
 
-import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Handler.Timer;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 
 public class Eel extends Projectile{
 
@@ -49,8 +49,8 @@ public class Eel extends Projectile{
 		
 	}
 
-	public void draw(Graphics2D g2,int xOffset){
-		g2.drawImage(Tile.eel[Math.min(1,Math.abs(getDir()-1))][lifeCounter],getX_Point()-xOffset, getY_Point(),getWidth(),getHeight(),null);
+	public void draw(Graphics2D g2,int xOffset, int yOffset){
+		g2.drawImage(Tile.eel[Math.min(1,Math.abs(getDir()-1))][lifeCounter],getX_Point()-xOffset, getY_Point()+yOffset,getWidth(),getHeight(),null);
 		
 	}
 

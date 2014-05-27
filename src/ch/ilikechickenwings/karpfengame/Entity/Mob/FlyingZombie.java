@@ -57,8 +57,8 @@ public class FlyingZombie extends BossMob{
 		
 	}
 	
-	public void draw(Graphics2D g2,int xOffset){
+	public void draw(Graphics2D g2,int xOffset, int yOffset){
 		g2.setColor(Color.blue);
-		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		g2.fillRect(getX_Point()-xOffset, getY_Point()-yOffset, getWidth(), getHeight());
 	}
 }

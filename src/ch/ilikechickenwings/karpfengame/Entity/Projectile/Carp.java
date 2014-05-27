@@ -56,8 +56,8 @@ public class Carp extends Projectile{
 		
 	}
 
-	public void draw(Graphics2D g2,int xOffset){
-		g2.drawImage(Tile.carp[Math.min(1,Math.abs(getDir()-1))][timeVar],getX_Point()-xOffset, getY_Point(),getWidth(),getHeight(),null);
+	public void draw(Graphics2D g2,int xOffset, int yOffset){
+		g2.drawImage(Tile.carp[Math.min(1,Math.abs(getDir()-1))][timeVar],getX_Point()-xOffset, getY_Point()+yOffset,getWidth(),getHeight(),null);
 		
 		
 		

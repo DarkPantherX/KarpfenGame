@@ -4,11 +4,11 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.Random;
 
-import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Drop;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Handler.Timer;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 
 public class Seagull extends Mob{
 	
@@ -76,9 +76,9 @@ public class Seagull extends Mob{
 	}
     
     
-	public void draw(Graphics2D g2,int xOffset){
+	public void draw(Graphics2D g2,int xOffset, int yOffset){
 		g2.setColor(Color.yellow);
-		g2.drawImage(Tile.seagull[0][timeVar],getX_Point()-xOffset, getY_Point(),getWidth()+10,getHeight()+10,null);
+		g2.drawImage(Tile.seagull[0][timeVar],getX_Point()-xOffset, getY_Point()+yOffset,getWidth()+10,getHeight()+10,null);
 	}
 
 	public static Seagull getLastSeagull() {

@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Level.BossLevel;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 import ch.ilikechickenwings.karpfengame.Reader.SceneReader;
 
 public class Storyline implements Story{

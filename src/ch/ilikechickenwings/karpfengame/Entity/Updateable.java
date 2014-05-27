@@ -7,6 +7,6 @@ import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 public interface Updateable {
 
 	public void update(InputHandler inHandler);
-	public void draw(Graphics2D g, int xOffset);
+	public void draw(Graphics2D g, int xOffset, int yOffset);
 	
 }

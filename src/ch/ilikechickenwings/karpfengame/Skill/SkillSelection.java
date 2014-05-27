@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import ch.ilikechickenwings.karpfengame.KarpfenGame;
-import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
@@ -14,6 +13,7 @@ import ch.ilikechickenwings.karpfengame.Entity.Projectile.GiantCarp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Grenade;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Handler.Timer;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 import ch.ilikechickenwings.karpfengame.Sound.SoundSystem;
 import ch.ilikechickenwings.karpfengame.Sound.Sounds;
 

@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import ch.ilikechickenwings.karpfengame.KarpfenGame;
-import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 
 public class GiantCarp extends Projectile {
 	int xOffset=0;
@@ -31,10 +31,10 @@ public class GiantCarp extends Projectile {
 		}
 	}
 
-	public void draw(Graphics2D g2,int xOffset){
+	public void draw(Graphics2D g2,int xOffset, int yOffset){
 		this.xOffset=xOffset;
 		g2.setColor(Color.white);
-		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(), getHeight());
+		g2.fillRect(getX_Point()-xOffset, getY_Point()+yOffset, getWidth(), getHeight());
 		
 	}
 

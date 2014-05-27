@@ -53,8 +53,8 @@ public class Grenade extends Projectile {
 
 	}
 
-	public void draw(Graphics2D g2,int xOffset){
-		g2.drawImage(Tile.baloonFish,getX_Point()-xOffset, getY_Point(), getWidth(), getHeight(),null);
+	public void draw(Graphics2D g2,int xOffset, int yOffset){
+		g2.drawImage(Tile.baloonFish,getX_Point()-xOffset, getY_Point()+yOffset, getWidth(), getHeight(),null);
 		
 	}
 

@@ -3,11 +3,11 @@ package ch.ilikechickenwings.karpfengame.Entity.Mob;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Wall;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Handler.Timer;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 
 public class WalkZombie extends Mob{
 	
@@ -83,16 +83,16 @@ public class WalkZombie extends Mob{
 		
 	}
 	
-	public void draw(Graphics2D g2,int xOffset){
+	public void draw(Graphics2D g2,int xOffset, int yOffset){
 		g2.setColor(Color.blue);
 		if(skin==1){
-			g2.drawImage(Tile.zombie1[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
+			g2.drawImage(Tile.zombie1[dire][timeVar],getX_Point()-xOffset, getY_Point()+yOffset,null);
 		}else if (skin==2){
-			g2.drawImage(Tile.zombie2[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
+			g2.drawImage(Tile.zombie2[dire][timeVar],getX_Point()-xOffset, getY_Point()+yOffset,null);
 		}else if(skin==3){
-			g2.drawImage(Tile.zombie3[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
+			g2.drawImage(Tile.zombie3[dire][timeVar],getX_Point()-xOffset, getY_Point()+yOffset,null);
 		}else{
-			g2.drawImage(Tile.zombie4[dire][timeVar],getX_Point()-xOffset, getY_Point(),null);
+			g2.drawImage(Tile.zombie4[dire][timeVar],getX_Point()-xOffset, getY_Point()+yOffset,null);
 		}
 	}
 

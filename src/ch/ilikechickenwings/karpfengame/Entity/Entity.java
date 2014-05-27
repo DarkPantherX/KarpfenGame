@@ -76,7 +76,7 @@ public class Entity implements Updateable{
 
 
 	@Override
-	public void draw(Graphics2D g, int xOffset) {
+	public void draw(Graphics2D g, int xOffset, int yOffset) {
 	}
 
 }

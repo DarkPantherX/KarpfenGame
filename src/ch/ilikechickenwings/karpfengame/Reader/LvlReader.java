@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import ch.ilikechickenwings.karpfengame.Level;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 
 public class LvlReader {
 

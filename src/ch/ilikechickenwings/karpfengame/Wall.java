@@ -47,9 +47,9 @@ public class Wall {
 	}
 
 	
-	public void draw(Graphics2D g2,int xOffset){
+	public void draw(Graphics2D g2,int xOffset,int yOffset){
 		g2.setColor(Color.red);
-		g2.drawImage(Tile.flat_ceiling,getX_Point()-xOffset, getY_Point(), getWidth(),
+		g2.drawImage(Tile.flat_ceiling,getX_Point()-xOffset, getY_Point()+yOffset, getWidth(),
 				getHeight()+20,null);
 		for(int i=0;i<ant;i++){
 			g2.drawImage(img[i],getX_Point()-xOffset, getY_Point()+(i+1)*30, getWidth(),

@@ -1,6 +1,6 @@
 package ch.ilikechickenwings.karpfengame.Skill;
 
-import ch.ilikechickenwings.karpfengame.Level;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 
 public class Karpfokalypse extends Skill {
 

@@ -28,6 +28,7 @@ import javax.swing.KeyStroke;
 
 import ch.ilikechickenwings.karpfengame.Handler.ComponentHandler;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 import ch.ilikechickenwings.karpfengame.Menu.LoadMenu;
 import ch.ilikechickenwings.karpfengame.Menu.Menu;
 

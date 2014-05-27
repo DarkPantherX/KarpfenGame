@@ -1,5 +1,7 @@
 package ch.ilikechickenwings.karpfengame;
 
+import ch.ilikechickenwings.karpfengame.Level.Level;
+
 public class CommandExecutor {
 
 	public CommandExecutor(String[] str2, Level lv){

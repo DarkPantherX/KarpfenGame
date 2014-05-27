@@ -4,10 +4,10 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 
 import ch.ilikechickenwings.karpfengame.KarpfenGame;
-import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Handler.Timer;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 
 public class FlyingCarp extends Projectile{
 	
@@ -39,9 +39,9 @@ public class FlyingCarp extends Projectile{
 		
 	}
 	
-	public void draw(Graphics2D g,int xOffset) {
+	public void draw(Graphics2D g,int xOffset, int yOffset) {
 		g.setColor(Color.cyan);
-		g.drawRect(getPlayer().getX_Point()-xOffset - 10, getPlayer().getY_Point() + 1,
+		g.drawRect(getPlayer().getX_Point()-xOffset - 10, getPlayer().getY_Point() + 1+yOffset,
 				20 + getPlayer().getHeight(), 20);
 
 	}

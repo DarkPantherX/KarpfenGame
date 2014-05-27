@@ -2,10 +2,10 @@ package ch.ilikechickenwings.karpfengame.Entity;
 
 import java.awt.Graphics2D;
 
-import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Handler.Timer;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 
 public class Explosion extends Entity{
 
@@ -35,9 +35,9 @@ public class Explosion extends Entity{
 		
 	}
 	
-	public void draw(Graphics2D g2, int xOffset){
+	public void draw(Graphics2D g2, int xOffset, int yOffset){
 		
-		g2.drawImage(Tile.explosion1[0][timeVar], getX_Point()-xOffset, getY_Point(), getWidth(), getHeight(),  null);
+		g2.drawImage(Tile.explosion1[0][timeVar], getX_Point()-xOffset, getY_Point()+yOffset, getWidth(), getHeight(),  null);
 	}
 	
 	

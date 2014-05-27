@@ -27,8 +27,8 @@ public class Drop extends Projectile{
 		setY_Point(getY_Point()+getyVel());
 	}
 	
-	public void draw(Graphics2D g2,int xOffset){
+	public void draw(Graphics2D g2,int xOffset, int yOffset){
 		g2.setColor(Color.white);
-		g2.drawImage(Tile.drop,getX_Point()-xOffset, getY_Point(), getWidth(), getHeight(),null);
+		g2.drawImage(Tile.drop,getX_Point()-xOffset, getY_Point()+yOffset, getWidth(), getHeight(),null);
 	}
 }

@@ -10,7 +10,7 @@ public class BossWall extends Wall{
 		// TODO Auto-generated constructor stub
 	}
 
-	public void draw(Graphics2D g2,int xOffset){
+	public void draw(Graphics2D g2,int xOffset,int yOffset){
 		g2.setColor(Color.red);
 		g2.fillRect(getX_Point()-xOffset, getY_Point(), getWidth(),
 				getHeight());

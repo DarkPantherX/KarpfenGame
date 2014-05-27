@@ -4,9 +4,9 @@ package ch.ilikechickenwings.karpfengame.Entity;
 import java.awt.Graphics2D;
 import java.awt.Image;
 
-import ch.ilikechickenwings.karpfengame.Level;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Handler.Timer;
+import ch.ilikechickenwings.karpfengame.Level.Level;
 
 public class VisionObstructer extends Entity{
 	

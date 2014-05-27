@@ -17,8 +17,8 @@ public class Coffee extends Item{
 		setCaffeine(100); // may has to be changed
 	}
 
-	public void draw(Graphics2D g2, int xOffset){
-	    g2.drawImage(Tile.coffee,getX_Point()-xOffset,getY_Point(), getWidth(), getHeight(),null);
+	public void draw(Graphics2D g2, int xOffset, int yOffset){
+	    g2.drawImage(Tile.coffee,getX_Point()-xOffset,getY_Point()+yOffset, getWidth(), getHeight(),null);
 		
 	}
 
