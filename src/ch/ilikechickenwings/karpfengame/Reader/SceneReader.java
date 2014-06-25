@@ -19,7 +19,6 @@ public class SceneReader {
 			
 			String stri[] = prop.getProperty("scenes").replaceAll("\\s+","").split(",");
 			int x=0;
-			System.out.println(stri.length/6);
 			for(int i=0;i<stri.length/6;i++){
 			Storyline.scenePics.add(new Scene(Tile.scenePics[Integer.parseInt(stri[x])],Integer.parseInt(stri[x+1]),Integer.parseInt(stri[x+2]),Integer.parseInt(stri[x+3]),Integer.parseInt(stri[x+4]),Integer.parseInt(stri[x+5])));
 			x+=6;
