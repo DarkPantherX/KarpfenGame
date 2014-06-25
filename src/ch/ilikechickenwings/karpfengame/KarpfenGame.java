@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.dnd.DropTarget;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -27,6 +28,7 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 
 import ch.ilikechickenwings.karpfengame.Handler.ComponentHandler;
+import ch.ilikechickenwings.karpfengame.Handler.DragDropListener;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Level.Level;
 import ch.ilikechickenwings.karpfengame.Menu.LoadMenu;
@@ -71,6 +73,8 @@ public class KarpfenGame extends JPanel implements Runnable{
 		// to the game
 		inHandler = new InputHandler();
 		compHandler = new ComponentHandler();
+		DragDropListener ddListener = new DragDropListener();
+		new DropTarget(this, ddListener);
 		addKeyListener(inHandler);
 		addMouseListener(inHandler);
 		addComponentListener(compHandler);
