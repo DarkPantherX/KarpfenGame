@@ -26,6 +26,8 @@ import ch.ilikechickenwings.karpfengame.Entity.Mob.*;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Reader.LvlReader;
 import ch.ilikechickenwings.karpfengame.Skill.*;
+import ch.ilikechickenwings.karpfengame.Sound.SoundSystem;
+import ch.ilikechickenwings.karpfengame.Sound.Sounds;
 
 
 /*
@@ -90,6 +92,7 @@ public class Level {
 	private String lvl;
 	private Wall lastWall;
 
+	protected SoundSystem sS;
 	
 	private Background background = new Background(0); // 0 = multipi TODO this should be defined in level.properties
 	
@@ -138,6 +141,7 @@ public class Level {
         // on the first wall there should be no zombie
 
         addWalls();
+        sS= new SoundSystem(Sounds.gameMusic1);
 	}
 	public Level(String string, KarpfenGame karpfenGame,boolean otherLevel){
 		lv=this;
@@ -500,6 +504,9 @@ public class Level {
 		walls.clear();
 		entities.clear();
 		xOffset = 0;
+		if(sS!=null){
+		sS.stop();
+		}
 	}
 	
 	

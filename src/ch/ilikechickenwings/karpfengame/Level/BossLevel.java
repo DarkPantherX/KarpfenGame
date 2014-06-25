@@ -22,6 +22,8 @@ import ch.ilikechickenwings.karpfengame.Entity.Projectile.Projectile;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Handler.InputHandler;
 import ch.ilikechickenwings.karpfengame.Reader.BossLvlReader;
+import ch.ilikechickenwings.karpfengame.Sound.SoundSystem;
+import ch.ilikechickenwings.karpfengame.Sound.Sounds;
 
 public class BossLevel extends Level{
 	
@@ -36,6 +38,7 @@ public class BossLevel extends Level{
 			new BossLvlReader("blvl"+lv+".pros");
 			thisLevel=lv;
 			entities.add(new FlyingZombie(300,300,getPlayer()));
+			sS = new SoundSystem(Sounds.gameMusic2);
 			}
 			
 		
