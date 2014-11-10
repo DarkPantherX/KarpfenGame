@@ -38,10 +38,12 @@ public class Tile {
 	public static Image healthPack;
 	public static Image drop;
 	public static Image baloonFish;
+	public static Image eelPic;
+	public static Image dropDownBackground;
+	public static Image dropDownSelected;
 
 	
-	public static Image s1p0;
-	public static Image s1p1;
+
 	public static Image[] scenePics;
 
 	
@@ -72,6 +74,8 @@ public class Tile {
 				getClass().getResource("/res/drop.png"));
 		baloonFish = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/baloonfish.png"));
+		eelPic = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/eel.png"));
 		flat1 = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/flat1.png"));
 		flat2 = Toolkit.getDefaultToolkit().getImage(
@@ -84,10 +88,10 @@ public class Tile {
 				getClass().getResource("/res/flat5.png"));
 		flat_ceiling = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/flat_ceiling.png"));
-		s1p0 = Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("/res/s1p4.png"));
-		s1p1 = Toolkit.getDefaultToolkit().getImage(
-				getClass().getResource("/res/s1p8.png"));
+		dropDownSelected = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/dropdownselected.png"));
+		dropDownBackground = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/dropdownback.png"));
 		BufferedImage eelSheet = null;
 		BufferedImage playerSheet = null;
 		BufferedImage seagullSheet = null;

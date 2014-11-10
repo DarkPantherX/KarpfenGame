@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 
 import ch.ilikechickenwings.karpfengame.KarpfenGame;
+import ch.ilikechickenwings.karpfengame.Tile;
 import ch.ilikechickenwings.karpfengame.Entity.Player;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Carp;
 import ch.ilikechickenwings.karpfengame.Entity.Projectile.Eel;
@@ -111,16 +112,29 @@ public class SkillSelection {
 	
 	public void draw(Graphics2D g2){
 		if(getyOffset()>0){
-		    g2.setColor(Color.CYAN);
-		    g2.fillRect(0,getyOffset()-2*getWidth(),KarpfenGame.WIDTH-1, getWidth()*2);
+		   
+		    g2.drawImage(Tile.dropDownBackground,0,getyOffset()-2*getWidth(),KarpfenGame.WIDTH, getWidth()*2,null);
 		    
-		    g2.setColor(Color.BLUE);
+		    
 		    for(int i=0;i<Skill.getNr();i++){
+		    	int addition=0;
+		    	if(i==enabledSkill){
+	    		g2.drawImage(Tile.dropDownSelected,i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2+5, getyOffset()-(int)(getWidth()*1.5+5), getWidth()+10, getWidth()+10,null);
+		    	addition=20;
+		    	}
 		    	
-		    	g2.drawRect(i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2, getyOffset()-getWidth(), getWidth(), getWidth());
+		    
+		    	
+		    	if(i==0){
+		    		g2.drawImage(Tile.carp[0][0], i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2+20, getyOffset()-(int)(getWidth()*1.3)-addition/2, getWidth()-30+addition, getWidth()-30+addition, null);
+		    	}else if(i==1){
+		    		g2.drawImage(Tile.eel[0][2], i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2+5, getyOffset()-(int)(getWidth()*1.5)-addition/2,getWidth()+addition,getWidth()-10+addition, null);
+		    	}else if(i==4){
+		    		g2.drawImage(Tile.baloonFish, i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2+15, getyOffset()-(int)(getWidth()*1.3)-addition/2,getWidth()-30+addition,getWidth()-30+addition, null);
+		    	}
+	    		//g2.drawRect(i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2, getyOffset()-(int)(getWidth()*1.5), getWidth(), getWidth());
 		    	if(i==getEnabledSkill()){
-		    		g2.setColor(Color.RED);
-		    		g2.fillRect(i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2+5, getyOffset()-getWidth()+5, getWidth()-10, getWidth()-10);
+		    		
 		    		g2.setColor(Color.BLUE);
 		    	}
 		    }
