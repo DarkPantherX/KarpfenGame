@@ -38,6 +38,8 @@ public class Tile {
 	public static Image healthPack;
 	public static Image drop;
 	public static Image baloonFish;
+	public static Image baloonFish2;
+	public static Image baloonFish2pic;
 	public static Image eelPic;
 	public static Image dropDownBackground;
 	public static Image dropDownSelected;
@@ -45,6 +47,8 @@ public class Tile {
 	
 
 	public static Image[] scenePics;
+	
+	
 
 	
 	public Tile(){
@@ -74,6 +78,10 @@ public class Tile {
 				getClass().getResource("/res/drop.png"));
 		baloonFish = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/baloonfish.png"));
+		baloonFish2 = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/baloonfish2.png"));
+		baloonFish2pic = Toolkit.getDefaultToolkit().getImage(
+				getClass().getResource("/res/baloonfish2pic.png"));
 		eelPic = Toolkit.getDefaultToolkit().getImage(
 				getClass().getResource("/res/eel.png"));
 		flat1 = Toolkit.getDefaultToolkit().getImage(

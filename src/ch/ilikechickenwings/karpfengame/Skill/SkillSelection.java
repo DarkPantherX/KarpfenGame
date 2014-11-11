@@ -128,7 +128,9 @@ public class SkillSelection {
 		    	if(i==0){
 		    		g2.drawImage(Tile.carp[0][0], i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2+20, getyOffset()-(int)(getWidth()*1.3)-addition/2, getWidth()-30+addition, getWidth()-30+addition, null);
 		    	}else if(i==1){
-		    		g2.drawImage(Tile.eel[0][2], i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2+5, getyOffset()-(int)(getWidth()*1.5)-addition/2,getWidth()+addition,getWidth()-10+addition, null);
+		    		g2.drawImage(Tile.eel[0][2], i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2, getyOffset()-(int)(getWidth()*1.5)-addition/2,getWidth()+addition,getWidth()-10+addition, null);
+		    	}else if(i==3){
+		    		g2.drawImage(Tile.baloonFish2pic, i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2+15, getyOffset()-(int)(getWidth()*1.3)-addition/2,getWidth()+addition-30,getWidth()-30+addition, null);
 		    	}else if(i==4){
 		    		g2.drawImage(Tile.baloonFish, i*KarpfenGame.WIDTH/(Skill.getNr())+getWidth()/2+15, getyOffset()-(int)(getWidth()*1.3)-addition/2,getWidth()-30+addition,getWidth()-30+addition, null);
 		    	}
