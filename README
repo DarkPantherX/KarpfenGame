@@ -18,20 +18,7 @@ And if we pull, we have to rewatch the code the other person wrote to see if we 
 Lines marked with a # in front may be deleted - but no others. Mark them with #, if you want to get rid of them.
 -----------------------------------------Questions---------------------------------------------
 
-Questions: 14.11.2013 by SC:
-
-- Idea for graphical background: The background moves slower than the foreground..?
-Or would we like to have the background move at the same speed as the walls?
--> I would be interested in implementing that feature....
-DPX: This will come as soon as ralph send konni the story board and she draws something
-
-
-- The GiantCarp currently destroys everything except the player.
-Should it destroy Items?
-
-
-Dunno, would be a good punishment for the use of this skill ;)
-(Maybe it should even destroy all the items in the lvl!)
+Questions: 
 
 ----------------------------------------------------------------------------
 Priority: 1-5
@@ -39,10 +26,12 @@ Priority: 1-5
 5:(ehh.. let's do this later on... Maybe never...)
 
 TODO SC:
+ -knockback when touching those coffee-freaks (2)
+ -no walking animation during jumps (2)
  -all the variables that vary from level to level are static. they shouldn't be... (3)
- -Variable FPS support (5)
  -implement own ideas (always)
- -Code clean up and commenting the whole code (always)
+ -Code clean up and commenting the whole code (1)
+ -Variable FPS support (5)
  -Camera y-movement (5)
  
 TODO DPX:
@@ -55,3 +44,4 @@ TODO DPX:
  
 IDEAS:
  -Drops should make platforms more white
+ -Background moving slower than foreground (maybe multiple leves)

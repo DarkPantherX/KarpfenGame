@@ -21,15 +21,15 @@ public class Player extends Entity{
 	private boolean invincible=false;
 	private long currTimeInvincible;
 	private long oldTimeInvincible;
-	private int state=1;
+	private int state=1; // for graphics: 1 = forwards, 2 = backwards, 3 = standing
 	private int dir; // -1 or 1
 	private boolean walking=false;
 	private int xVel;
 	private int yVel;
 	private boolean gravityOn;
-	private int g=1;
-	private int timeVar;
-	private int timeVarPosi;
+	private int g=1; // gravity constant
+	private int timeVar; // for walking animation
+	private int timeVarPosi; // for walking animation
 	private boolean obstructedVision;
 	
 	private int jumpVel=-15;
@@ -39,7 +39,7 @@ public class Player extends Entity{
 	private int coffee;
 	private boolean flying;
 	
-	private Timer timer;
+	private Timer timer; // used for graphics
 	private SkillSelection skillselection;
 
 	public Player(int x, int y, int lifes, int coffee, boolean[] useableSkill) {
@@ -59,7 +59,6 @@ public class Player extends Entity{
 		
 		skillselection = new SkillSelection(this,useableSkill);
 		//super(x, y, lifes);
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -68,56 +67,53 @@ public class Player extends Entity{
 		// Skill
 		skillselection.update(inHandler);
 		
-		setWalking(false);
-			// movement
-			if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!isGravityOn()) { // 
-				setGravityOn(true);
-				setyVel(getJumpVel()); 
-				setState(3);
-				setWalking(false);
-				timeVar=0;
-			}
-
-			if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
-				setxVel(-getxAbsVel());
-				setState(2);
-				setDir(-1);
+		// movement
+		if ((inHandler.getKeys()[KeyEvent.VK_W]||inHandler.getKeys()[KeyEvent.VK_UP]||inHandler.getKeys()[KeyEvent.VK_SPACE])&&!isGravityOn()) { // 
+			setGravityOn(true);
+			setyVel(getJumpVel()); 
+			setState(3);
+			setWalking(false);
+			timeVar=0;
+		}
+		if (inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]) {
+			setxVel(-getxAbsVel());
+			setState(2);
+			setDir(-1);
+			if(!isGravityOn() && !isFlying())
+			    setWalking(true);
+		}
+		if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
+			setxVel(getxAbsVel()); 
+			setState(1);
+			setDir(1);
+			if(!isGravityOn() && !isFlying())
 				setWalking(true);
-			}
-			if (inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT]) {
-				setxVel(getxAbsVel()); 
-				setState(1);
-				setDir(1);
-				setWalking(true);
-			}
-			if(!(inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]||inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT])){
-				setxVel(0);
-			}
-			if(isGravityOn()){
-				setyVel(getyVel()+g);
-		    }
+		}
+		if(!(inHandler.getKeys()[KeyEvent.VK_A]||inHandler.getKeys()[KeyEvent.VK_LEFT]||inHandler.getKeys()[KeyEvent.VK_D]||inHandler.getKeys()[KeyEvent.VK_RIGHT])){
+			setxVel(0);
+			setWalking(false);
+		}
+		if(isGravityOn()){
+			setyVel(getyVel()+g);
+		}
 			
-			walk();
+		walk();
 			
-			//Added Cooldown for damage
-			if(invincible){
-			    currTimeInvincible=System.currentTimeMillis();
-				if(currTimeInvincible>oldTimeInvincible+1000){ // 1 sec
-				    oldTimeInvincible=System.currentTimeMillis();
-				    setInvincible(false);
-			    }	
-			}
+		//Added Cooldown for damage
+		if(invincible){
+		    currTimeInvincible=System.currentTimeMillis();
+			if(currTimeInvincible>oldTimeInvincible+1000){ // 1 sec
+			    oldTimeInvincible=System.currentTimeMillis();
+			    setInvincible(false);
+		    }	
+		}
 			
-			if(getY_Point()<0){setY_Point(0);} // makes it impossible to fly out of the field of view
-			
+		if(getY_Point()<0){setY_Point(0);} // makes it impossible to fly out of the field of view
 	}
 
 	
 	public void draw(Graphics2D g2,int xOffset, int yOffset){
-		g2.setColor(Color.black);
-		//coffe shouldn't be above the player
-		
-		
+		g2.setColor(Color.black); // TODO: Delete this? -SC
 		// coffee
 		g2.drawImage(Tile.coffeeBar,KarpfenGame.WIDTH-60,5+(int)(100-100*coffee/100),25,100*coffee/100,null);
 		g2.drawImage(Tile.coffeeHolderBar,KarpfenGame.WIDTH-60, 5, 25, 100,null);
@@ -136,38 +132,34 @@ public class Player extends Entity{
 		skillselection.draw(g2);
 	}
 	
-	
-	
-	private void walk(){
+	private void walk()
+	{
 		setX_Point(getX_Point() + getxVel());
 		
-		if(isWalking()){
-		if(timer==null){
+		// for graphics
+		if(isWalking())
+		{
+		  if(timer==null){
 			timer= new Timer(75);
-		}
+		  }
 		
 		
-		if(timer.isReady()){
-			
+		  if(timer.isReady())
+		  {
 			if(timeVar==0){
-			
-				timeVarPosi=1;
+			    timeVarPosi=1;
 			}else if(timeVar==3){
-
 				timeVarPosi=-1;
-
 			}
 			timeVar+=timeVarPosi;
 			timer= new Timer(75);
-		}
+		  }
 		}
 		
 		if(!flying){
 			setY_Point(getY_Point()+getyVel());
 		}
 	}
-	
-	
 	
 	public void getDamaged(Mob mob){
 		if(!invincible){
@@ -229,7 +221,8 @@ public class Player extends Entity{
 
 	public void setGravityOn(boolean gravityOn) {
 		this.gravityOn = gravityOn;
-		setyVel(0);
+		if(gravityOn==false) // TODO: no additional stuff in setters. I'm sorry -SC
+		   setyVel(0);
 	}
 
 
@@ -333,11 +326,10 @@ public class Player extends Entity{
 
 	public void setFlying(boolean b) {
 		this.flying=b;
-		
+		setGravityOn(!b); // TODO: sorry, not nice -SC
 	}
 
 	public boolean isFlying() {
 		return flying;
-		
 	}
 }
