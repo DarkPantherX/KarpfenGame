@@ -298,9 +298,9 @@ public class Level {
 							player.setObstructedVision(true);
 							VisionObstructer s;
 							if(ui<5){
-								s= new VisionObstructer(rand.nextInt(KarpfenGame.WIDTH-250),rand.nextInt(KarpfenGame.HEIGHT-250),Tile.shit1);
+								s= new VisionObstructer(rand.nextInt(KarpfenGame.WIDTH-250),rand.nextInt(KarpfenGame.HEIGHT-250),Tile.shit1,player);
 							}else{
-								s= new VisionObstructer(rand.nextInt(KarpfenGame.WIDTH-250),rand.nextInt(KarpfenGame.HEIGHT-250),Tile.shit2);
+								s= new VisionObstructer(rand.nextInt(KarpfenGame.WIDTH-250),rand.nextInt(KarpfenGame.HEIGHT-250),Tile.shit2,player);
 							}
 								entities.add(s);	
 						}
@@ -444,6 +444,10 @@ public class Level {
 															// of the window
 															// impossible
 				dyOffset *= -1;
+			}
+			
+			while(wi.getY_Point()+dyOffset<120){
+				++dyOffset;
 			}
 
 			wall = new Wall(wi.getX_Point() + wi.getWidth() + dxMu
