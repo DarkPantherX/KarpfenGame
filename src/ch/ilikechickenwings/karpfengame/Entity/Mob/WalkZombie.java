@@ -31,6 +31,11 @@ public class WalkZombie extends Mob{
 		setGravityOn(false);
 		setSkin(skin);
 	}
+	public WalkZombie(int x,int y, int skin,int lifes) {
+		this(x,y,skin);
+		setLifes(lifes);
+		
+	}
 
 
 	public void update(InputHandler inHandler) {
@@ -47,15 +52,15 @@ public class WalkZombie extends Mob{
 			if (isDir()
 					&& getX_Point() + getWidth() > wall
 					.getX_Point() + wall.getWidth()
-					&& getX_Point() < wall.getX_Point()
-					+ wall.getWidth()) 
+					&& getX_Point() < wall.getX_Point()+ wall.getWidth()
+					&& wall.getY_Point()==getY_Point()+getHeight()) 
 			{ // if Zombie is about to walk off the wall at the right side.
 				setDir(false); // change direction
 				w = Level.walls.size();
 			} else if (!isDir()
 					&& getX_Point() < wall.getX_Point()
-					&& getX_Point() + getWidth() > wall
-					.getX_Point())
+					&& getX_Point() + getWidth() > wall.getX_Point()
+					&& wall.getY_Point()==getY_Point()+getHeight())
 			{  // if Zombie is about to walk off the wall on the left side.
 				setDir(true); // change direction
 				w = Level.walls.size();

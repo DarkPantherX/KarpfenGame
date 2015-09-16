@@ -45,7 +45,7 @@ public class BossLevel extends Level{
 		public void update(InputHandler inHandler) {
 			// checks collision of player with walls
 			// TODO: This check does probably not work if there's more than one wall
-			// above each other.. (witch is not possible yet)
+			// above each other.. (which is not possible yet)
 			for (int w = 0; w < walls.size(); w++) {
 				BossWall wall = (BossWall) walls.get(w);
 				if(player.isGravityOn()){
@@ -122,9 +122,9 @@ public class BossLevel extends Level{
 								player.setObstructedVision(true);
 								VisionObstructer s;
 								if(ui<5){
-									s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit1);
+									s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit1,player);
 								}else{
-									s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit2);
+									s= new VisionObstructer((int)(Math.random()*KarpfenGame.WIDTH),(int)(Math.random()*KarpfenGame.HEIGHT),Tile.shit2,player);
 								}
 									entities.add(s);
 							
